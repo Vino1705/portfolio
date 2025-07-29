@@ -46,7 +46,7 @@ Welcome to my personal developer portfolio website! I'm **Vinothini T**, a 3rd-y
 ## 📫 Contact Me
 
 - 📧 Email: vinothini@example.com
-- 🌐 Portfolio: [vinothini.dev](https://vinothini.dev)
+- 🌐 Portfolio: [vinothini.dev](https://vino1705.github.io/portfolio/)
 - 🐙 GitHub: [github.com/vinothini-codes](https://github.com/Vino1705)
 - 💼 LinkedIn: [linkedin.com/in/vinothini-t](https://www.linkedin.com/in/vinothini-t-08b4b4274/)
 
