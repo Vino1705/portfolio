@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VINOTHINI T | Web Developer Portfolio</title>
+  <meta name="description" content="Portfolio of Vinothini, an undergraduate CSE student showcasing web development skills, creative projects, and coding journey.">
+
+  <meta name="author" content="Vinothini">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/png" href="https://images.pexels.com/photos/574285/pexels-photo-574285.jpeg?auto=compress&cs=tinysrgb&w=32&h=32&fit=crop" >
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="animated-bg">
+    <div class="floating-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+      <div class="shape shape-4"></div>
+      <div class="shape shape-5"></div>
+      <div class="shape shape-6"></div>
+    </div>
+    <div class="neural-network">
+      <div class="node node-1"></div>
+      <div class="node node-2"></div>
+      <div class="node node-3"></div>
+      <div class="node node-4"></div>
+      <div class="node node-5"></div>
+      <div class="connection connection-1"></div>
+      <div class="connection connection-2"></div>
+      <div class="connection connection-3"></div>
+      <div class="connection connection-4"></div>
+    </div>
+  </div>
+
+  <!-- Preloader -->
+  <div class="preloader">
+    <div class="loader">
+      <div class="loader-inner"></div>
+      <div class="loader-text">Initializing dark mode engine... </div>
+    </div>
+  </div>
+
+  <!-- Scroll to Top Button -->
+  <button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Navigation -->
+  <header>
+    <nav id="navbar">
+      <a href="#home" class="logo">vino<span>.dev</span></a>
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#blog" class="nav-link">Milestones</a></li>
+        <li><a href="#contact" class="nav-link">ping me</a></li>
+      </ul>
+      <div class="mobile-menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="home-section">
+      <div class="home-content">
+        <div class="hero-animation">
+          <h1>Hi, I'm <span class="gradient-text">VINOTHINI T</span></h1>
+          <p class="subtitle"><span id="typing-effect"></span></p>
+          <p class="intro">Passionate Computer Science student exploring the intersections of Web Development, Machine Learning, and Robotics.</p>
+          <div class="home-buttons">
+            <a href="https://drive.google.com/file/d/1intSPkWVI0P5GDdAGEWM8LaEtlHO7zRD/view?usp=drive_link" class="btn primary pulse-btn">
+                <i class="fas fa-download"></i>
+                Download Resume
+            </a>
+
+            <a href="#contact" class="btn btn-outline glow-btn">
+              <i class="fas fa-envelope"></i>
+              Contact Me
+            </a>
+          </div>
+        </div>
+        <div class="scroll-indicator">
+          <span>🚀 Dive In</span>
+          <div class="scroll-arrow"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="content-section about-section reveal">
+      <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-container">
+          <div class="profile-section">
+            <div class="profile-pic-container">
+              <img src="PROFILE.jpg" alt="Profile photo of Ganesh Kumar" class="profile-pic" loading="lazy">
+              <div class="profile-ring"></div>
+            </div>
+          </div>
+          <div class="about-text">
+            <h3>Hey there, I'm <span class="gradient-text">Vinothini T !!</span></h3>
+           <p>I'm a third-year CSE undergraduate at Saveetha Engineering College, passionate about full-stack development, ML, and robotics. From LeetCode problem solving to winning hackathons and building projects in web, 3D printing, and agentic AI, I thrive on turning bold ideas into real tech.</p>
+            <p>While I enjoy exploring machine learning and agentic AI, I’m equally skilled in full-stack web development and robotics. I love building real-world projects, staying curious, and diving into emerging technologies like LLMs and 3D printing.</p>
+
+            <div class="milestones">
+              <div class="milestone">
+                <div class="milestone-icon">
+                  <i class="fas fa-code"></i>
+                </div>
+                <span class="counter" data-target="100">0</span>
+                <p>LeetCode Problems</p>
+              </div>
+              <div class="milestone">
+  <div class="milestone-icon">
+    <i class="fas fa-robot"></i>
+  </div>
+  <span class="counter" data-target="2">0</span>
+  <p>Robotics Projects Completed</p>
+</div>
+              <div class="milestone">
+  <div class="milestone-icon">
+    <i class="fas fa-trophy"></i>
+  </div>
+  <span class="counter" data-target="2">0</span>
+  <p>Hackathons won</p>
+</div>
+            <div class="milestone">
+  <div class="milestone-icon">
+    <i class="fas fa-project-diagram"></i>
+  </div>
+  <span class="counter" data-target="8">0</span>
+  <p>Ideation Projects Created</p>
+</div>
+            <div class="milestone">
+  <div class="milestone-icon">
+    <i class="fas fa-laptop-code"></i>
+  </div>
+  <span class="counter" data-target="5">0</span>
+  <p>Web Dev Projects</p>
+</div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+<section id="skills" class="content-section skills-section reveal">
+  <div class="container">
+    <h2 class="section-title">My Skills</h2>
+    <div class="skills-grid">
+      
+      <div class="skill-item" data-tooltip="2+ years experience">
+        <div class="skill-icon-container">
+          <i class="fab fa-html5 skill-icon"></i>
+        </div>
+        <h3>HTML5</h3>
+        <div class="progress-bar">
+          <div class="progress" data-progress="95%"></div>
+          <span class="progress-text">95%</span>
+        </div>
+      </div>
+
+      <div class="skill-item" data-tooltip="2+ years experience">
+        <div class="skill-icon-container">
+          <i class="fab fa-css3-alt skill-icon"></i>
+        </div>
+        <h3>CSS3</h3>
+        <div class="progress-bar">
+          <div class="progress" data-progress="90%"></div>
+          <span class="progress-text">90%</span>
+        </div>
+      </div>
+
+      <div class="skill-item" data-tooltip="1+ year experience">
+        <div class="skill-icon-container">
+          <i class="fab fa-js-square skill-icon"></i>
+        </div>
+        <h3>JavaScript</h3>
+        <div class="progress-bar">
+          <div class="progress" data-progress="75%"></div>
+          <span class="progress-text">75%</span>
+        </div>
+      </div>
+
+      <div class="skill-item" data-tooltip="2+ years experience">
+        <div class="skill-icon-container">
+          <i class="fas fa-brain skill-icon"></i>
+        </div>
+        <h3>Machine Learning</h3>
+        <div class="progress-bar">
+          <div class="progress" data-progress="85%"></div>
+          <span class="progress-text">85%</span>
+        </div>
+      </div>
+
+      <div class="skill-item" data-tooltip="1+ year experience">
+        <div class="skill-icon-container">
+          <i class="fas fa-robot skill-icon"></i>
+        </div>
+        <h3>Robotics (ROS2)</h3>
+        <div class="progress-bar">
+          <div class="progress" data-progress="70%"></div>
+          <span class="progress-text">70%</span>
+        </div>
+      </div>
+
+      <div class="skill-item" data-tooltip="2+ years experience">
+        <div class="skill-icon-container">
+          <i class="fas fa-database skill-icon"></i>
+        </div>
+        <h3>Data Structures</h3>
+        <div class="progress-bar">
+          <div class="progress" data-progress="80%"></div>
+          <span class="progress-text">80%</span>
+        </div>
+      </div>
+
+      <div class="skill-item" data-tooltip="2+ years experience">
+        <div class="skill-icon-container">
+          <i class="fas fa-code skill-icon"></i>
+        </div>
+        <h3>C</h3>
+        <div class="progress-bar">
+          <div class="progress" data-progress="85%"></div>
+          <span class="progress-text">85%</span>
+        </div>
+      </div>
+
+      <div class="skill-item" data-tooltip="2+ years experience">
+        <div class="skill-icon-container">
+          <i class="fas fa-code-branch skill-icon"></i>
+        </div>
+        <h3>C++</h3>
+        <div class="progress-bar">
+          <div class="progress" data-progress="80%"></div>
+          <span class="progress-text">80%</span>
+        </div>
+      </div>
+
+      <div class="skill-item" data-tooltip="1+ year experience">
+        <div class="skill-icon-container">
+          <i class="fab fa-java skill-icon"></i>
+        </div>
+        <h3>Java</h3>
+        <div class="progress-bar">
+          <div class="progress" data-progress="70%"></div>
+          <span class="progress-text">70%</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+    <!-- Projects Section -->
+<section id="projects" class="content-section projects-section reveal">
+  <div class="container">
+    <h2 class="section-title">Featured Projects</h2>
+    <div class="filter-tags">
+      <button class="tag active" data-filter="all">All</button>
+      <button class="tag" data-filter="AI">AI/ML</button>
+      <button class="tag" data-filter="Web">WEB DEV</button>
+      <button class="tag" data-filter="FullStack">ROBOTICS</button>
+    </div>
+    <div class="projects-grid">
+
+      <!-- Project 1: Autonomous Software Update Manager -->
+      <div class="project-card" data-tags="AI">
+        <div class="project-image">
+          <img src="https://images.pexels.com/photos/11035371/pexels-photo-11035371.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop" alt="Software Update Manager" loading="lazy">
+          <div class="project-overlay">
+            <div class="project-links">
+              <a href="https://github.com/your-github-link" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <h3>Agentic AI Update Manager</h3>
+          <p>Built an intelligent patch management system using CVE-based risk assessment, predictive ML, and adaptive scheduling.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Streamlit</span>
+            <span class="tech-tag">ML</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2: TeleCare Village Web App -->
+      <div class="project-card" data-tags="Web">
+        <div class="project-image">
+          <img src="https://images.pexels.com/photos/6823494/pexels-photo-6823494.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop" alt="TeleCare Village" loading="lazy">
+          <div class="project-overlay">
+            <div class="project-links">
+              <a href="https://github.com/your-github-link" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <h3>TeleCare Village</h3>
+          <p>Low-bandwidth healthcare web app to connect rural women to doctors and volunteers using voice and SMS without internet.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">React.js</span>
+            <span class="tech-tag">Firebase</span>
+            <span class="tech-tag">Express.js</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3: AMR Robotics System -->
+      <div class="project-card" data-tags="FullStack">
+        <div class="project-image">
+          <img src="https://images.pexels.com/photos/256381/pexels-photo-256381.jpeg?auto=compress&cs=tinysrgb&w=400&h=250&fit=crop" alt="AMR Robot" loading="lazy">
+          <div class="project-overlay">
+            <div class="project-links">
+              <a href="https://github.com/your-github-link" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="project-content">
+          <h3>AMR Campus Navigator</h3>
+          <p>Built an Autonomous Mobile Robot using ROS2 to navigate college corridors with obstacle avoidance and real-time maps.</p>
+          <div class="tech-stack">
+            <span class="tech-tag">ROS2</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Gazebo</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+    <!-- Blog Section -->
+    <section id="blog" class="content-section blog-section reveal">
+  <div class="container">
+    <h2 class="section-title">My Achievements</h2>
+    <div class="blog-grid">
+      
+      <article class="blog-post">
+        <div class="blog-image">
+          <img src="https://images.pexels.com/photos/5428827/pexels-photo-5428827.jpeg?auto=compress&cs=tinysrgb&w=400&h=200&fit=crop" alt="Intel AI Hackathon 2025" loading="lazy">
+        </div>
+        <div class="blog-content">
+          <div class="blog-meta">
+            <span class="blog-date">Jan 2025</span>
+            <span class="blog-category">Hackathon</span>
+          </div>
+          <h3>Winner – Intel AI Hackathon 2025</h3>
+          <p>Secured top 12 in Intel's national AI Hackathon 2025. BUild an Enterprise360 is an AI assistant for unified enterprise insights. Received a ₹25,000 cash prize and recognition for innovation.</p>
+          <a href="#" class="read-more">View Project <i class="fas fa-arrow-right"></i></a>
+        </div>
+      
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="content-section contact-section reveal">
+      <div class="container">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-container">
+          <div class="contact-info">
+            <h3>Let's Connect!</h3>
+            <p>I'm always excited to discuss new opportunities, collaborate on projects, or just chat about the latest in AI and technology.</p>
+            <div class="contact-details">
+              <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>vinoism1703@gmail.com</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+91 9042785843</span>
+              </div>
+              <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Chennai, Tamil Nadu, India</span>
+              </div>
+            </div>
+            <div class="social-media">
+              <a href="#" target="https://github.com/Vino1705" title="GitHub" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="#" target="https://www.linkedin.com/in/vinothini-t-08b4b4274/" title="LinkedIn" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a href="#" target="_blank" title="Twitter" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="mailto:vinoism1703@gmail.com" title="Email" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+              </a>
+            </div>
+          </div>
+          <form class="contact-form">
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
+            </div>
+            <div class="form-group">
+              <input type="text" name="subject" placeholder="Subject" required aria-label="Subject">
+            </div>
+            <div class="form-group">
+              <textarea name="message" rows="5" placeholder="Your Message" required aria-label="Your Message"></textarea>
+            </div>
+            <button type="submit" class="btn primary">
+              <i class="fas fa-paper-plane"></i>
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <p>&copy; 2025 Vinothini T. All Rights Reserved.</p>
+        </div>
+        <div class="footer-right">
+          <div class="social-media">
+            <a href="#" target="_blank" title="GitHub" aria-label="GitHub">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="#" target="_blank" title="LinkedIn" aria-label="LinkedIn">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#" target="_blank" title="Twitter" aria-label="Twitter">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="mailto:vinoism1703@gmail.com" title="Email" aria-label="Email">
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
