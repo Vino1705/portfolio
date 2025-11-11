@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Typing Effect
   const typingText = document.getElementById('typing-effect');
-  const words = ['Web Developer', 'Tech Explorer', 'Creative Coder', 'AI Learner', 'Robotics Enthusiast']
+  const words = ['Web Developer', 'Tech Explorer', 'Creative Coder', 'AI Learner']
 
   let wordIndex = 0;
   let charIndex = 0;
