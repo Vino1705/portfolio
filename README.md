@@ -54,7 +54,7 @@ Provides market insights, idea validation, and investor-ready recommendations.
 
 ## 📫 Contact Me
 
-- 📧 Email: vinothini@example.com
+- 📧 Email: vinoism1703@gmail.com
 - 🌐 Portfolio: [vinothini.dev](https://portfolio-p2yy.onrender.com/)
 - 🐙 GitHub: [github.com/vinothini-codes](https://github.com/Vino1705)
 - 💼 LinkedIn: [linkedin.com/in/vinothini-t](https://www.linkedin.com/in/vinothini-t-08b4b4274/)
