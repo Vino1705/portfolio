@@ -1,566 +1,421 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VINOTHINI T | Web Developer Portfolio</title>
-  <meta name="description" content="Portfolio of Vinothini, an undergraduate CSE student showcasing web development skills, creative projects, and coding journey.">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinothini T · Marketer × Vibe Coder × Problem Solver</title>
+  <meta name="description" content="Vinothini T — I turn ideas into shipped products and audiences into customers. Full-stack vibe coder, digital marketer, and problem-solving business developer based in Chennai." />
 
-  <meta name="author" content="Vinothini">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Space+Mono&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-<link rel="icon" type="image/png" href="https://images.pexels.com/photos/574285/pexels-photo-574285.jpeg?auto=compress&cs=tinysrgb&w=32&h=32&fit=crop" >
+  <!-- SEO Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Vinothini T",
+    "url": "https://vino1705.github.io/portfolio",
+    "jobTitle": "Digital Marketer & Full-Stack Developer",
+    "alumniOf": "Saveetha Engineering College",
+    "sameAs": [
+      "https://github.com/Vino1705",
+      "https://www.linkedin.com/in/vinothini-t-08b4b4274/"
+    ]
+  }
+  </script>
+
+  <meta name="author" content="Vinothini T" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✿</text></svg>" />
 </head>
 <body>
-  <!-- Animated Background -->
-  <div class="animated-bg">
-    <div class="floating-shapes">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-      <div class="shape shape-4"></div>
-      <div class="shape shape-5"></div>
-      <div class="shape shape-6"></div>
-    </div>
-    <div class="neural-network">
-      <div class="node node-1"></div>
-      <div class="node node-2"></div>
-      <div class="node node-3"></div>
-      <div class="node node-4"></div>
-      <div class="node node-5"></div>
-      <div class="connection connection-1"></div>
-      <div class="connection connection-2"></div>
-      <div class="connection connection-3"></div>
-      <div class="connection connection-4"></div>
-    </div>
-  </div>
+  <!-- grain + cursor -->
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"></div>
 
   <!-- Preloader -->
-  <div class="preloader">
-    <div class="loader">
-      <div class="loader-inner"></div>
-      <div class="loader-text">Initializing dark mode engine... </div>
+  <div class="preloader" id="preloader">
+    <div class="pre-inner">
+      <span class="pre-flower">✿</span>
+      <p class="pre-text">brewing something warm…</p>
     </div>
   </div>
 
-  <!-- Scroll to Top Button -->
-  <button id="scrollToTopBtn" title="Go to top" aria-label="Scroll to top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
+  <!-- Top marquee ribbon -->
+  <div class="ribbon" aria-hidden="true">
+    <div class="ribbon-track">
+      <span>build ✦ market ✦ ship</span><span>build ✦ market ✦ ship</span>
+      <span>build ✦ market ✦ ship</span><span>build ✦ market ✦ ship</span>
+      <span>build ✦ market ✦ ship</span><span>build ✦ market ✦ ship</span>
+    </div>
+  </div>
 
   <!-- Navigation -->
   <header>
     <nav id="navbar">
-      <a href="#home" class="logo">vino<span>.dev</span></a>
-      <ul class="nav-links">
+      <a href="#home" class="logo">vino<span>.</span><em>made</em></a>
+      <ul class="nav-links" id="navLinks">
         <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#what" class="nav-link">What I do</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#blog" class="nav-link">Milestones</a></li>
-        <li><a href="#contact" class="nav-link">ping me</a></li>
+        <li><a href="#work" class="nav-link">Work</a></li>
+        <li><a href="#wins" class="nav-link">Wins</a></li>
+        <li><a href="#contact" class="nav-link cta-link">Say hi</a></li>
       </ul>
-      <div class="mobile-menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </header>
 
   <main>
-  <!-- Hero Section -->
-  <section id="home" class="home-section">
-    <div class="home-content">
-      <div class="hero-animation">
-        <h1>Hi, I'm <span class="gradient-text">VINOTHINI T</span></h1>
-        <p class="subtitle"><span id="typing-effect"></span></p>
-        <p class="intro">
-          3rd-year Computer Science Engineering undergraduate passionate about 
-          Full Stack Web Development and AI-powered, user-centric digital solutions.
-        </p>
-        <div class="home-buttons">
-          <a href="https://docs.google.com/document/d/117TKPQJnpIrffZ8RoTBEPuWOEa1fUOF9/edit?usp=sharing&ouid=104643895752046764110&rtpof=true&sd=true" 
-             target="_blank"
-             class="btn primary pulse-btn">
-            <i class="fas fa-download"></i>
-            Download Resume
-          </a>
+    <!-- ===================== HERO ===================== -->
+    <section id="home" class="hero">
+      <div class="hero-grid container">
+        <div class="hero-copy">
+          <span class="badge"><span class="dot"></span> Available for internships &amp; freelance</span>
+          <p class="hi-tag">hey, i'm vino <span class="wave">👋</span></p>
+          <h1 class="hero-title">
+            I turn ideas into
+            <span class="mark">shipped products</span>
+            — and audiences into
+            <span class="mark mark-2">customers.</span>
+          </h1>
+          <p class="hero-sub">
+            Part digital marketer, part <em>vibe coder</em>, full-time problem solver.
+            I build friendly web apps with AI inside, then make sure the right people
+            actually find them.
+          </p>
+          <div class="hero-actions">
+            <a href="#work" class="btn btn-primary">See my work <i class="fas fa-arrow-right"></i></a>
+            <button id="resumeBtn" class="btn btn-ghost"><i class="far fa-file-lines"></i> My résumé</button>
+          </div>
+          <div class="hero-rotator">
+            <span class="rot-label">currently:</span>
+            <span id="rotator" class="rot-word"></span>
+          </div>
+        </div>
 
-          <a href="#contact" class="btn btn-outline glow-btn">
-            <i class="fas fa-envelope"></i>
-            Contact Me
-          </a>
+        <div class="hero-photo">
+          <div class="polaroid" id="heroPolaroid">
+            <img src="profile.jpeg" alt="Vinothini T smiling" loading="eager" />
+            <span class="tape tape-tl"></span>
+            <span class="tape tape-br"></span>
+            <p class="polaroid-cap">vino, mid-build ✿</p>
+          </div>
+          <span class="sticker sticker-1">vibe&nbsp;coder</span>
+          <span class="sticker sticker-2">₹35k+ won 🏆</span>
+          <span class="sticker sticker-3">chennai 📍</span>
         </div>
       </div>
-    </div>
-  </section>
-</main>
+      <a href="#what" class="scroll-cue" aria-label="Scroll down">
+        <span>scroll</span><i class="fas fa-arrow-down-long"></i>
+      </a>
+    </section>
 
+    <!-- ===================== WHAT I DO (triple threat) ===================== -->
+    <section id="what" class="section what reveal">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">the triple threat</span>
+          <h2 class="section-title">Three skills, <span class="hand">one</span> brain.</h2>
+          <p class="section-lead">Most people pick a lane. I work where building, marketing, and business strategy overlap — that's where the magic (and the money) happens.</p>
+        </div>
 
+        <div class="threat-grid">
+          <article class="threat-card">
+            <span class="threat-num">01</span>
+            <div class="threat-emoji">📣</div>
+            <h3>Digital Marketing</h3>
+            <p>Brand storytelling, content that converts, SEO, and social that doesn't feel like ads. I make products people <em>want</em> to talk about.</p>
+            <ul class="threat-tags"><li>Branding</li><li>SEO</li><li>Content</li><li>Canva</li></ul>
+          </article>
 
-        <div class="scroll-indicator">
-          <span>🚀 Dive In</span>
-          <div class="scroll-arrow"></div>
+          <article class="threat-card featured">
+            <span class="threat-num">02</span>
+            <div class="threat-emoji">🧑‍💻</div>
+            <h3>Vibe Coder</h3>
+            <p>Full-stack builder who ships fast with React, Node &amp; AI APIs. I prototype at the speed of thought and obsess over the little details that feel <em>good</em>.</p>
+            <ul class="threat-tags"><li>React</li><li>Node.js</li><li>Firebase</li><li>OpenAI</li></ul>
+          </article>
+
+          <article class="threat-card">
+            <span class="threat-num">03</span>
+            <div class="threat-emoji">🧩</div>
+            <h3>Problem-Solving Biz Dev</h3>
+            <p>I look at a messy problem and find the path to value — validating ideas, talking to users, and turning "what if" into "let's launch."</p>
+            <ul class="threat-tags"><li>Strategy</li><li>Research</li><li>Pitching</li><li>Ideation</li></ul>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- About Section -->
-<section id="about" class="content-section about-section reveal">
-  <div class="container">
-    <h2 class="section-title">About Me</h2>
-    <div class="about-container">
-      <!-- Profile Picture -->
-      <div class="profile-section">
-        <div class="profile-pic-container">
-          <img src="PROFILE.jpg" alt="Profile photo of Vinothini" class="profile-pic" loading="lazy">
-          <div class="profile-ring"></div>
-        </div>
+    <!-- ===================== SKILLS MARQUEE ===================== -->
+    <section class="skill-marquee" aria-label="Tools I use">
+      <div class="marquee-track">
+        <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>React.js</span><span>Node.js</span><span>Firebase</span><span>OpenAI API</span><span>Git &amp; GitHub</span><span>Canva</span><span>SEO</span><span>Branding</span>
+        <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>React.js</span><span>Node.js</span><span>Firebase</span><span>OpenAI API</span><span>Git &amp; GitHub</span><span>Canva</span><span>SEO</span><span>Branding</span>
       </div>
+    </section>
 
-      <!-- About Text -->
-      <div class="about-text">
-        <h3>Hey there, I'm <span class="gradient-text">Vinothini T!</span></h3>
-        <p>
-          I’m a third-year Computer Science Engineering undergraduate at Saveetha Engineering College, passionate about
-          building meaningful, user-focused digital experiences. I specialize in Full Stack Web Development and AI-powered
-          web applications that blend creativity, automation, and privacy.
-        </p>
-      
-
-        <!-- What I Do Section -->
-        <div class="focus-areas">
-          <h4>What I Do</h4>
-          <ul>
-            <li><i class="fas fa-code"></i> Full Stack Web Development (React.js, Node.js, Firebase)</li>
-            <li><i class="fas fa-brain"></i> AI Integration & Automation (OpenAI API)</li>
-            <li><i class="fas fa-bullhorn"></i> Digital Marketing </li>
-          </ul>
+    <!-- ===================== ABOUT ===================== -->
+    <section id="about" class="section about reveal">
+      <div class="container about-grid">
+        <div class="about-photo">
+          <div class="about-frame">
+            <img src="PROFILE.jpg" alt="Vinothini T" loading="lazy" />
+          </div>
+          <div class="signature">— Vinothini ✿</div>
         </div>
+        <div class="about-copy">
+          <span class="eyebrow">a little about me</span>
+          <h2 class="section-title">The girl-next-door <span class="hand">who ships</span>.</h2>
+          <p>I'm a third-year Computer Science Engineering student at <strong>Saveetha Engineering College, Chennai</strong> — but labels are boring. What I really do is sit in the sweet spot between <em>creativity</em> and <em>code</em>.</p>
+          <p>I've won hackathons, run marketing for student projects, and built AI apps that real people use. I'm warm and easy to work with, but I get genuinely competitive when there's a problem worth solving.</p>
 
-        <!-- Milestones -->
-        <div class="milestones">
-          <div class="milestone">
-            <div class="milestone-icon">
-              <i class="fas fa-trophy"></i>
-            </div>
-            <span class="counter" data-target="2">0</span>
-            <p>Hackathons Won</p>
+          <div class="fun-facts">
+            <div class="fact"><span class="fact-k">☕</span> Runs on filter coffee &amp; deadlines</div>
+            <div class="fact"><span class="fact-k">🚀</span> Ships first, perfects later</div>
+            <div class="fact"><span class="fact-k">🎨</span> Designs in Canva, dreams in code</div>
+            <div class="fact"><span class="fact-k">🧠</span> Always learning something new</div>
           </div>
 
-          <div class="milestone">
-            <div class="milestone-icon">
-              <i class="fas fa-project-diagram"></i>
-            </div>
-            <span class="counter" data-target="8">0</span>
-            <p>Projects Ideated & Built</p>
+          <div class="stats-row">
+            <div class="stat"><span class="counter" data-target="4">0</span><small>hackathons &amp; wins</small></div>
+            <div class="stat"><span class="counter" data-target="35" data-suffix="k+">0</span><small>₹ prize money</small></div>
+            <div class="stat"><span class="counter" data-target="8">0</span><small>products built</small></div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-
-    <!-- Skills Section -->
-<section id="skills" class="content-section skills-section reveal">
-  <div class="container">
-    <h2 class="section-title">My Skills</h2>
-    <div class="skills-grid">
-
-      <!-- HTML -->
-      <div class="skill-item" data-tooltip="2+ years experience">
-        <div class="skill-icon-container">
-          <i class="fab fa-html5 skill-icon"></i>
-        </div>
-        <h3>HTML5</h3>
-        <div class="progress-bar">
-          <div class="progress" data-progress="95%"></div>
-          <span class="progress-text">95%</span>
-        </div>
-      </div>
-
-      <!-- CSS -->
-      <div class="skill-item" data-tooltip="2+ years experience">
-        <div class="skill-icon-container">
-          <i class="fab fa-css3-alt skill-icon"></i>
-        </div>
-        <h3>CSS3</h3>
-        <div class="progress-bar">
-          <div class="progress" data-progress="90%"></div>
-          <span class="progress-text">90%</span>
-        </div>
-      </div>
-
-      <!-- JavaScript -->
-      <div class="skill-item" data-tooltip="1+ year experience">
-        <div class="skill-icon-container">
-          <i class="fab fa-js-square skill-icon"></i>
-        </div>
-        <h3>JavaScript</h3>
-        <div class="progress-bar">
-          <div class="progress" data-progress="80%"></div>
-          <span class="progress-text">80%</span>
-        </div>
-      </div>
-
-      <!-- React.js -->
-      <div class="skill-item" data-tooltip="1+ year experience">
-        <div class="skill-icon-container">
-          <i class="fab fa-react skill-icon"></i>
-        </div>
-        <h3>React.js</h3>
-        <div class="progress-bar">
-          <div class="progress" data-progress="80%"></div>
-          <span class="progress-text">80%</span>
-        </div>
-      </div>
-
-      <!-- Node.js -->
-      <div class="skill-item" data-tooltip="1 year experience">
-        <div class="skill-icon-container">
-          <i class="fab fa-node-js skill-icon"></i>
-        </div>
-        <h3>Node.js</h3>
-        <div class="progress-bar">
-          <div class="progress" data-progress="75%"></div>
-          <span class="progress-text">75%</span>
-        </div>
-      </div>
-
-      <!-- Firebase -->
-      <div class="skill-item" data-tooltip="1 year experience">
-        <div class="skill-icon-container">
-          <i class="fas fa-fire skill-icon"></i>
-        </div>
-        <h3>Firebase</h3>
-        <div class="progress-bar">
-          <div class="progress" data-progress="75%"></div>
-          <span class="progress-text">75%</span>
-        </div>
-      </div>
-
-      <!-- OpenAI API -->
-      <div class="skill-item" data-tooltip="AI Integration Experience">
-        <div class="skill-icon-container">
-          <i class="fas fa-brain skill-icon"></i>
-        </div>
-        <h3>OpenAI API</h3>
-        <div class="progress-bar">
-          <div class="progress" data-progress="70%"></div>
-          <span class="progress-text">70%</span>
-        </div>
-      </div>
-
-      <!-- C -->
-      <div class="skill-item" data-tooltip="2+ years experience">
-        <div class="skill-icon-container">
-          <i class="fas fa-code skill-icon"></i>
-        </div>
-        <h3>C</h3>
-        <div class="progress-bar">
-          <div class="progress" data-progress="85%"></div>
-          <span class="progress-text">85%</span>
-        </div>
-      </div>
-
-      <!-- C++ -->
-      <div class="skill-item" data-tooltip="1+ year experience">
-        <div class="skill-icon-container">
-          <i class="fas fa-code-branch skill-icon"></i>
-        </div>
-        <h3>C++</h3>
-        <div class="progress-bar">
-          <div class="progress" data-progress="75%"></div>
-          <span class="progress-text">75%</span>
-        </div>
-      </div>
-
-      <!-- Java -->
-      <div class="skill-item" data-tooltip="Exploring Java & OOP concepts">
-        <div class="skill-icon-container">
-          <i class="fab fa-java skill-icon"></i>
-        </div>
-        <h3>Java (Exploring)</h3>
-        <div class="progress-bar">
-          <div class="progress" data-progress="60%"></div>
-          <span class="progress-text">60%</span>
-        </div>
-      </div>
-
-      <!-- Git & GitHub -->
-      <div class="skill-item" data-tooltip="Version Control Experience">
-        <div class="skill-icon-container">
-          <i class="fab fa-github skill-icon"></i>
-        </div>
-        <h3>Git & GitHub</h3>
-        <div class="progress-bar">
-          <div class="progress" data-progress="85%"></div>
-          <span class="progress-text">85%</span>
-        </div>
-      </div>
-
-      <!-- Canva -->
-      <div class="skill-item" data-tooltip="Design & Marketing">
-        <div class="skill-icon-container">
-          <i class="fas fa-paint-brush skill-icon"></i>
-        </div>
-        <h3>Canva</h3>
-        <div class="progress-bar">
-          <div class="progress" data-progress="90%"></div>
-          <span class="progress-text">90%</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-   <!-- Projects Section -->
-<section id="projects" class="content-section projects-section reveal">
-  <div class="container">
-    <h2 class="section-title">Featured Projects</h2>
-    <div class="projects-grid">
-
-      <div class="project-card">
-        <div class="project-image">
-          <img src="image.png" alt="Smart Update Manager" loading="lazy">
-          <div class="project-overlay">
-            <a href="https://github.com/Vino1705/Smartupdate" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
-        <div class="project-content">
-          <h3>Smart Update Manager</h3>
-          <p>Agentic AI system for autonomous and intelligent software updates with adaptive scheduling.</p>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-image">
-          <img src="Screenshot 2025-11-11 135939.png" alt="Sahaay AI" loading="lazy">
-          <div class="project-overlay">
-            <a href="https://github.com/Ganesh-0509/Sahaay-Ai" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
-        <div class="project-content">
-          <h3>Sahaay AI</h3>
-          <p>Web-based mental wellness and motivation chatbot for self-care and daily reflection.</p>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-image">
-          <img src="Screenshot 2025-11-11 140120.png" alt="FinMate" loading="lazy">
-          <div class="project-overlay">
-            <a href="https://github.com/Vino1705/Kart-i-quo" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
-        <div class="project-content">
-          <h3>FinMate</h3>
-          <p>Personal finance and budgeting assistant designed for smart money management and insights.</p>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-image">
-          <img src="Screenshot 2025-11-11 140509.png" alt="ContentSpark" loading="lazy">
-          <div class="project-overlay">
-            <a href="https://github.com/Vino1705/Mindspark" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
-        <div class="project-content">
-          <h3>ContentSpark</h3>
-          <p>AI writing companion for idea generation, rewriting, and summarizing — ensuring full data privacy.</p>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-image">
-          <img src="Screenshot 2025-11-11 140412.png" alt="VentureVerse AI" loading="lazy">
-          <div class="project-overlay">
-            <a href="https://github.com/Vino1705/VentureVerse" target="_blank" title="View Code"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
-        <div class="project-content">
-          <h3>VentureVerse AI</h3>
-          <p>AI-powered startup advisory platform delivering market insights, business validation, and investor-ready recommendations.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-
-    <!-- Blog Section -->
-<section id="blog" class="content-section blog-section reveal">
-  <div class="container">
-    <h2 class="section-title">My Achievements</h2>
-    <div class="blog-grid">
-
-      <!-- Achievement 1: Intel AI Hackathon -->
-      <article class="blog-post">
-        <div class="blog-image">
-          <img src="Screenshot 2025-11-11 141259.png" 
-               alt="Intel AI Hackathon 2025" loading="lazy">
-        </div>
-        <div class="blog-content">
-          <div class="blog-meta">
-            <span class="blog-date">May 2025</span>
-            <span class="blog-category">Hackathon</span>
-          </div>
-          <h3>Winner – Intel AI Hackathon 2025</h3>
-          <p>Secured Top 12 in Intel's National AI Hackathon 2025 with <strong>Enterprise360</strong> – an AI assistant for unified enterprise insights. 
-          Received a ₹25,000 cash prize and national recognition for innovation.</p>
-          
-        </div>
-      </article>
-
-      <!-- Achievement 2: VIT FinMate -->
-      <article class="blog-post">
-        <div class="blog-image">
-          <img src="void.jpg" 
-               alt="VIT FinMate Symposium" loading="lazy">
-        </div>
-        <div class="blog-content">
-          <div class="blog-meta">
-            <span class="blog-date">Oct 2025</span>
-            <span class="blog-category">Symposium</span>
-          </div>
-          <h3>VIT Symposium – FinMate</h3>
-          <p>Presented <strong>FinMate</strong>, a personal finance and budgeting assistant, at VIT’s Technical Symposium. 
-          Recognized for innovation and practical problem-solving approach.And we also received 10K as a cash prize</p>
-          
-        </div>
-      </article>
-
-      <!-- Achievement 3: ASME IMECE Brain Bolt -->
-      <article class="blog-post">
-        <div class="blog-image">
-          <img src="ujjain.jpg" 
-               alt="ASME IMECE India 2025" loading="lazy">
-        </div>
-        <div class="blog-content">
-          <div class="blog-meta">
-            <span class="blog-date">Sep 2025</span>
-            <span class="blog-category">Competition</span>
-          </div>
-          <h3>Brain Bolt – ASME IMECE India 2025 (Special Mention)</h3>
-          <p>Earned a <strong>Special Mention</strong> in <em>Brain Bolt – The Engineers’ Sprint</em> at ASME IMECE India 2025, 
-          held in Hyderabad. Recognized for creative engineering solutions and teamwork excellence.</p>
-          
-        </div>
-      </article>
-
-      <article class="blog-post">
-        <div class="blog-image">
-          <img src="nxtwave 3.jpg" 
-               alt="NxtWavexOpenAI Buildathon " loading="lazy">
-        </div>
-        <div class="blog-content">
-          <div class="blog-meta">
-            <span class="blog-date">Nov 2025</span>
-            <span class="blog-category">Hackathon</span>
-          </div>
-          <h3>NxtWavexOpenAI Buildathon (Tamil Nadu Regionals) - Finalist</h3>
-          <p>Secured a spot in the Top 10 at the OpenAI Academy × NxtWave State-Level Buildathon 2025 with <strong>Sahaay-AI</strong> – our mental wellness companion focused on emotional check-ins, mood analytics, and a safe anonymous support space. 
-       We are now heading to the National Round, competing against top teams from across the country.</p>
-
-          
-        </div>
-      </article>
-
-    </div>
-  </div>
-</section>
-
-
-
-    <!-- Contact Section -->
-    <section id="contact" class="content-section contact-section reveal">
+    <!-- ===================== WORK ===================== -->
+    <section id="work" class="section work reveal">
       <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-container">
-          <div class="contact-info">
-            <h3>Let's Connect!</h3>
-            <p>I'm always excited to discuss new opportunities, collaborate on projects, or just chat about the latest in AI and technology.</p>
-            <div class="contact-details">
-              <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <span>vinoism1703@gmail.com</span>
-              </div>
-              <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <span>+91 9042785843</span>
-              </div>
-              <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Chennai, Tamil Nadu, India</span>
-              </div>
-            </div>
-            <div class="social-media">
-              <a href="https://github.com/Vino1705" target="https://github.com/Vino1705" title="GitHub" aria-label="GitHub">
-                <i class="fab fa-github"></i>
-              </a>
-              <a href="https://www.linkedin.com/in/vinothini-t-08b4b4274/" target="https://www.linkedin.com/in/vinothini-t-08b4b4274/" title="LinkedIn" aria-label="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-              </a>
-          
-              <a href="mailto:vinoism1703@gmail.com" title="Email" aria-label="Email">
-                <i class="fas fa-envelope"></i>
-              </a>
-            </div>
-          </div>
-          <form class="contact-form">
-            <div class="form-group">
-              <input type="text" name="name" placeholder="Your Name" required aria-label="Your Name">
-            </div>
-            <div class="form-group">
-              <input type="email" name="email" placeholder="Your Email" required aria-label="Your Email">
-            </div>
-            <div class="form-group">
-              <input type="text" name="subject" placeholder="Subject" required aria-label="Subject">
-            </div>
-            <div class="form-group">
-              <textarea name="message" rows="5" placeholder="Your Message" required aria-label="Your Message"></textarea>
-            </div>
-            <button type="submit" class="btn primary">
-              <i class="fas fa-paper-plane"></i>
-              Send Message
-            </button>
-          </form>
+        <div class="section-head">
+          <span class="eyebrow">selected work</span>
+          <h2 class="section-title">Stuff I've <span class="hand">built &amp; shipped</span>.</h2>
+          <p class="section-lead">Each one started as a problem, became a product, and got a marketing push. Click any card for the full story.</p>
         </div>
+
+        <div class="filter-row">
+          <button class="chip active" data-filter="all">Everything</button>
+          <button class="chip" data-filter="ai">AI</button>
+          <button class="chip" data-filter="web">Web</button>
+          <button class="chip" data-filter="fintech">FinTech</button>
+        </div>
+
+        <div class="work-grid" id="workGrid">
+          <article class="work-card" data-category="ai" data-project="sahaay">
+            <div class="work-img">
+              <img src="Screenshot 2025-11-11 135939.png" alt="Sahaay AI" loading="lazy" />
+              <span class="work-cat">AI · Wellness</span>
+            </div>
+            <div class="work-body">
+              <h3>Sahaay AI</h3>
+              <p>A gentle mental-wellness companion — mood check-ins, daily reflection, and an anonymous safe space. OpenAI × NxtWave Buildathon finalist.</p>
+              <span class="work-more">Read the story <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </article>
+
+          <article class="work-card" data-category="fintech" data-project="finmate">
+            <div class="work-img">
+              <img src="Screenshot 2025-11-11 140120.png" alt="FinMate" loading="lazy" />
+              <span class="work-cat">FinTech</span>
+            </div>
+            <div class="work-body">
+              <h3>FinMate</h3>
+              <p>A friendly personal-finance &amp; budgeting assistant that turns spending data into plain-English insights. Won ₹10K at the VIT symposium.</p>
+              <span class="work-more">Read the story <i class="fas fa-arrow-right"></i></span>
+            </div>
+          </article>
+
+          <article class="work-card wip" data-category="ai" data-project="enterprise360">
+            <span class="wip-ribbon">🚧 Under construction</span>
+            <div class="work-img">
+              <img src="Screenshot 2025-11-11 140412.png" alt="Enterprise360" loading="lazy" />
+              <span class="work-cat">AI · Enterprise</span>
+            </div>
+            <div class="work-body">
+              <h3>Enterprise360</h3>
+              <p>An AI assistant that unifies scattered enterprise data into one conversational view. Top 12 nationally at Intel AI Hackathon 2025 (₹25K).</p>
+              <span class="work-more">Coming soon <i class="fas fa-hammer"></i></span>
+            </div>
+          </article>
+
+          <article class="work-card wip" data-category="ai" data-project="contentspark">
+            <span class="wip-ribbon">🚧 Under construction</span>
+            <div class="work-img">
+              <img src="Screenshot 2025-11-11 140509.png" alt="ContentSpark" loading="lazy" />
+              <span class="work-cat">AI · Marketing</span>
+            </div>
+            <div class="work-body">
+              <h3>ContentSpark</h3>
+              <p>A privacy-first AI writing companion for idea generation, rewriting &amp; summarizing — the marketer's pocket co-pilot.</p>
+              <span class="work-more">Coming soon <i class="fas fa-hammer"></i></span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== WINS ===================== -->
+    <section id="wins" class="section wins reveal">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">receipts</span>
+          <h2 class="section-title">A few <span class="hand">proud moments</span>.</h2>
+          <p class="section-lead">Because "trust me, I'm good" only goes so far.</p>
+        </div>
+
+        <div class="wins-grid">
+          <article class="win-card">
+            <div class="win-img"><img src="Screenshot 2025-11-11 141259.png" alt="Intel AI Hackathon 2025" loading="lazy" /><span class="win-medal">🥇</span></div>
+            <div class="win-body">
+              <div class="win-meta"><span>May 2025</span><span class="win-chip">Hackathon</span></div>
+              <h3>Top 12 · Intel AI Hackathon 2025</h3>
+              <p>National recognition + ₹25,000 for <strong>Enterprise360</strong>, an AI assistant for unified enterprise insights.</p>
+            </div>
+          </article>
+
+          <article class="win-card">
+            <div class="win-img"><img src="void.jpg" alt="VIT FinMate Symposium" loading="lazy" /><span class="win-medal">💰</span></div>
+            <div class="win-body">
+              <div class="win-meta"><span>Oct 2025</span><span class="win-chip">Symposium</span></div>
+              <h3>Winner · VIT Symposium</h3>
+              <p>Presented <strong>FinMate</strong> and took home ₹10,000 for a practical, problem-first finance assistant.</p>
+            </div>
+          </article>
+
+          <article class="win-card">
+            <div class="win-img"><img src="ujjain.jpg" alt="ASME IMECE India 2025" loading="lazy" /><span class="win-medal">⭐</span></div>
+            <div class="win-body">
+              <div class="win-meta"><span>Sep 2025</span><span class="win-chip">Competition</span></div>
+              <h3>Special Mention · ASME IMECE India</h3>
+              <p>Recognized at <em>Brain Bolt – The Engineers' Sprint</em> in Hyderabad for creative engineering &amp; teamwork.</p>
+            </div>
+          </article>
+
+          <article class="win-card">
+            <div class="win-img"><img src="nxtwave 3.jpg" alt="NxtWave x OpenAI Buildathon" loading="lazy" /><span class="win-medal">🚀</span></div>
+            <div class="win-body">
+              <div class="win-meta"><span>Nov 2025</span><span class="win-chip">Buildathon</span></div>
+              <h3>Finalist · OpenAI × NxtWave</h3>
+              <p>Top 10 in the Tamil Nadu regionals with <strong>Sahaay-AI</strong> — now heading to the National round.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA + CONTACT ===================== -->
+    <section id="contact" class="section contact reveal">
+      <div class="container contact-grid">
+        <div class="contact-left">
+          <span class="eyebrow">let's make something</span>
+          <h2 class="section-title">Got a problem<br />worth <span class="hand">solving</span>?</h2>
+          <p>Whether you need a product built, a brand that pops, or just a second brain on a tricky idea — I'd love to hear about it. I reply fast and I'm genuinely nice to work with. 🌷</p>
+
+          <ul class="contact-list">
+            <li><i class="fas fa-envelope"></i> <a href="mailto:vinoism1703@gmail.com">vinoism1703@gmail.com</a></li>
+            <li><i class="fas fa-phone"></i> <a href="tel:+919042785843">+91 90427 85843</a></li>
+            <li><i class="fas fa-location-dot"></i> Chennai, Tamil Nadu, India</li>
+          </ul>
+
+          <div class="socials">
+            <a href="https://github.com/Vino1705" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/vinothini-t-08b4b4274/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="mailto:vinoism1703@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xvgzbgzl" method="POST">
+          <div class="field">
+            <label for="name">Your name</label>
+            <input id="name" type="text" name="name" placeholder="Jane Doe" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="jane@company.com" required />
+          </div>
+          <div class="field">
+            <label for="subject">What's it about?</label>
+            <input id="subject" type="text" name="subject" placeholder="A project, a role, a hello…" required />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell me the fun part…" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block"><i class="fas fa-paper-plane"></i> Send it over</button>
+        </form>
       </div>
     </section>
   </main>
 
   <!-- Footer -->
   <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-left">
-          <p>&copy; 2025 Vinothini T. All Rights Reserved.</p>
-        </div>
-        <div class="footer-right">
-          <div class="social-media">
-            <a href="https://github.com/Vino1705" target="https://github.com/Vino1705" title="GitHub" aria-label="GitHub">
-              <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/vinothini-t-08b4b4274/" target="https://www.linkedin.com/in/vinothini-t-08b4b4274/" title="LinkedIn" aria-label="LinkedIn">
-              <i class="fab fa-linkedin"></i>
-            </a>
-            
-            <a href="mailto:vinoism1703@gmail.com" title="Email" aria-label="Email">
-              <i class="fas fa-envelope"></i>
-            </a>
-          </div>
-        </div>
-      </div>
+    <div class="container footer-inner">
+      <p class="foot-logo">vino<span>.</span><em>made</em></p>
+      <p class="foot-note">Built with code, coffee &amp; a little bit of vibe. © 2025 Vinothini T.</p>
+      <a href="#home" class="foot-top">back to top <i class="fas fa-arrow-up"></i></a>
     </div>
   </footer>
+
+  <!-- AI Avatar Assistant -->
+  <div id="avatar" class="avatar-widget" aria-live="polite">
+    <button id="avatarBubbleBtn" class="avatar-fab" aria-label="Chat with AI Vino" hidden>
+      <img src="PROFILE.jpg" alt="AI Vino" />
+      <span class="avatar-online"></span>
+      <span class="avatar-ping"></span>
+    </button>
+
+    <div id="avatarPanel" class="avatar-panel" role="dialog" aria-label="AI Vino assistant">
+      <div class="avatar-head">
+        <div class="avatar-pfp">
+          <img src="PROFILE.jpg" alt="AI Vino" />
+          <span class="avatar-online"></span>
+        </div>
+        <div class="avatar-id">
+          <strong>AI Vino <span class="ai-pill">AI</span></strong>
+          <small><span class="typing-dotline"><i></i><i></i><i></i></span> <span id="avatarStatus">saying hi…</span></small>
+        </div>
+        <button id="avatarSpeak" class="avatar-icon-btn" aria-label="Hear me" title="Hear me">
+          <i class="fas fa-volume-high"></i>
+        </button>
+        <button id="avatarClose" class="avatar-icon-btn" aria-label="Minimize">
+          <i class="fas fa-minus"></i>
+        </button>
+      </div>
+
+      <div class="avatar-body" id="avatarBody"></div>
+
+      <div class="avatar-quick" id="avatarQuick"></div>
+    </div>
+  </div>
+
+  <!-- Project modal -->
+  <div id="projectModal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Resume modal -->
+  <div id="resumeModal" class="modal" aria-hidden="true">
+    <div class="modal-card modal-wide">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <iframe src="https://docs.google.com/document/d/117TKPQJnpIrffZ8RoTBEPuWOEa1fUOF9/preview?rm=minimal" title="Résumé"></iframe>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"><i class="fas fa-circle-check"></i> <span>Message sent! I'll get back to you soon ✿</span></div>
+
+  <button id="topBtn" class="top-btn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
 
   <script src="script.js"></script>
 </body>
