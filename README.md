@@ -7,7 +7,7 @@ A warm, personable portfolio for a builder who lives where digital marketing, fu
 development, and problem-solving business development overlap. Built as a fast, dependency-free
 static site (HTML, CSS, vanilla JS).
 
-🔗 **Live:** https://vino1705.github.io/portfolio
+🔗 **Live:** https://portfolio-p2yy.onrender.com/
 
 ---
 
