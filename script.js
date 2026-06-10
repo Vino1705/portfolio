@@ -218,9 +218,15 @@
   });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") $$(".modal.open").forEach(closeModal); });
 
-  /* ---------- Contact form (AJAX → toast) ---------- */
+  /* ---------- Contact form (Web3Forms → your inbox) ---------- */
   const form = $("#contactForm");
   const toast = $("#toast");
+  function showToast(msg, ms = 4000) {
+    if (!toast) return;
+    toast.querySelector("span").textContent = msg;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), ms);
+  }
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -228,22 +234,27 @@
       const original = btn.innerHTML;
       btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
       try {
-        const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } });
-        if (res.ok) {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" }
+        });
+        const out = await res.json().catch(() => ({}));
+        if (res.ok && out.success) {
           form.reset();
-          toast.classList.add("show");
-          setTimeout(() => toast.classList.remove("show"), 4000);
-        } else { throw new Error("Network"); }
+          showToast("Message sent! I'll get back to you soon ✿");
+        } else {
+          showToast(out.message || "Hmm, that didn't send — email me directly?", 5000);
+        }
       } catch {
-        toast.querySelector("span").textContent = "Hmm, that didn't send. Email me directly?";
-        toast.classList.add("show");
-        setTimeout(() => toast.classList.remove("show"), 4000);
+        showToast("Network hiccup — please email vinoism1703@gmail.com", 5000);
       } finally { btn.disabled = false; btn.innerHTML = original; }
     });
   }
 
   /* ---------- AI Avatar Assistant ---------- */
   (function avatar() {
+    const widget = $("#avatar");
     const panel = $("#avatarPanel");
     const fab = $("#avatarBubbleBtn");
     const body = $("#avatarBody");
@@ -369,9 +380,25 @@
     });
     if (window.speechSynthesis) speechSynthesis.onvoiceschanged = pickVoice;
 
-    // auto-open shortly after load
+    // start collapsed
     panel.classList.add("hidden"); fab.hidden = true;
-    window.addEventListener("load", () => setTimeout(openPanel, 1500));
+
+    // fully tuck the widget away while the contact section is in view
+    // (so nothing in the corner can ever intercept clicks on the links / form)
+    let contactInView = false;
+    const contactSec = document.querySelector("#contact");
+    if (contactSec && widget) {
+      new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          contactInView = en.isIntersecting;
+          if (en.isIntersecting) { minimize(); widget.classList.add("tucked"); }
+          else { widget.classList.remove("tucked"); }
+        });
+      }, { threshold: 0.15 }).observe(contactSec);
+    }
+
+    // auto-open the greeting ~1.5s after load — but only if we're NOT at the contact section
+    window.addEventListener("load", () => setTimeout(() => { if (!contactInView) openPanel(); }, 1500));
   })();
 
   /* ---------- Smooth-scroll for in-page anchors ---------- */
