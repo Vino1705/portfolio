@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=3" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✿</text></svg>" />
 </head>
 <body>
@@ -332,7 +332,12 @@
           </div>
         </div>
 
-        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xvgzbgzl" method="POST">
+        <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+          <!-- 👇 Paste your Web3Forms access key here (from web3forms.com) -->
+          <input type="hidden" name="access_key" value="a5a582b3-1479-41e6-9cf4-cdf79427379e" />
+          <input type="hidden" name="from_name" value="Portfolio Contact" />
+          <!-- spam honeypot: bots fill this, humans never see it -->
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="field">
             <label for="name">Your name</label>
             <input id="name" type="text" name="name" placeholder="Jane Doe" required />
@@ -417,6 +422,6 @@
 
   <button id="topBtn" class="top-btn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>

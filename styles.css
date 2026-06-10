@@ -430,7 +430,11 @@ footer { background: var(--ink); color: var(--cream); padding: 40px 0; }
 .top-btn:hover { background: var(--coral); transform: translateY(-4px); }
 
 /* ---------- AI Avatar Assistant ---------- */
-.avatar-widget { position: fixed; bottom: 26px; left: 26px; z-index: 850; }
+.avatar-widget { position: fixed; bottom: 26px; left: 26px; z-index: 850; pointer-events: none; transition: opacity .35s var(--ease), transform .35s var(--ease); }
+.avatar-widget .avatar-fab, .avatar-widget .avatar-panel { pointer-events: auto; }
+.avatar-panel.hidden { pointer-events: none; }
+.avatar-widget.tucked { opacity: 0; visibility: hidden; transform: translateY(24px) scale(.9); pointer-events: none; }
+.avatar-widget.tucked .avatar-fab, .avatar-widget.tucked .avatar-panel { pointer-events: none; }
 
 .avatar-fab {
   position: relative; width: 64px; height: 64px; border-radius: 50%; padding: 0; cursor: pointer;
