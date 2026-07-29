@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vinothini T · Marketer × Vibe Coder × Problem Solver</title>
-  <meta name="description" content="Vinothini T — I turn ideas into shipped products and audiences into customers. Full-stack vibe coder, digital marketer, and problem-solving business developer based in Chennai." />
+  <title>Vinothini T · Developer × Digital Marketer × Problem Solver</title>
+  <meta name="description" content="Vinothini T — I turn ideas into shipped products and audiences into customers. Full-stack developer, digital marketer, and problem-solving business developer based in Chennai." />
 
   <!-- SEO Schema -->
   <script type="application/ld+json">
@@ -27,8 +27,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=3" />
+  <link rel="stylesheet" href="styles.css?v=21" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✿</text></svg>" />
+
+  <!-- Three.js for the 3D hero -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
   <!-- grain + cursor -->
@@ -44,13 +54,15 @@
     </div>
   </div>
 
-  <!-- Top marquee ribbon -->
-  <div class="ribbon" aria-hidden="true">
-    <div class="ribbon-track">
-      <span>build ✦ market ✦ ship</span><span>build ✦ market ✦ ship</span>
-      <span>build ✦ market ✦ ship</span><span>build ✦ market ✦ ship</span>
-      <span>build ✦ market ✦ ship</span><span>build ✦ market ✦ ship</span>
-    </div>
+  <!-- Top flip-word ticker -->
+  <div class="ticker" aria-hidden="true">
+    <span class="ticker-lead">I</span>
+    <span class="flip-words">
+      <span>build</span>
+      <span>market</span>
+      <span>ship</span>
+    </span>
+    <span class="ticker-tail">things people love.</span>
   </div>
 
   <!-- Navigation -->
@@ -59,8 +71,10 @@
       <a href="#home" class="logo">vino<span>.</span><em>made</em></a>
       <ul class="nav-links" id="navLinks">
         <li><a href="#home" class="nav-link active">Home</a></li>
-        <li><a href="#what" class="nav-link">What I do</a></li>
+        <li><a href="build.html" class="nav-link">Build</a></li>
+        <li><a href="grow.html" class="nav-link">Grow</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
         <li><a href="#work" class="nav-link">Work</a></li>
         <li><a href="#wins" class="nav-link">Wins</a></li>
         <li><a href="#contact" class="nav-link cta-link">Say hi</a></li>
@@ -72,92 +86,89 @@
   </header>
 
   <main>
-    <!-- ===================== HERO ===================== -->
-    <section id="home" class="hero">
-      <div class="hero-grid container">
-        <div class="hero-copy">
-          <span class="badge"><span class="dot"></span> Available for internships &amp; freelance</span>
-          <p class="hi-tag">hey, i'm vino <span class="wave">👋</span></p>
-          <h1 class="hero-title">
-            I turn ideas into
-            <span class="mark">shipped products</span>
-            — and audiences into
-            <span class="mark mark-2">customers.</span>
-          </h1>
-          <p class="hero-sub">
-            Part digital marketer, part <em>vibe coder</em>, full-time problem solver.
-            I build friendly web apps with AI inside, then make sure the right people
-            actually find them.
-          </p>
-          <div class="hero-actions">
-            <a href="#work" class="btn btn-primary">See my work <i class="fas fa-arrow-right"></i></a>
-            <button id="resumeBtn" class="btn btn-ghost"><i class="far fa-file-lines"></i> My résumé</button>
-          </div>
-          <div class="hero-rotator">
-            <span class="rot-label">currently:</span>
-            <span id="rotator" class="rot-word"></span>
-          </div>
-        </div>
+    <!-- ===================== HERO · 3D DIORAMA ===================== -->
+    <section id="home" class="hero hero--diorama">
+      <span class="warm-glow" aria-hidden="true"></span>
 
-        <div class="hero-photo">
-          <div class="polaroid" id="heroPolaroid">
-            <img src="profile.jpeg" alt="Vinothini T smiling" loading="eager" />
-            <span class="tape tape-tl"></span>
-            <span class="tape tape-br"></span>
-            <p class="polaroid-cap">vino, mid-build ✿</p>
-          </div>
-          <span class="sticker sticker-1">vibe&nbsp;coder</span>
-          <span class="sticker sticker-2">₹35k+ won 🏆</span>
-          <span class="sticker sticker-3">chennai 📍</span>
+      <!-- copy -->
+      <div class="dio-copy">
+        <span class="badge"><span class="dot"></span> Available for internships &amp; freelance</span>
+        <p class="hi-tag">hey, i'm vino <span class="wave">👋</span></p>
+        <h1 class="hero-title">I build products, market ideas, <span class="mark">&amp; ship</span> them.</h1>
+        <p class="hero-sub">Developer <span class="amp">×</span> digital marketer — I turn ideas into shipped products people actually love.</p>
+        <div class="hero-actions">
+          <a href="#work" class="btn btn-primary">See my work <i class="fas fa-arrow-right"></i></a>
+          <a href="resume-developer.pdf" target="_blank" rel="noopener" class="btn btn-ghost"><i class="far fa-file-lines"></i> My résumé</a>
         </div>
       </div>
-      <a href="#what" class="scroll-cue" aria-label="Scroll down">
-        <span>scroll</span><i class="fas fa-arrow-down-long"></i>
+
+      <!-- caricature cutout (background auto-removed at runtime) -->
+      <figure class="dio-toon" id="dioToon">
+        <img src="caricature-cut.png" alt="Caricature of Vinothini giving a thumbs up"
+             onerror="this.onerror=null; this.src='caricature.png';" />
+        <!-- floating skill icons orbiting the figure -->
+        <span class="orb-ic o1" data-label="React" style="--d:0s"><span class="orb-face"><img src="ic-react.svg" alt="React"></span></span>
+        <span class="orb-ic o2" data-label="Node.js" style="--d:.5s"><span class="orb-face"><img src="ic-nodedotjs.svg" alt="Node.js"></span></span>
+        <span class="orb-ic o3" data-label="TypeScript" style="--d:1s"><span class="orb-face"><img src="ic-typescript.svg" alt="TypeScript"></span></span>
+        <span class="orb-ic o4" data-label="Next.js" style="--d:1.5s"><span class="orb-face"><img src="ic-nextdotjs.svg" alt="Next.js"></span></span>
+        <span class="orb-ic o5" data-label="Python" style="--d:2s"><span class="orb-face"><img src="ic-python.svg" alt="Python"></span></span>
+        <span class="orb-ic o6" data-label="Firebase" style="--d:2.5s"><span class="orb-face"><img src="ic-firebase.svg" alt="Firebase"></span></span>
+        <figcaption class="dio-toon-tag">that's me ✿</figcaption>
+      </figure>
+
+      <!-- cute right-side scroller -->
+      <a href="#what" class="side-scroll" id="sideScroll" aria-label="Scroll to my work">
+        <span class="ss-text" id="ssText">stop staring at me — go see my work 👀</span>
+        <span class="ss-arrow"><i class="fas fa-arrow-down-long"></i></span>
       </a>
     </section>
 
-    <!-- ===================== WHAT I DO (triple threat) ===================== -->
-    <section id="what" class="section what reveal">
+    <!-- ===================== TWO SIDES GATEWAY ===================== -->
+    <section id="what" class="section sides-intro reveal">
       <div class="container">
         <div class="section-head">
-          <span class="eyebrow">the triple threat</span>
-          <h2 class="section-title">Three skills, <span class="hand">one</span> brain.</h2>
-          <p class="section-lead">Most people pick a lane. I work where building, marketing, and business strategy overlap — that's where the magic (and the money) happens.</p>
+          <span class="eyebrow">two sides, one me</span>
+          <h2 class="section-title">I <span class="hand">build</span> it — then I make people <span class="hand">want</span> it.</h2>
+          <p class="section-lead">Most people pick a lane: engineer <em>or</em> marketer. I live in both. Pick a side to dive in.</p>
         </div>
-
-        <div class="threat-grid">
-          <article class="threat-card">
-            <span class="threat-num">01</span>
-            <div class="threat-emoji">📣</div>
-            <h3>Digital Marketing</h3>
-            <p>Brand storytelling, content that converts, SEO, and social that doesn't feel like ads. I make products people <em>want</em> to talk about.</p>
-            <ul class="threat-tags"><li>Branding</li><li>SEO</li><li>Content</li><li>Canva</li></ul>
-          </article>
-
-          <article class="threat-card featured">
-            <span class="threat-num">02</span>
-            <div class="threat-emoji">🧑‍💻</div>
-            <h3>Vibe Coder</h3>
-            <p>Full-stack builder who ships fast with React, Node &amp; AI APIs. I prototype at the speed of thought and obsess over the little details that feel <em>good</em>.</p>
-            <ul class="threat-tags"><li>React</li><li>Node.js</li><li>Firebase</li><li>OpenAI</li></ul>
-          </article>
-
-          <article class="threat-card">
-            <span class="threat-num">03</span>
-            <div class="threat-emoji">🧩</div>
-            <h3>Problem-Solving Biz Dev</h3>
-            <p>I look at a messy problem and find the path to value — validating ideas, talking to users, and turning "what if" into "let's launch."</p>
-            <ul class="threat-tags"><li>Strategy</li><li>Research</li><li>Pitching</li><li>Ideation</li></ul>
-          </article>
+        <div class="sides-split">
+          <a href="build.html" class="split-half split-build">
+            <span class="split-emoji">🛠</span>
+            <h3>The Build side</h3>
+            <p>Full-stack dev · AI &amp; prompt engineering · testing &amp; QA</p>
+            <span class="split-go">open the page <i class="fas fa-arrow-right"></i></span>
+          </a>
+          <span class="split-vs">×</span>
+          <a href="grow.html" class="split-half split-grow">
+            <span class="split-emoji">📈</span>
+            <h3>The Grow side</h3>
+            <p>Business development · SEO · digital marketing</p>
+            <span class="split-go">open the page <i class="fas fa-arrow-right"></i></span>
+          </a>
         </div>
       </div>
     </section>
 
     <!-- ===================== SKILLS MARQUEE ===================== -->
-    <section class="skill-marquee" aria-label="Tools I use">
-      <div class="marquee-track">
-        <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>React.js</span><span>Node.js</span><span>Firebase</span><span>OpenAI API</span><span>Git &amp; GitHub</span><span>Canva</span><span>SEO</span><span>Branding</span>
-        <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>React.js</span><span>Node.js</span><span>Firebase</span><span>OpenAI API</span><span>Git &amp; GitHub</span><span>Canva</span><span>SEO</span><span>Branding</span>
+    <section class="logos-marquee" aria-label="Tools &amp; tech I use">
+      <div class="lm-track" id="lmTrack">
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/react" alt="" width="22" height="22" loading="lazy"> React</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/nextdotjs/2B2420" alt="" width="22" height="22" loading="lazy"> Next.js</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/nodedotjs" alt="" width="22" height="22" loading="lazy"> Node.js</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/typescript" alt="" width="22" height="22" loading="lazy"> TypeScript</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/javascript" alt="" width="22" height="22" loading="lazy"> JavaScript</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/python" alt="" width="22" height="22" loading="lazy"> Python</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/firebase" alt="" width="22" height="22" loading="lazy"> Firebase</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/supabase" alt="" width="22" height="22" loading="lazy"> Supabase</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/mongodb" alt="" width="22" height="22" loading="lazy"> MongoDB</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/tailwindcss" alt="" width="22" height="22" loading="lazy"> Tailwind</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/html5" alt="" width="22" height="22" loading="lazy"> HTML5</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/css" alt="" width="22" height="22" loading="lazy"> CSS</span>
+        <span class="lm-chip"><i class="fas fa-brain" style="color:#10a37f"></i> OpenAI</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/git" alt="" width="22" height="22" loading="lazy"> Git</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/github/2B2420" alt="" width="22" height="22" loading="lazy"> GitHub</span>
+        <span class="lm-chip"><img src="https://cdn.simpleicons.org/figma" alt="" width="22" height="22" loading="lazy"> Figma</span>
+        <span class="lm-chip"><i class="fas fa-palette" style="color:#00C4CC"></i> Canva</span>
       </div>
     </section>
 
@@ -172,8 +183,8 @@
         </div>
         <div class="about-copy">
           <span class="eyebrow">a little about me</span>
-          <h2 class="section-title">The girl-next-door <span class="hand">who ships</span>.</h2>
-          <p>I'm a third-year Computer Science Engineering student at <strong>Saveetha Engineering College, Chennai</strong> — but labels are boring. What I really do is sit in the sweet spot between <em>creativity</em> and <em>code</em>.</p>
+          <h2 class="section-title">The developer who <span class="hand">ships &amp; sells</span>.</h2>
+          <p>I'm a final-year Computer Science Engineering student at <strong>Saveetha Engineering College, Chennai</strong>, working in the sweet spot between <em>creativity</em> and <em>code</em> — and I've already taken it into the real world.</p>
           <p>I've won hackathons, run marketing for student projects, and built AI apps that real people use. I'm warm and easy to work with, but I get genuinely competitive when there's a problem worth solving.</p>
 
           <div class="fun-facts">
@@ -262,6 +273,53 @@
       </div>
     </section>
 
+    <!-- ===================== EXPERIENCE ===================== -->
+    <section id="experience" class="section experience reveal">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">what i'm up to</span>
+          <h2 class="section-title">My <span class="hand">experience</span>.</h2>
+          <p class="section-lead">Real-world work at a startup — plus freelance builds with my brother.</p>
+        </div>
+        <div class="exp-card">
+          <div class="exp-side">
+            <div class="exp-logo"><img src="healthpilot-logo.png" alt="HealthPilot.ai" onerror="this.replaceWith(document.createTextNode('🩺'))"></div>
+            <span class="exp-badge"><span class="exp-dot"></span> Current</span>
+            <span class="exp-when">2026 — Present</span>
+          </div>
+          <div class="exp-body">
+            <h3>Tester &amp; Business Development Executive</h3>
+            <p class="exp-co"><a href="https://healthpilot.ai" target="_blank" rel="noopener">HealthPilot.ai</a> <span>· AI healthcare startup</span></p>
+            <ul class="exp-points">
+              <li><strong>QA &amp; Testing</strong> — writing test cases and catching edge cases before they reach users.</li>
+              <li><strong>Business Development</strong> — driving growth and opening new opportunities for the product.</li>
+              <li><strong>Client Engagement</strong> — building relationships and turning conversations into partnerships.</li>
+            </ul>
+            <ul class="exp-tags"><li>Testing / QA</li><li>Business Development</li><li>Client Engagement</li><li>AI Product</li></ul>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-side">
+            <div class="exp-logo exp-logo--dark"><img src="freshframe-logo.png" alt="FreshFrame" onerror="this.replaceWith(document.createTextNode('🚀'))"></div>
+            <span class="exp-badge exp-badge--open"><span class="exp-dot"></span> Open for work</span>
+            <span class="exp-when">Freelance</span>
+          </div>
+          <div class="exp-body">
+            <h3>Co-founder &amp; Developer</h3>
+            <p class="exp-co">FreshFrame <span>· we build, you grow</span></p>
+            <ul class="exp-points">
+              <li><strong>Websites</strong> — designed, built &amp; shipped end to end for real clients.</li>
+              <li><strong>Branding &amp; digital solutions</strong> — identity and growth that stand out.</li>
+              <li><strong>Got something worth building?</strong> Tell us the idea — we'll make it real.</li>
+            </ul>
+            <ul class="exp-tags"><li>Websites</li><li>Branding</li><li>Digital Solutions</li><li>Full-Stack</li></ul>
+            <a href="#contact" class="btn btn-primary exp-cta"><i class="fas fa-paper-plane"></i> Let's build something</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===================== WINS ===================== -->
     <section id="wins" class="section wins reveal">
       <div class="container">
@@ -271,42 +329,58 @@
           <p class="section-lead">Because "trust me, I'm good" only goes so far.</p>
         </div>
 
-        <div class="wins-grid">
-          <article class="win-card">
-            <div class="win-img"><img src="Screenshot 2025-11-11 141259.png" alt="Intel AI Hackathon 2025" loading="lazy" /><span class="win-medal">🥇</span></div>
-            <div class="win-body">
-              <div class="win-meta"><span>May 2025</span><span class="win-chip">Hackathon</span></div>
-              <h3>Top 12 · Intel AI Hackathon 2025</h3>
-              <p>National recognition + ₹25,000 for <strong>Enterprise360</strong>, an AI assistant for unified enterprise insights.</p>
-            </div>
-          </article>
+        <!-- stats band -->
+        <div class="wins-stats">
+          <div class="wins-stat"><b>₹<span class="counter" data-target="35" data-suffix="K+">0</span></b><small>won pitching ideas</small></div>
+          <div class="wins-stat"><b><span class="counter" data-target="4">0</span></b><small>national finals</small></div>
+          <div class="wins-stat"><b><span class="counter" data-target="3">0</span></b><small>hackathons</small></div>
+          <div class="wins-stat"><b><span class="counter" data-target="1">0</span></b><small>startup role</small></div>
+        </div>
 
-          <article class="win-card">
-            <div class="win-img"><img src="void.jpg" alt="VIT FinMate Symposium" loading="lazy" /><span class="win-medal">💰</span></div>
-            <div class="win-body">
-              <div class="win-meta"><span>Oct 2025</span><span class="win-chip">Symposium</span></div>
-              <h3>Winner · VIT Symposium</h3>
-              <p>Presented <strong>FinMate</strong> and took home ₹10,000 for a practical, problem-first finance assistant.</p>
+        <!-- interactive showcase -->
+        <div class="showcase" id="showcase">
+          <div class="showcase-stage">
+            <div class="sc-media">
+              <img id="scImg" src="Screenshot 2025-11-11 141259.png" alt="Intel AI Hackathon 2025" />
+              <span class="sc-medal" id="scMedal">🥇</span>
             </div>
-          </article>
+            <div class="sc-info" id="scInfo">
+              <div class="sc-meta"><span id="scDate">May 2025</span><span class="sc-chip" id="scChip">Hackathon</span></div>
+              <h3 class="sc-title" id="scTitle">Top 12 · Intel AI Hackathon 2025</h3>
+              <p class="sc-desc" id="scDesc">National recognition + ₹25,000 for Enterprise360, an AI assistant for unified enterprise insights.</p>
+            </div>
+          </div>
 
-          <article class="win-card">
-            <div class="win-img"><img src="ujjain.jpg" alt="ASME IMECE India 2025" loading="lazy" /><span class="win-medal">⭐</span></div>
-            <div class="win-body">
-              <div class="win-meta"><span>Sep 2025</span><span class="win-chip">Competition</span></div>
-              <h3>Special Mention · ASME IMECE India</h3>
-              <p>Recognized at <em>Brain Bolt – The Engineers' Sprint</em> in Hyderabad for creative engineering &amp; teamwork.</p>
-            </div>
-          </article>
-
-          <article class="win-card">
-            <div class="win-img"><img src="nxtwave 3.jpg" alt="NxtWave x OpenAI Buildathon" loading="lazy" /><span class="win-medal">🚀</span></div>
-            <div class="win-body">
-              <div class="win-meta"><span>Nov 2025</span><span class="win-chip">Buildathon</span></div>
-              <h3>Finalist · OpenAI × NxtWave</h3>
-              <p>Top 10 in the Tamil Nadu regionals with <strong>Sahaay-AI</strong> — now heading to the National round.</p>
-            </div>
-          </article>
+          <ul class="showcase-list" id="scList">
+            <li class="sc-item active" data-medal="🥇" data-date="May 2025" data-chip="Hackathon"
+                data-title="Top 12 · Intel AI Hackathon 2025"
+                data-desc="National recognition + ₹25,000 for Enterprise360, an AI assistant for unified enterprise insights."
+                data-img="Screenshot 2025-11-11 141259.png">
+              <span class="sc-i-medal">🥇</span>
+              <span class="sc-i-text"><b>Intel AI Hackathon</b><small>Top 12 · ₹25K · National</small></span>
+            </li>
+            <li class="sc-item" data-medal="💰" data-date="Oct 2025" data-chip="Symposium"
+                data-title="Winner · VIT Symposium"
+                data-desc="Presented FinMate and took home ₹10,000 for a practical, problem-first finance assistant."
+                data-img="void.jpg">
+              <span class="sc-i-medal">💰</span>
+              <span class="sc-i-text"><b>VIT Symposium</b><small>Winner · ₹10K</small></span>
+            </li>
+            <li class="sc-item" data-medal="⭐" data-date="Sep 2025" data-chip="Competition"
+                data-title="Special Mention · ASME IMECE India"
+                data-desc="Recognized at Brain Bolt – The Engineers' Sprint in Hyderabad for creative engineering & teamwork."
+                data-img="ujjain.jpg">
+              <span class="sc-i-medal">⭐</span>
+              <span class="sc-i-text"><b>ASME IMECE India</b><small>Special Mention</small></span>
+            </li>
+            <li class="sc-item" data-medal="🚀" data-date="Nov 2025" data-chip="Buildathon"
+                data-title="Finalist · OpenAI × NxtWave"
+                data-desc="Top 10 in the Tamil Nadu regionals with Sahaay-AI — now heading to the National round."
+                data-img="nxtwave 3.jpg">
+              <span class="sc-i-medal">🚀</span>
+              <span class="sc-i-text"><b>OpenAI × NxtWave</b><small>Finalist · Top 10</small></span>
+            </li>
+          </ul>
         </div>
       </div>
     </section>
@@ -333,10 +407,8 @@
         </div>
 
         <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-          <!-- 👇 Paste your Web3Forms access key here (from web3forms.com) -->
           <input type="hidden" name="access_key" value="a5a582b3-1479-41e6-9cf4-cdf79427379e" />
-          <input type="hidden" name="from_name" value="Portfolio Contact" />
-          <!-- spam honeypot: bots fill this, humans never see it -->
+          <input type="hidden" name="from_name" value="Portfolio · vino.made" />
           <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="field">
             <label for="name">Your name</label>
@@ -364,42 +436,10 @@
   <footer>
     <div class="container footer-inner">
       <p class="foot-logo">vino<span>.</span><em>made</em></p>
-      <p class="foot-note">Built with code, coffee &amp; a little bit of vibe. © 2025 Vinothini T.</p>
+      <p class="foot-note">Designed &amp; built with care. © 2026 Vinothini T.</p>
       <a href="#home" class="foot-top">back to top <i class="fas fa-arrow-up"></i></a>
     </div>
   </footer>
-
-  <!-- AI Avatar Assistant -->
-  <div id="avatar" class="avatar-widget" aria-live="polite">
-    <button id="avatarBubbleBtn" class="avatar-fab" aria-label="Chat with AI Vino" hidden>
-      <img src="PROFILE.jpg" alt="AI Vino" />
-      <span class="avatar-online"></span>
-      <span class="avatar-ping"></span>
-    </button>
-
-    <div id="avatarPanel" class="avatar-panel" role="dialog" aria-label="AI Vino assistant">
-      <div class="avatar-head">
-        <div class="avatar-pfp">
-          <img src="PROFILE.jpg" alt="AI Vino" />
-          <span class="avatar-online"></span>
-        </div>
-        <div class="avatar-id">
-          <strong>AI Vino <span class="ai-pill">AI</span></strong>
-          <small><span class="typing-dotline"><i></i><i></i><i></i></span> <span id="avatarStatus">saying hi…</span></small>
-        </div>
-        <button id="avatarSpeak" class="avatar-icon-btn" aria-label="Hear me" title="Hear me">
-          <i class="fas fa-volume-high"></i>
-        </button>
-        <button id="avatarClose" class="avatar-icon-btn" aria-label="Minimize">
-          <i class="fas fa-minus"></i>
-        </button>
-      </div>
-
-      <div class="avatar-body" id="avatarBody"></div>
-
-      <div class="avatar-quick" id="avatarQuick"></div>
-    </div>
-  </div>
 
   <!-- Project modal -->
   <div id="projectModal" class="modal" aria-hidden="true">
@@ -409,19 +449,11 @@
     </div>
   </div>
 
-  <!-- Resume modal -->
-  <div id="resumeModal" class="modal" aria-hidden="true">
-    <div class="modal-card modal-wide">
-      <button class="modal-close" aria-label="Close">&times;</button>
-      <iframe src="https://docs.google.com/document/d/117TKPQJnpIrffZ8RoTBEPuWOEa1fUOF9/preview?rm=minimal" title="Résumé"></iframe>
-    </div>
-  </div>
-
   <!-- Toast -->
   <div id="toast" class="toast"><i class="fas fa-circle-check"></i> <span>Message sent! I'll get back to you soon ✿</span></div>
 
   <button id="topBtn" class="top-btn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
 
-  <script src="script.js?v=3"></script>
+  <script src="script.js?v=15"></script>
 </body>
 </html>

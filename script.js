@@ -205,10 +205,6 @@
   }
   $$(".work-card").forEach((card) => card.addEventListener("click", () => openProject(card.dataset.project, card.classList.contains("wip"))));
 
-  /* ---------- Resume modal ---------- */
-  const resumeModal = $("#resumeModal");
-  const resumeBtn = $("#resumeBtn");
-  if (resumeBtn) resumeBtn.addEventListener("click", () => openModal(resumeModal));
 
   /* ---------- Modal helpers ---------- */
   function openModal(m) { m.classList.add("open"); m.setAttribute("aria-hidden", "false"); document.body.style.overflow = "hidden"; }
@@ -218,7 +214,7 @@
   });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") $$(".modal.open").forEach(closeModal); });
 
-  /* ---------- Contact form (Web3Forms → your inbox) ---------- */
+  /* ---------- Contact form (Web3Forms → straight to inbox, no app) ---------- */
   const form = $("#contactForm");
   const toast = $("#toast");
   function showToast(msg, ms = 4000) {
@@ -231,174 +227,80 @@
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const btn = form.querySelector('button[type="submit"]');
-      const original = btn.innerHTML;
-      btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…';
+      const original = btn ? btn.innerHTML : "";
+      if (btn) { btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending…'; }
       try {
         const res = await fetch(form.action, {
           method: "POST",
           body: new FormData(form),
-          headers: { Accept: "application/json" }
+          headers: { Accept: "application/json" },
         });
         const out = await res.json().catch(() => ({}));
         if (res.ok && out.success) {
           form.reset();
-          showToast("Message sent! I'll get back to you soon ✿");
+          showToast("Message sent — it's in my inbox! I'll reply soon ✿");
         } else {
-          showToast(out.message || "Hmm, that didn't send — email me directly?", 5000);
+          showToast(out.message || "Couldn't send — email vinoism1703@gmail.com", 5000);
         }
       } catch {
         showToast("Network hiccup — please email vinoism1703@gmail.com", 5000);
-      } finally { btn.disabled = false; btn.innerHTML = original; }
+      } finally {
+        if (btn) { btn.disabled = false; btn.innerHTML = original; }
+      }
     });
   }
 
-  /* ---------- AI Avatar Assistant ---------- */
-  (function avatar() {
-    const widget = $("#avatar");
-    const panel = $("#avatarPanel");
-    const fab = $("#avatarBubbleBtn");
-    const body = $("#avatarBody");
-    const quick = $("#avatarQuick");
-    const statusEl = $("#avatarStatus");
-    const closeBtn = $("#avatarClose");
-    const speakBtn = $("#avatarSpeak");
-    if (!panel) return;
-
+  /* ---------- 3D tilt + glare on cards ---------- */
+  (function tilt() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    // scripted brain
-    const intro = [
-      "Hi there! I'm Vino 👋 — well, the <em>AI</em> version of me. ✨",
-      "I'm a digital marketer, a <em>vibe coder</em>, and a problem-solving builder. Basically: I make ideas real, then make people care about them.",
-      "Warm and easy to work with, but low-key competitive when there's a good problem to crack. Ask me anything 👇"
-    ];
-    const replies = {
-      what: {
-        label: "What do you do?",
-        msg: "Three things, one brain 🧠 — I market (branding, content, SEO), I build full-stack apps with AI inside (React, Node, OpenAI), and I do the business-dev bit: validating ideas and turning 'what if' into 'let's launch.'",
-        go: "#what"
-      },
-      win: {
-        label: "Your proudest win?",
-        msg: "Top 12 nationally at the <em>Intel AI Hackathon 2025</em> with Enterprise360 — and a ₹25,000 prize 🏆. I've stacked up ₹35K+ across hackathons. Want the full list?",
-        go: "#wins"
-      },
-      work: {
-        label: "Show me your work",
-        msg: "On it! Scrolling you to my favourite builds — Sahaay AI, FinMate, Enterprise360 & ContentSpark. Tap any card for the story. 🚀",
-        go: "#work"
-      },
-      hire: {
-        label: "Are you available?",
-        msg: "Yes! I'm open to internships &amp; freelance right now. The fastest way to reach me is the form below — I reply quickly and I'm genuinely nice to work with. 🌷",
-        go: "#contact"
-      }
-    };
-
-    let typingTimer = null;
-    function addMsg(html, who) {
-      const el = document.createElement("div");
-      el.className = "av-msg" + (who === "user" ? " user" : "");
-      body.appendChild(el);
-      body.scrollTop = body.scrollHeight;
-      if (who === "user" || reduce) { el.innerHTML = html; body.scrollTop = body.scrollHeight; return Promise.resolve(el); }
-      // typewriter (renders HTML safely after typing plain text)
-      return new Promise((resolve) => {
-        const tmp = document.createElement("div"); tmp.innerHTML = html;
-        const text = tmp.textContent;
-        let i = 0; el.classList.add("av-cursor");
-        clearInterval(typingTimer);
-        typingTimer = setInterval(() => {
-          el.textContent = text.slice(0, ++i);
-          body.scrollTop = body.scrollHeight;
-          if (i >= text.length) { clearInterval(typingTimer); el.classList.remove("av-cursor"); el.innerHTML = html; resolve(el); }
-        }, 22);
+    if (reduce || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    $$(".work-card, .win-card").forEach((card) => {
+      card.classList.add("tilt3d");
+      const glare = document.createElement("span");
+      glare.className = "tilt-glare";
+      card.appendChild(glare);
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        card.style.transform = `perspective(800px) rotateX(${(py - .5) * -8}deg) rotateY(${(px - .5) * 10}deg) translateY(-6px)`;
+        glare.style.setProperty("--gx", px * 100 + "%");
+        glare.style.setProperty("--gy", py * 100 + "%");
       });
-    }
-
-    function setStatus(s) { statusEl.textContent = s; }
-    function showChips() {
-      quick.innerHTML = "";
-      Object.entries(replies).forEach(([k, r]) => {
-        const b = document.createElement("button");
-        b.className = "av-chip"; b.textContent = r.label;
-        b.addEventListener("click", () => onAsk(k));
-        quick.appendChild(b);
-      });
-    }
-
-    let lastSpoken = "";
-    async function onAsk(key) {
-      const r = replies[key];
-      quick.innerHTML = "";
-      await addMsg(r.label, "user");
-      setStatus("typing…");
-      await wait(280);
-      const el = await addMsg(r.msg, "bot");
-      lastSpoken = el.textContent;
-      setStatus("online");
-      if (r.go) { const t = document.querySelector(r.go); if (t) setTimeout(() => t.scrollIntoView({ behavior: "smooth" }), 450); }
-      showChips();
-    }
-
-    function wait(ms) { return new Promise((r) => setTimeout(r, ms)); }
-
-    let started = false;
-    async function runIntro() {
-      if (started) return; started = true;
-      setStatus("saying hi…");
-      for (const line of intro) { await addMsg(line, "bot"); await wait(reduce ? 60 : 400); }
-      lastSpoken = intro.map((l) => l.replace(/<[^>]+>/g, "")).join(" ");
-      setStatus("online");
-      showChips();
-    }
-
-    function openPanel() { panel.classList.remove("hidden"); fab.hidden = true; runIntro(); }
-    function minimize() { panel.classList.add("hidden"); fab.hidden = false; stopSpeak(); }
-
-    closeBtn.addEventListener("click", minimize);
-    fab.addEventListener("click", openPanel);
-
-    // text-to-speech
-    let speaking = false;
-    function pickVoice() {
-      const vs = window.speechSynthesis ? speechSynthesis.getVoices() : [];
-      return vs.find((v) => /en-IN/i.test(v.lang)) ||
-             vs.find((v) => /female|zira|samantha|aria|jenny|google uk english female/i.test(v.name)) ||
-             vs.find((v) => /^en/i.test(v.lang)) || vs[0];
-    }
-    function stopSpeak() { if (window.speechSynthesis) speechSynthesis.cancel(); speaking = false; speakBtn.classList.remove("speaking"); }
-    speakBtn.addEventListener("click", () => {
-      if (!("speechSynthesis" in window)) { setStatus("voice not supported 🙁"); return; }
-      if (speaking) { stopSpeak(); return; }
-      const u = new SpeechSynthesisUtterance(lastSpoken || intro.join(" ").replace(/<[^>]+>/g, ""));
-      const v = pickVoice(); if (v) u.voice = v;
-      u.rate = 1.02; u.pitch = 1.12;
-      u.onend = () => { speaking = false; speakBtn.classList.remove("speaking"); };
-      speaking = true; speakBtn.classList.add("speaking");
-      speechSynthesis.cancel(); speechSynthesis.speak(u);
+      card.addEventListener("pointerleave", () => { card.style.transform = ""; });
     });
-    if (window.speechSynthesis) speechSynthesis.onvoiceschanged = pickVoice;
+  })();
 
-    // start collapsed
-    panel.classList.add("hidden"); fab.hidden = true;
 
-    // fully tuck the widget away while the contact section is in view
-    // (so nothing in the corner can ever intercept clicks on the links / form)
-    let contactInView = false;
-    const contactSec = document.querySelector("#contact");
-    if (contactSec && widget) {
-      new IntersectionObserver((entries) => {
-        entries.forEach((en) => {
-          contactInView = en.isIntersecting;
-          if (en.isIntersecting) { minimize(); widget.classList.add("tucked"); }
-          else { widget.classList.remove("tucked"); }
-        });
-      }, { threshold: 0.15 }).observe(contactSec);
+  /* ---------- Achievements: interactive showcase ---------- */
+  (function showcase() {
+    const wrap = $("#showcase");
+    if (!wrap) return;
+    const items = $$(".sc-item", wrap);
+    const img = $("#scImg"), medal = $("#scMedal"), date = $("#scDate"),
+      chip = $("#scChip"), title = $("#scTitle"), desc = $("#scDesc"), info = $("#scInfo");
+    let idx = 0, timer = null;
+    function show(i) {
+      idx = i;
+      items.forEach((it, k) => it.classList.toggle("active", k === i));
+      const d = items[i].dataset;
+      img.style.opacity = "0";
+      setTimeout(() => { img.src = d.img; img.alt = d.title; img.style.opacity = "1"; }, 180);
+      medal.textContent = d.medal; date.textContent = d.date; chip.textContent = d.chip;
+      title.textContent = d.title; desc.textContent = d.desc;
+      info.classList.remove("sc-anim"); void info.offsetWidth; info.classList.add("sc-anim");
     }
+    function next() { show((idx + 1) % items.length); }
+    function restart() { clearInterval(timer); timer = setInterval(next, 6000); }
+    items.forEach((it, i) => it.addEventListener("click", () => { show(i); restart(); }));
+    wrap.addEventListener("mouseenter", () => clearInterval(timer));
+    wrap.addEventListener("mouseleave", restart);
+    restart();
+  })();
 
-    // auto-open the greeting ~1.5s after load — but only if we're NOT at the contact section
-    window.addEventListener("load", () => setTimeout(() => { if (!contactInView) openPanel(); }, 1500));
+  /* ---------- Logo marquee: duplicate for a seamless loop ---------- */
+  (function () {
+    const track = $("#lmTrack");
+    if (track) track.innerHTML += track.innerHTML;
   })();
 
   /* ---------- Smooth-scroll for in-page anchors ---------- */
@@ -411,4 +313,100 @@
       }
     });
   });
+
+  /* ---------- Cute right-side scroller (rotating phrases) ---------- */
+  (function sideScroll() {
+    const el = $("#ssText");
+    if (!el) return;
+    const phrases = [
+      "stop staring at me — go see my work 👀",
+      "psst… the good stuff is below 👇",
+      "enough cuteness — check my skills ✨",
+      "scroll down, don't be shy 🌿",
+      "my projects are cuter, promise 💌",
+    ];
+    let i = 0;
+    setInterval(() => {
+      el.style.opacity = "0";
+      setTimeout(() => { i = (i + 1) % phrases.length; el.textContent = phrases[i]; el.style.opacity = "1"; }, 400);
+    }, 3800);
+    // hide the whole scroller once the user has scrolled past the hero
+    const scroller = $("#sideScroll");
+    window.addEventListener("scroll", () => {
+      if (!scroller) return;
+      const past = window.scrollY > window.innerHeight * 0.6;
+      scroller.style.opacity = past ? "0" : "1";
+      scroller.style.pointerEvents = past ? "none" : "auto";
+    }, { passive: true });
+  })();
+
+  /* ---------- Floating logo badges: 3D tilt on hover ---------- */
+  (function skillBadges() {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    $$(".orb-ic").forEach((o) => {
+      const face = o.querySelector(".orb-face");
+      if (!face) return;
+      o.addEventListener("pointermove", (e) => {
+        const r = o.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        face.style.transform = `rotateY(${px * 34}deg) rotateX(${-py * 34}deg) scale(1.14)`;
+      });
+      o.addEventListener("pointerleave", () => { face.style.transform = ""; });
+    });
+  })();
+
+  /* ---------- Caricature: auto background-removal + 3D parallax ---------- */
+  (function toon() {
+    const fig = $("#dioToon"); if (!fig) return;
+    const img = fig.querySelector("img"); if (!img) return;
+    let cut = false;
+    function autoCutout() {
+      if (cut) return;
+      if (img.src.indexOf("PROFILE.jpg") !== -1) return; // fallback photo — leave it
+      if (!img.naturalWidth) return;
+      cut = true;
+      try {
+        const w = img.naturalWidth, h = img.naturalHeight;
+        const cv = document.createElement("canvas"); cv.width = w; cv.height = h;
+        const ctx = cv.getContext("2d", { willReadFrequently: true });
+        ctx.drawImage(img, 0, 0);
+        const id = ctx.getImageData(0, 0, w, h), p = id.data;
+        const at = (x, y) => (y * w + x) * 4;
+        const cs = [at(0, 0), at(w - 1, 0), at(0, h - 1), at(w - 1, h - 1)];
+        let kr = 0, kg = 0, kb = 0;
+        cs.forEach((i) => { kr += p[i]; kg += p[i + 1]; kb += p[i + 2]; });
+        kr /= 4; kg /= 4; kb /= 4;
+        const tol = 56 * 56, vis = new Uint8Array(w * h), st = [];
+        for (let x = 0; x < w; x++) { st.push(x, (h - 1) * w + x); }
+        for (let y = 0; y < h; y++) { st.push(y * w, y * w + w - 1); }
+        while (st.length) {
+          const q = st.pop(); if (vis[q]) continue; vis[q] = 1;
+          const i = q * 4, dr = p[i] - kr, dg = p[i + 1] - kg, db = p[i + 2] - kb;
+          if (dr * dr + dg * dg + db * db > tol) continue;
+          p[i + 3] = 0;
+          const x = q % w, y = (q / w) | 0;
+          if (x > 0) st.push(q - 1); if (x < w - 1) st.push(q + 1);
+          if (y > 0) st.push(q - w); if (y < h - 1) st.push(q + w);
+        }
+        ctx.putImageData(id, 0, 0);
+        img.src = cv.toDataURL("image/png");
+        fig.classList.add("is-cut");
+      } catch (e) { /* tainted / error — keep original */ }
+    }
+    // NOTE: cutout disabled — the caricature is a full illustrated scene, not a
+    // plain-background figure, so we frame it cleanly instead of cutting it.
+    void autoCutout;
+
+    // subtle 3D parallax on the cutout
+    const hero = fig.closest(".hero");
+    if (hero && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      hero.addEventListener("pointermove", (e) => {
+        const r = hero.getBoundingClientRect();
+        const dx = (e.clientX - r.left) / r.width - 0.5, dy = (e.clientY - r.top) / r.height - 0.5;
+        img.style.transform = `translate(${dx * 24}px, ${dy * 16}px) rotate(${dx * 3}deg)`;
+      });
+      hero.addEventListener("pointerleave", () => { img.style.transform = ""; });
+    }
+  })();
 })();

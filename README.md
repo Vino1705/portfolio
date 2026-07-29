@@ -1,6 +1,6 @@
 # Vinothini T — Portfolio ✿
 
-**Marketer × Vibe Coder × Problem Solver.**
+**Developer × Digital Marketer × Problem Solver.**
 I turn ideas into shipped products — and audiences into customers.
 
 A warm, personable portfolio for a builder who lives where digital marketing, full-stack
@@ -13,11 +13,11 @@ static site (HTML, CSS, vanilla JS).
 
 ## 👋 About me
 
-I'm a third-year Computer Science Engineering student at **Saveetha Engineering College, Chennai** —
+I'm a final-year Computer Science Engineering student at **Saveetha Engineering College, Chennai** —
 but I work in the sweet spot between creativity and code:
 
 - 📣 **Digital Marketing** — branding, content that converts, SEO, and social
-- 🧑‍💻 **Vibe Coder** — full-stack apps with AI inside, shipped fast
+- 🧑‍💻 **Full-Stack Developer** — AI-powered web apps, built and shipped
 - 🧩 **Problem-Solving Biz Dev** — validating ideas and turning "what if" into "let's launch"
 
 ## 💡 Featured work

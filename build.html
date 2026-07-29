@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Build Side · Vinothini T</title>
+  <meta name="description" content="Vinothini T — full-stack development, AI & prompt engineering, and testing. The engineering half of a builder who also does growth." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@600;700&family=Space+Mono&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=16" />
+  <link rel="stylesheet" href="pages.css?v=3" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠</text></svg>" />
+</head>
+<body class="build-page">
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header>
+    <nav id="navbar">
+      <a href="index.html" class="logo">vino<span>.</span><em>made</em></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="build.html" class="nav-link active">Build</a></li>
+        <li><a href="grow.html" class="nav-link">Grow</a></li>
+        <li><a href="index.html#work" class="nav-link">Work</a></li>
+        <li><a href="index.html#wins" class="nav-link">Wins</a></li>
+        <li><a href="index.html#contact" class="nav-link cta-link">Say hi</a></li>
+      </ul>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="page-main">
+    <!-- HERO -->
+    <section class="subhero">
+      <span class="blob" style="width:380px;height:380px;top:-120px;right:-60px;"></span>
+      <div class="container subhero-inner">
+        <a href="index.html" class="crumb"><i class="fas fa-arrow-left"></i> back to home</a>
+        <span class="eyebrow mono-eyebrow">$ ./the-build-side</span>
+        <h1>The <span class="hand">build</span> side.</h1>
+        <p class="subhero-lead">Full-stack apps, shipped fast with AI in the loop.</p>
+        <div class="subhero-actions">
+          <a href="resume-developer.pdf" target="_blank" rel="noopener" class="btn btn-primary"><i class="far fa-file-lines"></i> Developer résumé</a>
+          <a href="#builds" class="btn btn-ghost">Selected builds <i class="fas fa-arrow-down"></i></a>
+        </div>
+        <div class="stat-strip">
+          <div class="stat"><span class="counter" data-target="8">0</span><small>products built</small></div>
+          <div class="stat"><span class="counter" data-target="4">0</span><small>national finals</small></div>
+          <div class="stat"><span class="counter" data-target="20" data-suffix="+">0</span><small>tools &amp; skills</small></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS DASHBOARD -->
+    <section class="section skills-dash">
+      <div class="container">
+        <div class="section-head" style="text-align:left;margin-left:0;">
+          <span class="eyebrow">at a glance</span>
+          <h2 class="section-title">My <span class="hand">skills</span>.</h2>
+        </div>
+
+        <div class="sk-group reveal-up">
+          <h4 class="sk-head"><i class="fas fa-laptop-code"></i> Frontend</h4>
+          <div class="sk-grid">
+            <div class="skill"><span class="sk-ring" style="--p:90"><span class="sk-core"><img src="https://cdn.simpleicons.org/react" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">React</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:85"><span class="sk-core"><img src="https://cdn.simpleicons.org/nextdotjs/2B2420" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">Next.js</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:82"><span class="sk-core"><img src="https://cdn.simpleicons.org/typescript" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">TypeScript</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:92"><span class="sk-core"><img src="https://cdn.simpleicons.org/javascript" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">JavaScript</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:88"><span class="sk-core"><img src="https://cdn.simpleicons.org/tailwindcss" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">Tailwind</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:95"><span class="sk-core"><img src="https://cdn.simpleicons.org/html5" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">HTML5</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:90"><span class="sk-core"><img src="https://cdn.simpleicons.org/css" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">CSS</span></div>
+          </div>
+        </div>
+
+        <div class="sk-group reveal-up">
+          <h4 class="sk-head"><i class="fas fa-server"></i> Backend &amp; Data</h4>
+          <div class="sk-grid">
+            <div class="skill"><span class="sk-ring" style="--p:85"><span class="sk-core"><img src="https://cdn.simpleicons.org/nodedotjs" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">Node.js</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:78"><span class="sk-core"><img src="https://cdn.simpleicons.org/python" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">Python</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:80"><span class="sk-core"><img src="https://cdn.simpleicons.org/supabase" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">Supabase</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:82"><span class="sk-core"><img src="https://cdn.simpleicons.org/firebase" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">Firebase</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:75"><span class="sk-core"><img src="https://cdn.simpleicons.org/mongodb" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">MongoDB</span></div>
+          </div>
+        </div>
+
+        <div class="sk-group reveal-up">
+          <h4 class="sk-head"><i class="fas fa-wand-magic-sparkles"></i> AI &amp; Prompt Engineering</h4>
+          <div class="sk-grid">
+            <div class="skill"><span class="sk-ring" style="--p:88"><span class="sk-core"><i class="fas fa-brain" style="color:#10a37f"></i></span></span><span class="sk-name">OpenAI</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:90"><span class="sk-core"><i class="fas fa-terminal" style="color:#10a37f"></i></span></span><span class="sk-name">Prompt Design</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:80"><span class="sk-core"><i class="fas fa-diagram-project" style="color:#10a37f"></i></span></span><span class="sk-name">Agentic AI</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:78"><span class="sk-core"><i class="fas fa-database" style="color:#10a37f"></i></span></span><span class="sk-name">RAG</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:75"><span class="sk-core"><i class="fas fa-flask" style="color:#10a37f"></i></span></span><span class="sk-name">Evals</span></div>
+          </div>
+        </div>
+
+        <div class="sk-group reveal-up">
+          <h4 class="sk-head"><i class="fas fa-vial-circle-check"></i> Testing &amp; QA</h4>
+          <div class="sk-grid">
+            <div class="skill"><span class="sk-ring" style="--p:85"><span class="sk-core"><i class="fas fa-list-check" style="color:var(--sage)"></i></span></span><span class="sk-name">Test Cases</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:88"><span class="sk-core"><i class="fas fa-hand-pointer" style="color:var(--sage)"></i></span></span><span class="sk-name">Manual QA</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:75"><span class="sk-core"><i class="fas fa-robot" style="color:var(--sage)"></i></span></span><span class="sk-name">Automation</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:85"><span class="sk-core"><i class="fas fa-bug" style="color:var(--sage)"></i></span></span><span class="sk-name">Debugging</span></div>
+          </div>
+        </div>
+
+        <div class="sk-group reveal-up">
+          <h4 class="sk-head"><i class="fas fa-screwdriver-wrench"></i> Tools</h4>
+          <div class="sk-grid">
+            <div class="skill"><span class="sk-ring" style="--p:88"><span class="sk-core"><img src="https://cdn.simpleicons.org/git" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">Git</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:90"><span class="sk-core"><img src="https://cdn.simpleicons.org/github/2B2420" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">GitHub</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:80"><span class="sk-core"><img src="https://cdn.simpleicons.org/figma" alt="" width="26" height="26" loading="lazy"></span></span><span class="sk-name">Figma</span></div>
+            <div class="skill"><span class="sk-ring" style="--p:92"><span class="sk-core"><i class="fas fa-code" style="color:#2B2420"></i></span></span><span class="sk-name">VS Code</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SELECTED BUILDS (compact) -->
+    <section id="builds" class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="section-head" style="text-align:left;margin-left:0;">
+          <span class="eyebrow">proof</span>
+          <h2 class="section-title">Selected <span class="hand">builds</span>.</h2>
+        </div>
+        <div class="proj-rows">
+          <a href="https://github.com/Vino1705" target="_blank" rel="noopener" class="proj-row reveal-up">
+            <span class="proj-emoji">🛣️</span>
+            <div><h3>RoadWatch</h3><div class="proj-tags"><span>Next.js</span><span>Supabase</span><span>Agentic AI</span></div></div>
+            <span class="proj-link">GitHub <i class="fab fa-github"></i></span>
+          </a>
+          <a href="https://github.com/Vino1705/Finmate" target="_blank" rel="noopener" class="proj-row reveal-up">
+            <span class="proj-emoji">💰</span>
+            <div><h3>FinMate</h3><div class="proj-tags"><span>React</span><span>TypeScript</span><span>Firebase</span><span>OpenAI</span></div></div>
+            <span class="proj-link">GitHub <i class="fab fa-github"></i></span>
+          </a>
+          <a href="https://github.com/Vino1705/Mindspark" target="_blank" rel="noopener" class="proj-row reveal-up">
+            <span class="proj-emoji">✍️</span>
+            <div><h3>ContentSpark</h3><div class="proj-tags"><span>Next.js</span><span>Tailwind</span><span>GenAI</span></div></div>
+            <span class="proj-link">GitHub <i class="fab fa-github"></i></span>
+          </a>
+          <a href="https://github.com/Vino1705/Smartupdate" target="_blank" rel="noopener" class="proj-row reveal-up">
+            <span class="proj-emoji">🧠</span>
+            <div><h3>Smart Update Manager</h3><div class="proj-tags"><span>Python</span><span>ML</span><span>Agentic AI</span></div></div>
+            <span class="proj-link">GitHub <i class="fab fa-github"></i></span>
+          </a>
+          <a href="https://github.com/Vino1705/Lunarwebsite" target="_blank" rel="noopener" class="proj-row reveal-up">
+            <span class="proj-emoji">🌌</span>
+            <div><h3>Lunar Terrain · ISRO HAVK</h3><div class="proj-tags"><span>AI</span><span>Computer Vision</span><span>3D</span></div></div>
+            <span class="proj-link">GitHub <i class="fab fa-github"></i></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="cta-band reveal-up">
+          <h2>That's the <span class="hand">build</span> side.</h2>
+          <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:6px;">
+            <a href="grow.html" class="btn btn-primary">See the Grow side <i class="fas fa-arrow-right"></i></a>
+            <a href="index.html#contact" class="btn btn-ghost" style="border-color:var(--cream);color:var(--cream);"><i class="far fa-envelope"></i> Get in touch</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <p class="foot-logo">vino<span>.</span><em>made</em></p>
+      <p class="foot-note">Designed &amp; built with care. © 2026 Vinothini T.</p>
+      <a href="#" class="foot-top">back to top <i class="fas fa-arrow-up"></i></a>
+    </div>
+  </footer>
+
+  <button id="topBtn" class="top-btn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
+  <script src="pages.js?v=2"></script>
+</body>
+</html>
