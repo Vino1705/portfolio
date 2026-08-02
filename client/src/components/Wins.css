@@ -1,0 +1,551 @@
+/* ============================================================================
+   Wins — an achievements HUD. Player card on the left (level, XP bar, stats,
+   side quests), badge board on the right. Badges unlock on scroll with a shine
+   sweep and a toast, and open a detail card when tapped.
+   ========================================================================== */
+
+.wins {
+  position: relative;
+  overflow: hidden;
+}
+
+.wins-head {
+  max-width: 52ch;
+}
+
+.hud {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: clamp(1rem, 2.4vw, 1.8rem);
+  align-items: start;
+}
+
+/* ------------------------------ player card ------------------------------- */
+
+.player {
+  padding: clamp(1.1rem, 2.2vw, 1.6rem);
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(234, 199, 195, 0.24);
+  background:
+    radial-gradient(420px 220px at 20% 0%, rgba(234, 199, 195, 0.14), transparent 68%),
+    linear-gradient(168deg, var(--wine-700), var(--wine-900));
+  box-shadow: var(--shadow-md);
+}
+
+.pl-top {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.pl-avatar {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--blush);
+  background: var(--wine-800);
+}
+
+.pl-avatar img {
+  width: 150%;
+  max-width: none;
+  margin: 4% 0 0 -25%;
+}
+
+.pl-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--cream);
+}
+
+.pl-class {
+  font-size: 0.74rem;
+  color: var(--text-faint);
+}
+
+.pl-level {
+  display: grid;
+  place-items: center;
+  padding: 0.35rem 0.7rem;
+  border-radius: 12px;
+  border: 1px solid rgba(231, 190, 119, 0.45);
+  background: rgba(231, 190, 119, 0.12);
+  line-height: 1;
+}
+
+.pl-level small {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.18em;
+  color: var(--accent-warm);
+}
+
+.pl-level b {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--accent-warm);
+}
+
+/* --- xp bar --------------------------------------------------------------- */
+
+.pl-xp {
+  margin-top: 1.1rem;
+}
+
+.xp-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 0.35rem;
+}
+
+.xp-track {
+  height: 10px;
+  border-radius: var(--r-pill);
+  background: rgba(12, 2, 5, 0.5);
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.xp-fill {
+  display: block;
+  height: 100%;
+  width: var(--pct, 0%);
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--blush), var(--gold));
+  box-shadow: 0 0 14px rgba(231, 190, 119, 0.5);
+  transition: width 0.8s var(--ease);
+}
+
+/* --- stats & quests ------------------------------------------------------- */
+
+.pl-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+}
+
+.pl-stats li {
+  padding: 0.65rem 0.7rem;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.pl-stats b {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.pl-stats small {
+  display: block;
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.pl-quests {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 1.1rem;
+  padding-top: 1rem;
+  border-top: 1px dashed var(--line);
+}
+
+.pl-quests li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+}
+
+/* ------------------------------ badge board ------------------------------- */
+
+.board-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.bh-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.bh-count svg {
+  color: var(--accent-warm);
+}
+
+.bh-count b {
+  color: var(--accent);
+}
+
+.bh-replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(234, 199, 195, 0.34);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+.bh-replay:hover {
+  background: var(--blush);
+  color: var(--wine-900);
+}
+
+/* --- badges --------------------------------------------------------------- */
+
+.badges {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.badge {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  width: 100%;
+  padding: 1.1rem 0.7rem 0.9rem;
+  overflow: hidden;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line);
+  background: linear-gradient(170deg, rgba(247, 240, 227, 0.06), rgba(12, 2, 5, 0.4));
+  text-align: center;
+  filter: grayscale(1);
+  opacity: 0.45;
+  transition:
+    filter 0.5s var(--ease),
+    opacity 0.5s var(--ease),
+    transform var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.badge.is-open {
+  filter: none;
+  opacity: 1;
+  border-color: color-mix(in srgb, var(--rarity) 45%, transparent);
+  background: linear-gradient(
+    170deg,
+    color-mix(in srgb, var(--rarity) 16%, transparent),
+    rgba(12, 2, 5, 0.45)
+  );
+  animation: badge-pop 0.55s var(--ease);
+}
+
+@keyframes badge-pop {
+  0% {
+    transform: scale(0.86) translateY(8px);
+  }
+  55% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+.badge:hover {
+  transform: translateY(-4px);
+}
+
+.badge.is-selected {
+  border-color: var(--rarity);
+  box-shadow: 0 0 0 1px var(--rarity);
+}
+
+.bd-face {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--rarity) 55%, transparent);
+  background: rgba(12, 2, 5, 0.4);
+  color: var(--text-faint);
+}
+
+.badge.is-open .bd-face {
+  background: color-mix(in srgb, var(--rarity) 20%, rgba(12, 2, 5, 0.4));
+  box-shadow: 0 0 22px color-mix(in srgb, var(--rarity) 35%, transparent);
+}
+
+.bd-medal {
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.bd-name {
+  margin-top: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.2;
+}
+
+.bd-tier {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rarity);
+}
+
+.bd-xp {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-faint);
+}
+
+/* the shine sweep that runs across a badge as it unlocks */
+.bd-shine {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.32) 50%,
+    transparent 65%
+  );
+  transform: translateX(-120%);
+}
+
+.badge.is-open .bd-shine {
+  animation: shine 0.9s var(--ease) 0.15s;
+}
+
+@keyframes shine {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+/* --- detail card ---------------------------------------------------------- */
+
+.detail {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(0.9rem, 2vw, 1.4rem);
+  margin-top: 0.9rem;
+  padding: 0.9rem;
+  min-height: 190px;
+  border-radius: var(--r-lg);
+  /* a light patch inside the otherwise dark HUD — see `.patch` in base.css */
+  box-shadow: 0 14px 32px rgba(12, 2, 5, 0.35);
+}
+
+.dt-media {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--wine-800);
+}
+
+.dt-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: fade-in 0.5s var(--ease);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: scale(1.03);
+  }
+}
+
+.dt-medal {
+  position: absolute;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  background: rgba(12, 2, 5, 0.75);
+  border: 1px solid var(--line-strong);
+}
+
+.dt-body {
+  padding: 0.3rem 0.3rem 0.3rem 0;
+  animation: fade-up 0.45s var(--ease);
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.dt-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.dt-chip {
+  padding: 0.18rem 0.6rem;
+  border-radius: var(--r-pill);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  color: var(--accent);
+}
+
+.dt-chip--tier {
+  border-color: color-mix(in srgb, var(--accent-warm) 45%, transparent);
+  color: var(--accent-warm);
+}
+
+.dt-title {
+  margin-top: 0.5rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.dt-desc {
+  margin-top: 0.4rem;
+  font-size: 0.92rem;
+  color: var(--text-dim);
+}
+
+.dt-xp {
+  margin-top: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--accent-warm);
+}
+
+.dt-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  color: var(--text-faint);
+  font-size: 0.9rem;
+}
+
+/* ------------------------------- toast ------------------------------------ */
+
+.unlock-toast {
+  position: absolute;
+  left: 50%;
+  bottom: 1.4rem;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.6rem 1.1rem 0.6rem 0.7rem;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(231, 190, 119, 0.45);
+  background: rgba(12, 2, 5, 0.9);
+  box-shadow: 0 18px 40px rgba(12, 2, 5, 0.55);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translate(-50%, 14px);
+  pointer-events: none;
+  transition:
+    opacity 0.35s var(--ease),
+    transform 0.35s var(--ease);
+}
+
+.unlock-toast.is-on {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.ut-medal {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  background: rgba(231, 190, 119, 0.16);
+}
+
+.ut-text b {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--accent-warm);
+}
+
+.ut-text small {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--text-faint);
+}
+
+/* ------------------------------ responsive -------------------------------- */
+
+@media (max-width: 1020px) {
+  .hud {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .badges {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .detail {
+    grid-template-columns: 1fr;
+  }
+  .pl-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge.is-open {
+    animation: none;
+  }
+  .badge.is-open .bd-shine {
+    animation: none;
+  }
+}

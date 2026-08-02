@@ -1,0 +1,70 @@
+/* ============================================================================
+   Marquee — seamless scrolling band of tools, edge-faded.
+   ========================================================================== */
+
+.marquee {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding-block: 1.05rem;
+  border-block: 1px solid rgba(247, 240, 227, 0.1);
+  background: linear-gradient(180deg, var(--wine-800), var(--wine-950));
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.mq-track {
+  display: flex;
+  width: max-content;
+  gap: 0.7rem;
+  animation: mq 42s linear infinite;
+}
+
+.marquee:hover .mq-track {
+  animation-play-state: paused;
+}
+
+@keyframes mq {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.mq-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.42rem 1.05rem;
+  border-radius: var(--r-pill);
+  /* light pills on the red band — small patches of the beige/blush */
+  border: 1px solid rgba(58, 18, 25, 0.14);
+  background: linear-gradient(180deg, var(--wash-1), var(--wash-2));
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--wine-800);
+  white-space: nowrap;
+}
+
+/* the dots cycle through the joy palette so the band is not one flat colour */
+.mq-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blush);
+}
+
+.mq-chip:nth-child(4n + 1) .mq-dot {
+  background: var(--joy-2);
+}
+.mq-chip:nth-child(4n + 2) .mq-dot {
+  background: var(--joy-3);
+}
+.mq-chip:nth-child(4n + 3) .mq-dot {
+  background: var(--joy-4);
+}
+.mq-chip:nth-child(4n) .mq-dot {
+  background: var(--joy-1);
+}
+
+.mq-chip {
+  border-color: rgba(234, 199, 195, 0.2);
+}

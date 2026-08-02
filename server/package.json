@@ -1,0 +1,18 @@
+{
+  "name": "server",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Node/Express API + static host for the vino.made portfolio.",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

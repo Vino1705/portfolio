@@ -1,0 +1,144 @@
+/* ============================================================================
+   Footer — one big call to action, then a thin credit bar.
+   ========================================================================== */
+
+.site-footer {
+  position: relative;
+  width: 100%;
+  padding: clamp(3.4rem, 6vw, 5.4rem) var(--rail) 1.4rem;
+  border-top: 1px solid rgba(247, 240, 227, 0.1);
+  background:
+    radial-gradient(700px 340px at 50% 0%, rgba(151, 40, 63, 0.42), transparent 66%),
+    linear-gradient(178deg, var(--wine-900), var(--wine-950));
+  text-align: center;
+}
+
+/* --- the CTA -------------------------------------------------------------- */
+
+.fc-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--blush);
+}
+
+.fc-title {
+  margin-top: 0.9rem;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5.6vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--cream);
+}
+
+.fc-title em {
+  font-style: italic;
+  color: var(--blush);
+}
+
+.fc-sub {
+  max-width: 46ch;
+  margin: 1rem auto 0;
+  color: var(--text-dim);
+}
+
+.fc-btn {
+  margin-top: 1.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+}
+
+.foot-socials {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1.6rem;
+}
+
+.foot-socials a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  color: var(--text-dim);
+  transition:
+    transform var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.foot-socials a:hover {
+  transform: translateY(-3px);
+  color: var(--wine-900);
+  background: var(--blush);
+  border-color: var(--blush);
+}
+
+/* --- credit bar ----------------------------------------------------------- */
+
+.foot-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: clamp(2.6rem, 5vw, 4rem);
+  padding-top: 1.3rem;
+  border-top: 1px solid var(--line);
+  text-align: left;
+}
+
+.foot-logo {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.foot-logo span {
+  color: var(--blush);
+}
+
+.foot-logo em {
+  font-style: italic;
+  color: var(--sand);
+}
+
+.foot-note {
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+
+.foot-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--blush);
+}
+
+.foot-top:hover svg {
+  transform: translateY(-3px);
+}
+
+.foot-top svg {
+  transition: transform var(--dur) var(--ease);
+}
+
+@media (max-width: 640px) {
+  .foot-bar {
+    justify-content: center;
+    text-align: center;
+  }
+  .fc-btn {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+}

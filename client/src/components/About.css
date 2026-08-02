@@ -1,0 +1,355 @@
+/* ============================================================================
+   About — its own cream panel, opened by a chocolate banner that tears away
+   into the page. Inside: the "Niche & Specialties" block, then the bio.
+   ========================================================================== */
+
+.about-panel {
+  overflow: hidden;
+}
+
+/* ---------------------------- chocolate banner ---------------------------- */
+
+.about-banner {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(2rem, 4.4vw, 3.4rem) clamp(1.4rem, 4vw, 3.2rem)
+    clamp(2.6rem, 4.6vw, 3.8rem);
+  text-align: center;
+  background:
+    radial-gradient(680px 320px at 50% -20%, rgba(124, 30, 51, 0.55), transparent 65%),
+    linear-gradient(168deg, var(--choco-700) 0%, var(--choco-800) 45%, var(--choco-900) 100%);
+}
+
+.about-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.4;
+  background-image: repeating-linear-gradient(
+    -60deg,
+    rgba(247, 240, 227, 0.045) 0 1px,
+    transparent 1px 10px
+  );
+  pointer-events: none;
+}
+
+.ab-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--blush);
+}
+
+.ab-diamond {
+  color: var(--blush);
+  letter-spacing: 0;
+}
+
+.ab-sub {
+  margin-top: 0.9rem;
+  font-family: var(--font-hand);
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  color: var(--rose-soft);
+}
+
+.niche-title {
+  margin-top: 0.9rem;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.nt-line {
+  display: block;
+  font-family: var(--font-sans);
+  font-weight: 800;
+  font-size: clamp(2rem, 6.6vw, 4.6rem);
+  color: var(--cream);
+}
+
+.nt-line em {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  color: var(--blush);
+}
+
+/* ------------------------------- body ------------------------------------- */
+
+.about-inner {
+  padding-block: clamp(2rem, 4vw, 3.4rem);
+}
+
+/* --- niche grid (maroon card inside the cream panel) ---------------------- */
+
+.niche-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(200px, 0.85fr) 1fr;
+  align-items: center;
+  gap: clamp(0.8rem, 2vw, 2rem);
+  padding: clamp(1.4rem, 3vw, 2.4rem) clamp(1rem, 2.4vw, 2.2rem);
+  border-radius: var(--r-lg);
+  border: 1px solid rgba(247, 240, 227, 0.12);
+  background:
+    radial-gradient(600px 300px at 50% 112%, rgba(227, 162, 167, 0.16), transparent 70%),
+    linear-gradient(160deg, var(--wine-700), var(--wine-900));
+  box-shadow: var(--shadow-md);
+}
+
+.niche-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.niche-pill {
+  padding: 0.7rem 1.25rem;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(247, 240, 227, 0.16);
+  background: rgba(247, 240, 227, 0.07);
+  color: var(--cream);
+  font-size: clamp(0.78rem, 1.35vw, 0.94rem);
+  font-weight: 600;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  transition:
+    transform var(--dur) var(--ease),
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.niche-pill:hover {
+  transform: translateY(-2px);
+  background: rgba(247, 240, 227, 0.14);
+  border-color: var(--blush);
+}
+
+.niche-col--left .niche-pill:nth-child(even) {
+  margin-left: clamp(0.4rem, 2.6vw, 2.2rem);
+}
+.niche-col--right .niche-pill:nth-child(even) {
+  margin-right: clamp(0.4rem, 2.6vw, 2.2rem);
+}
+
+.niche-centre {
+  position: relative;
+  display: grid;
+  place-items: end center;
+  min-height: clamp(240px, 30vw, 400px);
+}
+
+.nc-halo {
+  position: absolute;
+  inset: auto 0 0;
+  height: 82%;
+  border-radius: 50% 50% 40% 40%;
+  background: radial-gradient(circle at 50% 70%, rgba(231, 190, 119, 0.26), transparent 68%);
+  filter: blur(6px);
+}
+
+.niche-centre img {
+  position: relative;
+  width: 100%;
+  max-height: clamp(240px, 30vw, 400px);
+  object-fit: contain;
+  object-position: bottom center;
+  border-radius: var(--r-md);
+  filter: drop-shadow(0 24px 40px rgba(12, 2, 5, 0.45));
+}
+
+/* --- the story ------------------------------------------------------------ */
+
+.about-story {
+  max-width: 66ch;
+  margin: clamp(2.2rem, 4.4vw, 3.4rem) auto 0;
+  text-align: center;
+}
+
+.about-story p {
+  color: var(--text-dim);
+}
+
+.about-story p + p {
+  margin-top: 0.8rem;
+}
+
+.about-story strong {
+  color: var(--blush);
+  font-weight: 700;
+}
+
+/* --- the three lives ------------------------------------------------------ */
+
+.lives {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: clamp(0.9rem, 2vw, 1.4rem);
+  margin-top: clamp(1.8rem, 3.4vw, 2.8rem);
+}
+
+/* Light patches on the red panel — `.patch` supplies the beige/blush fill and
+   flips the text tokens; the group's own colour washes over the top. */
+.life {
+  position: relative;
+  padding: 1.5rem 1.4rem 1.4rem;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: 0 14px 32px rgba(12, 2, 5, 0.32);
+  transition:
+    transform var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.life::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    168deg,
+    color-mix(in srgb, var(--tint) 34%, transparent),
+    transparent 62%
+  );
+}
+
+.life > * {
+  position: relative;
+  z-index: 1;
+}
+
+.life::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 2;
+  height: 5px;
+  background: var(--tint);
+}
+
+.life:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, var(--tint) 70%, var(--wine-700));
+}
+
+.life-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  font-size: 1.4rem;
+  background: color-mix(in srgb, var(--tint) 55%, #fff);
+  box-shadow: inset 0 0 0 1px rgba(58, 18, 25, 0.08);
+}
+
+.life-title {
+  margin-top: 0.9rem;
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: color-mix(in srgb, var(--tint) 22%, var(--wine-800));
+}
+
+.life-text {
+  margin-top: 0.4rem;
+  font-size: 0.93rem;
+  color: var(--text-dim);
+}
+
+/* --- small print ---------------------------------------------------------- */
+
+.about-foot {
+  margin-top: clamp(1.8rem, 3.4vw, 2.6rem);
+}
+
+.ff-lead {
+  text-align: center;
+  margin-bottom: 0.9rem;
+}
+
+.ff-lead .hand {
+  font-size: 1.5rem;
+  color: var(--blush);
+}
+
+.about-sub {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+/* 2 × 2 — an even grid rather than a 3 + 1 orphan */
+.fun-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  max-width: 780px;
+  margin-inline: auto;
+}
+
+.fun-facts li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.8rem 1.1rem;
+  border-radius: var(--r-pill);
+  border: 1px solid color-mix(in srgb, var(--tint) 34%, transparent);
+  background: color-mix(in srgb, var(--tint) 10%, transparent);
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.ff-icon {
+  font-size: 1.15rem;
+  line-height: 1;
+}
+
+.about-sign {
+  margin-top: 1.4rem;
+  font-family: var(--font-hand);
+  font-size: 1.6rem;
+  color: var(--blush);
+  text-align: center;
+}
+
+/* ------------------------------ responsive -------------------------------- */
+
+@media (max-width: 620px) {
+  .fun-facts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .niche-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'centre centre'
+      'left right';
+  }
+  .niche-centre {
+    grid-area: centre;
+    min-height: 230px;
+  }
+  .niche-col--left {
+    grid-area: left;
+  }
+  .niche-col--right {
+    grid-area: right;
+  }
+  .niche-col--left .niche-pill:nth-child(even),
+  .niche-col--right .niche-pill:nth-child(even) {
+    margin: 0;
+  }
+}

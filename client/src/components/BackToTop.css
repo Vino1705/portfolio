@@ -1,0 +1,33 @@
+.top-btn {
+  position: fixed;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: clamp(1rem, 3vw, 2rem);
+  z-index: 45;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(180deg, var(--wine-700), var(--wine-900));
+  color: var(--cream);
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(14px) scale(0.9);
+  pointer-events: none;
+  transition:
+    opacity var(--dur) var(--ease),
+    transform var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+}
+
+.top-btn.is-show {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.top-btn:hover {
+  background: var(--rose);
+  color: var(--wine-900);
+}

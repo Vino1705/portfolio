@@ -1,0 +1,429 @@
+/* ============================================================================
+   Base — reset, beige page shell, panel system, shared primitives.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 24px);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  font-size: 16.5px;
+  line-height: 1.68;
+  color: var(--text);
+  background:
+    radial-gradient(1100px 620px at 80% -8%, rgba(151, 40, 63, 0.5), transparent 62%),
+    radial-gradient(900px 700px at 4% 26%, rgba(99, 21, 39, 0.45), transparent 60%),
+    linear-gradient(178deg, var(--wine-850) 0%, var(--wine-900) 48%, var(--wine-950) 100%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* `clip` instead of `hidden` — `hidden` would turn the body into a scroll
+     container and break the sticky film frames in Experience. */
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body.is-locked {
+  overflow: hidden;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+::selection {
+  background: var(--rose);
+  color: var(--wine-900);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* --- scrollbar ----------------------------------------------------------- */
+
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--wine-950);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--wine-600);
+  border-radius: var(--r-pill);
+  border: 3px solid var(--wine-950);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--wine-500);
+}
+
+/* --- page furniture ------------------------------------------------------ */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 auto auto 0;
+  height: 3px;
+  width: 100%;
+  transform-origin: 0 50%;
+  transform: scaleX(var(--p, 0));
+  background: linear-gradient(90deg, var(--rose), var(--gold), var(--sand));
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* --- layout: sections are spacers, panels are the visible blocks --------- */
+
+.container {
+  width: min(var(--maxw), 100% - var(--gutter) * 2);
+  margin-inline: auto;
+}
+
+.section {
+  position: relative;
+  padding-block: var(--section-y);
+}
+
+/* Panels are full-bleed: the background runs edge to edge while the content
+   stays on a centred rail, so nothing stretches on ultrawide screens. */
+.panel {
+  position: relative;
+  width: 100%;
+  padding-block: clamp(3rem, 6vw, 5.5rem);
+  padding-inline: var(--rail);
+}
+
+.panel--paper {
+  background: linear-gradient(168deg, var(--beige-50) 0%, var(--beige-200) 100%);
+  border-block: 1px solid rgba(58, 18, 25, 0.12);
+}
+
+/* A light patch — beige washing into blush pink. Applied to individual cards
+   and blocks so the light colours appear *within* the red sections rather than
+   taking over whole bands of the page. Carries its own token flip (tokens.css)
+   so anything nested inside reads correctly. */
+.patch {
+  background: linear-gradient(166deg, var(--wash-1) 0%, var(--wash-2) 60%, var(--wash-3) 100%);
+  border: 1px solid rgba(58, 18, 25, 0.12);
+}
+
+/* A colour rule across the top of every panel, so the palette is visible even
+   where a section is mostly one shade. */
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--joy-1) 0%,
+    var(--joy-2) 28%,
+    var(--joy-3) 52%,
+    var(--joy-4) 76%,
+    var(--joy-5) 100%
+  );
+  opacity: 0.85;
+}
+
+.panel--wine {
+  background:
+    radial-gradient(900px 480px at 85% -12%, rgba(151, 40, 63, 0.45), transparent 62%),
+    linear-gradient(178deg, var(--wine-800) 0%, var(--wine-900) 100%);
+  border-block: 1px solid rgba(247, 240, 227, 0.09);
+}
+
+.panel--deep {
+  background:
+    radial-gradient(760px 420px at 12% 0%, rgba(124, 30, 51, 0.4), transparent 62%),
+    linear-gradient(178deg, var(--wine-900) 0%, var(--wine-950) 100%);
+  border-block: 1px solid rgba(247, 240, 227, 0.07);
+}
+
+/* Bleed a panel's own header band to its edges. */
+.panel--flush {
+  padding-inline: 0;
+  padding-block: 0;
+  overflow: hidden;
+}
+
+/* Inner rail for content inside a flush panel. */
+.rail {
+  width: 100%;
+  padding-inline: var(--rail);
+}
+
+/* --- headings ------------------------------------------------------------ */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-quiet);
+}
+
+.eyebrow::before {
+  content: '';
+  width: 26px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.section-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(2rem, 4.6vw, 3.2rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-top: 0.7rem;
+  text-wrap: balance;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hand {
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: 1.18em;
+  color: var(--accent-warm);
+  line-height: 0.9;
+}
+
+.section-lead {
+  max-width: 58ch;
+  margin-top: 1rem;
+  color: var(--text-dim);
+}
+
+.section-head {
+  margin-bottom: clamp(1.8rem, 3.6vw, 3rem);
+}
+
+/* --- buttons ------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.6rem;
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  border: 1px solid transparent;
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+  will-change: transform;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--blush), var(--blush-deep));
+  color: var(--wine-900);
+  box-shadow: 0 12px 30px rgba(234, 199, 195, 0.22);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 18px 44px rgba(124, 30, 51, 0.32);
+}
+
+/* on paper the primary button reads better as solid wine */
+.panel--paper .btn-primary,
+.on-paper .btn-primary {
+  background: linear-gradient(180deg, var(--wine-600), var(--wine-800));
+  color: var(--cream);
+}
+
+.btn-ghost {
+  border-color: var(--line-strong);
+  color: var(--text);
+  background: var(--surface);
+  backdrop-filter: blur(6px);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  background: var(--surface-2);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* --- chips & tags -------------------------------------------------------- */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.05rem;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text-dim);
+  font-size: 0.86rem;
+  font-weight: 600;
+  transition:
+    color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+
+.chip:hover {
+  color: var(--text);
+  border-color: var(--line-strong);
+  transform: translateY(-1px);
+}
+
+.chip.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--wine-900);
+}
+
+.panel--paper .chip.is-active,
+.on-paper .chip.is-active {
+  color: var(--cream);
+}
+
+/* --- torn paper edge (shared) -------------------------------------------- */
+
+.torn-edge {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  width: 100%;
+  height: clamp(20px, 2.6vw, 34px);
+  display: block;
+}
+
+/* --- reveal animation ---------------------------------------------------- */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.75s var(--ease),
+    transform 0.75s var(--ease);
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* --- utilities ----------------------------------------------------------- */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%, -160%);
+  z-index: 200;
+  padding: 0.7rem 1.2rem;
+  border-radius: var(--r-pill);
+  background: var(--wine-800);
+  color: var(--cream);
+  font-weight: 700;
+  transition: transform 0.3s var(--ease);
+}
+
+.skip-link:focus-visible {
+  transform: translate(-50%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,221 @@
+/* ============================================================================
+   Hero — full-bleed cover banner. Headline and art sit in their own columns so
+   they can never collide; a torn paper edge hands off to the profile section.
+   ========================================================================== */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  padding: calc(var(--nav-h) + clamp(0.8rem, 1.6vw, 1.4rem)) var(--rail)
+    clamp(3.4rem, 5vw, 4.6rem);
+  background:
+    radial-gradient(760px 460px at 86% 24%, rgba(201, 165, 110, 0.26), transparent 62%),
+    radial-gradient(560px 400px at 6% 88%, rgba(227, 162, 167, 0.18), transparent 60%),
+    linear-gradient(118deg, var(--wine-700) 0%, var(--wine-800) 46%, var(--wine-950) 100%);
+}
+
+.hc-noise {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.35;
+  background-image: repeating-linear-gradient(
+    115deg,
+    rgba(247, 240, 227, 0.05) 0 1px,
+    transparent 1px 9px
+  );
+}
+
+.hc-glow {
+  position: absolute;
+  right: -6%;
+  top: -26%;
+  width: 42%;
+  aspect-ratio: 1;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(231, 190, 119, 0.3), transparent 68%);
+  filter: blur(10px);
+}
+
+.hc-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: clamp(1rem, 2.4vw, 2.4rem);
+}
+
+.hc-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(234, 199, 195, 0.38);
+  background: var(--blush-tint);
+  backdrop-filter: blur(6px);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--blush);
+}
+
+.hc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #7fd48a;
+  box-shadow: 0 0 0 0 rgba(127, 212, 138, 0.6);
+  animation: pulse 2.4s infinite;
+}
+
+@keyframes pulse {
+  70% {
+    box-shadow: 0 0 0 9px rgba(127, 212, 138, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(127, 212, 138, 0);
+  }
+}
+
+.hc-kicker {
+  margin-top: clamp(0.9rem, 1.8vw, 1.3rem);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--blush);
+}
+
+.hc-title {
+  margin-top: 0.5rem;
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: clamp(2rem, 4.6vw, 3.6rem);
+  line-height: 1.04;
+  letter-spacing: -0.028em;
+  color: var(--cream);
+  text-wrap: balance;
+}
+
+.hc-title em {
+  font-style: italic;
+  color: var(--gold);
+  position: relative;
+  white-space: nowrap;
+}
+
+.hc-title em::after {
+  content: '';
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: 0.06em;
+  height: 0.3em;
+  z-index: -1;
+  border-radius: var(--r-pill);
+  background: rgba(231, 190, 119, 0.2);
+}
+
+.hc-lead {
+  margin-top: 0.9rem;
+  max-width: 50ch;
+  color: var(--text-dim);
+}
+
+.hc-lead strong {
+  color: var(--blush);
+  font-weight: 700;
+}
+
+.hc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.6rem;
+}
+
+.hc-scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.6rem;
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  color: var(--blush);
+  transition: color var(--dur) var(--ease);
+}
+
+.hc-scroll svg {
+  animation: bob 2s ease-in-out infinite;
+}
+
+.hc-scroll:hover {
+  color: var(--gold);
+}
+
+@keyframes bob {
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* The art is capped by height so it can never inflate the row and push the
+   copy into the middle of the banner. */
+.hc-art {
+  justify-self: end;
+  align-self: end;
+  width: 100%;
+  margin-bottom: clamp(-3.4rem, -4.4vw, -2.6rem);
+}
+
+.hc-art img {
+  width: auto;
+  max-width: 100%;
+  max-height: clamp(380px, 66vh, 660px);
+  margin-left: auto;
+  filter: drop-shadow(-18px 24px 44px rgba(12, 2, 5, 0.5));
+  animation: float-art 9s ease-in-out infinite;
+}
+
+@keyframes float-art {
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.hc-strip {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: clamp(24px, 3vw, 40px);
+  display: flex;
+  width: max-content;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(247, 240, 227, 0.22);
+  white-space: nowrap;
+  animation: strip 30s linear infinite;
+}
+
+@keyframes strip {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 820px) {
+  .hc-inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+    min-height: 0;
+  }
+  .hc-art {
+    justify-self: center;
+    width: min(66%, 280px);
+    margin-top: 1.2rem;
+    margin-bottom: clamp(-3rem, -6vw, -2rem);
+  }
+}

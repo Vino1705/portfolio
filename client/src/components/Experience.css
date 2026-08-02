@@ -1,0 +1,337 @@
+/* ============================================================================
+   Experience — a 35mm film roll. Black film base, punched sprocket holes down
+   both edges, one exposed frame per role, handwritten notes in the margin.
+   ========================================================================== */
+
+.filmroll {
+  --film-base: #12090b;
+  --perf-w: clamp(30px, 4vw, 46px);
+  position: relative;
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+/* --- edge markings above/below the strip ---------------------------------- */
+
+.film-edge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.film-edge--top {
+  margin-bottom: 0.7rem;
+}
+.film-edge--bottom {
+  margin-top: 0.7rem;
+}
+
+.fe-mark {
+  color: var(--blush);
+  letter-spacing: 0;
+}
+
+/* --- the strip itself ----------------------------------------------------- */
+
+.filmstrip {
+  position: relative;
+  padding: clamp(1rem, 2vw, 1.6rem) var(--perf-w);
+  border-radius: 6px;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0 var(--perf-w), transparent var(--perf-w)),
+    linear-gradient(-90deg, rgba(0, 0, 0, 0.5) 0 var(--perf-w), transparent var(--perf-w)),
+    linear-gradient(175deg, #1a0e11, var(--film-base) 45%, #0d0507);
+  box-shadow:
+    var(--shadow-lg),
+    inset 0 0 0 1px rgba(246, 234, 223, 0.08);
+}
+
+/* punched holes — an SVG tile repeats down the full height of the strip */
+.film-perfs {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--perf-w);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='38'%3E%3Crect x='7' y='9' width='16' height='20' rx='5' fill='%23f6eadf' fill-opacity='0.9'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  background-position: center top;
+  background-size: 100% 38px;
+  opacity: 0.92;
+}
+
+.film-perfs--left {
+  left: 0;
+}
+.film-perfs--right {
+  right: 0;
+}
+
+/* --- frames --------------------------------------------------------------- */
+
+.film-frames {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.7rem, 1.6vw, 1.1rem);
+}
+
+/* Each frame sticks as you scroll, so the next one slides up and overlaps it —
+   the roll stacks itself into a pile. */
+.film-frame {
+  position: sticky;
+  top: calc(var(--nav-h-sm) + 1.4rem + var(--i, 0) * 14px);
+  display: grid;
+  grid-template-columns: minmax(150px, 0.55fr) 1fr;
+  gap: clamp(1rem, 2.4vw, 2rem);
+  padding: clamp(1.2rem, 2.6vw, 1.9rem) clamp(1.1rem, 2.4vw, 1.8rem);
+  border-radius: 3px;
+  border: 1px solid rgba(246, 234, 223, 0.1);
+  background:
+    radial-gradient(500px 240px at 82% 0%, rgba(151, 40, 63, 0.4), transparent 68%),
+    linear-gradient(165deg, var(--wine-800), var(--wine-950));
+  box-shadow:
+    inset 0 0 60px rgba(0, 0, 0, 0.45),
+    0 -14px 30px rgba(12, 2, 5, 0.5);
+  z-index: var(--i, 0);
+}
+
+.film-frame.is-blank {
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(246, 234, 223, 0.05) 0 10px,
+      transparent 10px 20px
+    ),
+    linear-gradient(165deg, #23131a, #140a0e);
+}
+
+/* frame number, printed on the film like a real strip */
+.frame-no {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--sand);
+  opacity: 0.75;
+}
+
+.frame-no i {
+  font-style: normal;
+  font-size: 0.55rem;
+  vertical-align: super;
+  opacity: 0.7;
+}
+
+/* the pink marker scribble from the reference */
+.frame-note {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.9rem;
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #ff3b72;
+  text-shadow: 0 0 14px rgba(255, 59, 114, 0.45);
+  transform: rotate(-6deg);
+  pointer-events: none;
+}
+
+/* --- frame meta column ---------------------------------------------------- */
+
+.frame-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.55rem;
+  padding-top: 1.1rem;
+}
+
+.frame-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.32rem 0.8rem;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-strong);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+}
+
+.fb-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.frame-badge--current {
+  color: #8ddc98;
+  border-color: rgba(141, 220, 152, 0.4);
+  background: rgba(141, 220, 152, 0.1);
+}
+
+.frame-badge--open {
+  color: var(--gold);
+  border-color: rgba(231, 190, 119, 0.4);
+  background: rgba(231, 190, 119, 0.1);
+}
+
+.frame-badge--blank {
+  color: var(--text-faint);
+}
+
+.frame-period {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--blush);
+  letter-spacing: 0.04em;
+}
+
+.frame-kind {
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  color: var(--sand);
+  line-height: 1.2;
+}
+
+/* --- frame body ----------------------------------------------------------- */
+
+.frame-body {
+  padding-top: 0.9rem;
+  min-width: 0;
+}
+
+.frame-role {
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 2.3vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.frame-co {
+  margin-top: 0.2rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.frame-co a {
+  border-bottom: 1px solid rgba(231, 190, 119, 0.45);
+  transition: color var(--dur) var(--ease);
+}
+
+.frame-co a:hover {
+  color: var(--blush);
+}
+
+.frame-points {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+
+.frame-points li {
+  position: relative;
+  padding-left: 1.15rem;
+  font-size: 0.92rem;
+  color: var(--text-dim);
+}
+
+.frame-points li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: var(--rose);
+  opacity: 0.8;
+}
+
+.frame-points strong {
+  color: var(--cream);
+  font-weight: 700;
+}
+
+.frame-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1rem;
+}
+
+.frame-tags li {
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.frame-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--blush);
+}
+
+.frame-cta:hover svg {
+  transform: translateX(4px);
+}
+
+.frame-cta svg {
+  transition: transform var(--dur) var(--ease);
+}
+
+/* --- responsive ----------------------------------------------------------- */
+
+@media (max-width: 720px) {
+  .filmroll {
+    --perf-w: 22px;
+  }
+  .film-perfs {
+    background-size: 100% 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='30'%3E%3Crect x='5' y='7' width='12' height='16' rx='4' fill='%23f6eadf' fill-opacity='0.9'/%3E%3C/svg%3E");
+  }
+  .film-frame {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  .frame-meta {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 0.8rem;
+  }
+  .frame-note {
+    position: static;
+    display: block;
+    transform: rotate(-3deg);
+    margin-bottom: 0.3rem;
+  }
+  .film-frame {
+    position: relative;
+    top: auto;
+  }
+}

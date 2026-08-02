@@ -1,0 +1,166 @@
+/* ============================================================================
+   Design tokens — "deep red editorial"
+   The page is wine red end to end. Beige/cream is an accent only: the paper
+   notes in the Skills section, the torn edges and small highlights.
+
+   Text colours are tokens, so a surface can flip the whole colour scheme of
+   its contents just by re-declaring them (see `.on-dark` / `.panel--paper`).
+   ========================================================================== */
+
+:root {
+  /* --- beige / paper accents (used sparingly) --------------------------- */
+  --beige-50: #f5ecdb;
+  --beige-100: #ecdfc7;
+  --beige-200: #e0d0b1;
+  --beige-300: #d2be99;
+  --beige-400: #c2ab80;
+  --beige-500: #ae956a;
+
+  /* --- wine scale (darkest → lightest) ---------------------------------- */
+  --wine-950: #1e050b;
+  --wine-900: #2f0811;
+  --wine-850: #3b0a16;
+  --wine-800: #4c0f1d;
+  --wine-700: #631527;
+  --wine-600: #7c1e33;
+  --wine-500: #97283f;
+  --wine-400: #b23c52;
+
+  /* --- chocolate (banner headers) --------------------------------------- */
+  --choco-900: #2b1310;
+  --choco-800: #3d1b16;
+  --choco-700: #4f241c;
+
+  /* --- warm neutrals & accents ------------------------------------------ */
+  --cream: #f7f0e3;
+  --cream-2: #efe4d2;
+  --ink: #3a1219;
+  --sand: #c9a56e;
+  --sand-deep: #8b6a3c;
+  --gold: #e7be77;
+  --gold-deep: #9b6a1e;
+  --rose: #e3a2a7;
+  --rose-soft: #f0c9c6;
+  --rose-deep: #a3283c;
+
+  /* the blush from the reference — the second lead colour beside the red */
+  --blush: #f0cbc7;
+  --blush-deep: #dda49e;
+  --blush-tint: rgba(240, 203, 199, 0.16);
+
+  /* light panel stock — beige washing into blush */
+  --wash-1: #f8efe3;
+  --wash-2: #f3ddd6;
+  --wash-3: #edcbc5;
+
+  /* playful accents — turned up so they actually read */
+  --joy-1: #f4b0ab; /* blush pink */
+  --joy-2: #f0c46b; /* gold       */
+  --joy-3: #86d6a6; /* mint       */
+  --joy-4: #bda6e8; /* lilac      */
+  --joy-5: #f5a074; /* apricot    */
+
+  /* --- text / lines / surfaces (dark red is now the default context) ---- */
+  --text: var(--cream);
+  --text-dim: rgba(247, 240, 227, 0.72);
+  --text-faint: rgba(247, 240, 227, 0.46);
+  --line: rgba(247, 240, 227, 0.14);
+  --line-strong: rgba(247, 240, 227, 0.28);
+  --surface: rgba(247, 240, 227, 0.05);
+  --surface-2: rgba(247, 240, 227, 0.09);
+  --surface-3: rgba(247, 240, 227, 0.14);
+
+  /* card + field fills, so components flip with the surface they sit on */
+  --card-a: rgba(247, 240, 227, 0.09);
+  --card-b: rgba(12, 2, 5, 0.4);
+  --field-bg: rgba(12, 2, 5, 0.42);
+  --danger: #ff8f9e;
+
+  /* accent aliases resolve differently on dark vs paper */
+  --accent: var(--blush);
+  --accent-warm: var(--gold);
+  --accent-quiet: var(--blush-deep);
+
+  /* --- shape ------------------------------------------------------------- */
+  --r-xs: 8px;
+  --r-sm: 12px;
+  --r-md: 18px;
+  --r-lg: 26px;
+  --r-xl: 36px;
+  --r-pill: 999px;
+
+  /* --- depth ------------------------------------------------------------- */
+  --shadow-sm: 0 2px 10px rgba(59, 30, 12, 0.14);
+  --shadow-md: 0 18px 44px rgba(59, 30, 12, 0.2);
+  --shadow-lg: 0 34px 90px rgba(45, 22, 10, 0.3);
+
+  /* --- type -------------------------------------------------------------- */
+  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, Segoe UI, sans-serif;
+  --font-hand: 'Caveat', 'Segoe Script', cursive;
+  --font-mono: 'Space Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* --- layout ------------------------------------------------------------ */
+  --maxw: 1360px;
+  --gutter: clamp(1.1rem, 4vw, 3.2rem);
+  --nav-h: 84px;
+  --nav-h-sm: 62px;
+  --section-y: 0;
+  /* full-bleed panels keep their contents centred on this rail */
+  --rail: max(var(--gutter), calc((100% - var(--maxw)) / 2));
+
+  /* --- motion ------------------------------------------------------------ */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur: 0.45s;
+}
+
+/* Anything sitting on a dark maroon surface. Dark is the page default, so this
+   mostly exists so nested light surfaces can be undone explicitly. */
+.on-dark,
+.panel--wine,
+.panel--deep {
+  --text: var(--cream);
+  --text-dim: rgba(247, 240, 227, 0.72);
+  --text-faint: rgba(247, 240, 227, 0.46);
+  --line: rgba(247, 240, 227, 0.14);
+  --line-strong: rgba(247, 240, 227, 0.28);
+  --surface: rgba(247, 240, 227, 0.05);
+  --surface-2: rgba(247, 240, 227, 0.09);
+  --surface-3: rgba(247, 240, 227, 0.14);
+  --accent: var(--blush);
+  --accent-warm: var(--gold);
+  --accent-quiet: var(--blush-deep);
+  color: var(--text);
+}
+
+/* Light patches — cards and blocks of beige/blush that sit *inside* the red
+   sections, plus the Skills notebook. The page stays red-dominant; these are
+   the light interruptions in it. */
+.on-paper,
+.panel--paper,
+.patch {
+  --text: var(--ink);
+  --text-dim: rgba(58, 18, 25, 0.76);
+  --text-faint: rgba(58, 18, 25, 0.54);
+  --line: rgba(58, 18, 25, 0.16);
+  --line-strong: rgba(58, 18, 25, 0.3);
+  --surface: rgba(58, 18, 25, 0.045);
+  --surface-2: rgba(58, 18, 25, 0.075);
+  --surface-3: rgba(58, 18, 25, 0.12);
+  --card-a: rgba(255, 255, 255, 0.78);
+  --card-b: rgba(255, 255, 255, 0.42);
+  --field-bg: rgba(255, 255, 255, 0.7);
+  --danger: var(--wine-500);
+  --accent: var(--rose-deep);
+  --accent-warm: var(--gold-deep);
+  --accent-quiet: var(--sand-deep);
+  color: var(--text);
+}
+
+@media (max-width: 720px) {
+  :root {
+    --nav-h: 66px;
+    --nav-h-sm: 58px;
+  }
+}
