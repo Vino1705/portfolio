@@ -261,7 +261,7 @@ Base URL in dev: `http://localhost:5174` (the Vite dev server proxies `/api` the
 | `GET` | `/api/content/profile` · `/projects` · `/experience` · `/wins` | Content as JSON |
 | `POST` | `/api/contact` | Validates, honeypot-checks, rate-limits (5 / IP / 10 min), relays to Web3Forms |
 
-In production `server/src/index.js` also serves `client/dist` with a SPA fallback, so one Node
+In production `server/src/index.js` also serves `./dist` with a SPA fallback, so one Node
 process hosts the whole thing.
 
 **Env** (`server/.env`, copied from `.env.example`): `PORT`, `WEB3FORMS_ACCESS_KEY`,
@@ -352,7 +352,7 @@ Other scripts:
 |---|---|
 | `npm run dev` | Both dev servers with hot reload |
 | `npm run dev:client` / `npm run dev:server` | One at a time |
-| `npm run build` | Builds `client/dist` |
+| `npm run build` | Builds `./dist` |
 | `npm start` | Node serves the API **and** the built site on `:5174` |
 | `npm run preview` | `build` then `start` — production check |
 
@@ -376,7 +376,7 @@ Static front end on the CDN, `api/*.js` as serverless functions. Functions wake 
 milliseconds, so unlike a free Node host there is **no cold-start penalty**.
 
 1. **Add New → Project** → import the repo. `vercel.json` supplies the build command and
-   output directory (`client/dist`); leave the detected settings alone.
+   output directory (`dist`); leave the detected settings alone.
 2. **Settings → Environment Variables** → `WEB3FORMS_ACCESS_KEY`.
 3. Deploy. Confirm with `GET /api/health` → `"runtime":"vercel"` and
    `"mail":"configured"`.

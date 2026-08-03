@@ -11,7 +11,7 @@ import contactRouter from './routes/contact.js';
 import contentRouter from './routes/content.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const CLIENT_DIST = path.resolve(__dirname, '../../client/dist');
+const CLIENT_DIST = path.resolve(__dirname, '../../dist');
 
 const app = express();
 const PORT = Number(process.env.PORT) || 5174;
