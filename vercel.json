@@ -1,6 +1,10 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
+
+  "//": "IMPORTANT: the project's Root Directory must be the repo root (./), not client/. The API functions live in /api at the repo root and are only picked up from there.",
+
+  "framework": null,
+  "installCommand": "npm install --include=dev",
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install --include=dev"
+  "outputDirectory": "dist"
 }

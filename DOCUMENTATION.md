@@ -375,10 +375,17 @@ Both wrappers do nothing but adapt request/response shapes, so the two deploymen
 Static front end on the CDN, `api/*.js` as serverless functions. Functions wake in
 milliseconds, so unlike a free Node host there is **no cold-start penalty**.
 
-1. **Add New → Project** → import the repo. `vercel.json` supplies the build command and
-   output directory (`dist`); leave the detected settings alone.
-2. **Settings → Environment Variables** → `WEB3FORMS_ACCESS_KEY`.
-3. Deploy. Confirm with `GET /api/health` → `"runtime":"vercel"` and
+1. **Add New → Project** → import the repo.
+2. **Settings → General → Root Directory must be `./` (the repo root).** If Vercel auto-picks
+   `client`, the deploy fails two ways at once: the build output lands outside the root
+   directory (`No Output Directory named "dist" found`), and — quietly — `api/` is never
+   deployed, so the contact form 404s. `vercel.json` supplies everything else.
+
+   You can tell which one ran from the build log: from the repo root it prints
+   `> vino-portfolio@2.0.0 build` before `> client@2.0.0 build`. If only the second line
+   appears, the Root Directory is wrong.
+3. **Settings → Environment Variables** → `WEB3FORMS_ACCESS_KEY`.
+4. Deploy. Confirm with `GET /api/health` → `"runtime":"vercel"` and
    `"mail":"configured"`.
 
 Notes:
