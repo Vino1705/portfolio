@@ -22,12 +22,10 @@ services:
     healthCheckPath: /api/health
     autoDeploy: true
 
+    # No mail key needed: the contact form posts straight from the browser to
+    # Web3Forms, which rejects server-side submissions on the free plan.
     envVars:
       - key: NODE_VERSION
         value: "20"
       - key: NODE_ENV
         value: production
-      # Set this in the Render dashboard — never commit the key.
-      # Without it the contact form still returns 200 and logs the message.
-      - key: WEB3FORMS_ACCESS_KEY
-        sync: false

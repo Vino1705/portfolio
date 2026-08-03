@@ -7,7 +7,6 @@ import express from 'express';
 import cors from 'cors';
 import compression from 'compression';
 
-import contactRouter from './routes/contact.js';
 import contentRouter from './routes/content.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -32,8 +31,10 @@ app.get('/api/health', (_req, res) => {
   res.json({ ok: true, service: 'vino-portfolio-api', uptime: process.uptime() });
 });
 
+/* Note: there is no /api/contact. Web3Forms rejects server-side submissions on
+   the free plan, so the form posts to them directly from the browser — see
+   client/src/lib/contactForm.js. */
 app.use('/api/content', contentRouter);
-app.use('/api/contact', contactRouter);
 
 app.use('/api', (_req, res) => res.status(404).json({ ok: false, error: 'Unknown endpoint' }));
 

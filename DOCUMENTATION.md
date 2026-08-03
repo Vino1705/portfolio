@@ -47,7 +47,7 @@ Problem Solver*. Final-year CSE @ Saveetha Engineering College, Chennai.
 | Front end | **React 19** + **Vite 6** | Function components + hooks, no router (single page) |
 | Styling | **Vanilla CSS** | Design tokens in `tokens.css`; one stylesheet per component, imported by that component |
 | Back end | **Node.js 20+** + **Express 4** | Contact relay, JSON content API, static host for the built client |
-| Contact delivery | **Web3Forms**, server-side | Shared logic in `api/_core/contact.js`; the access key is an env var, never in the browser |
+| Contact delivery | **Web3Forms**, from the browser | Their free plan rejects server-side calls (403); the access key is public by design — see §10.1 |
 | Fonts | **Google Fonts** | Fraunces (display serif), Plus Jakarta Sans (UI), Caveat (hand), Space Mono (labels/meta) |
 | Icons | **Inline SVG** — `client/src/components/Icons.jsx` | Font Awesome and the Simple Icons CDN are both gone; no third-party icon requests |
 | Brand logos | **Local SVGs** — `client/public/assets/logos/` | Self-hosted, used by the Skills notebook. See §4.1 for which are official and which are redraws |
@@ -84,6 +84,7 @@ portfolio/
 │       ├── main.jsx           # entry — mounts <App/>, loads global CSS
 │       ├── App.jsx            # page composition + page-level state
 │       ├── data/site.js       # ★ ALL CONTENT lives here
+│       ├── lib/contactForm.js # validation + direct Web3Forms submit
 │       ├── hooks/
 │       │   ├── useReveal.js       # scroll-reveal observer
 │       │   ├── useScrollSpy.js    # active nav section
@@ -107,9 +108,7 @@ portfolio/
 ├── render.yaml                # Render blueprint (Node web service)
 │
 ├── api/                       # ---------- serverless functions (Vercel) ----------
-│   ├── _core/contact.js       # ★ shared contact logic — used by BOTH targets
-│   ├── contact.js             # POST /api/contact
-│   └── health.js              # GET  /api/health
+│   └── health.js              # GET /api/health  (no contact route — see §10.1)
 │
 ├── server/                    # ---------- Node/Express back end ----------
 │   ├── package.json
@@ -117,7 +116,6 @@ portfolio/
 │   └── src/
 │       ├── index.js           # app setup, static hosting, SPA fallback
 │       ├── routes/
-│       │   ├── contact.js     # thin wrapper around api/_core/contact.js
 │       │   └── content.js     # GET  /api/content/* — JSON content
 │       └── data/content.js    # trimmed copy of the site content for the API
 │
@@ -259,14 +257,12 @@ Base URL in dev: `http://localhost:5174` (the Vite dev server proxies `/api` the
 | `GET` | `/api/health` | Liveness + uptime |
 | `GET` | `/api/content` | Profile summary + counts |
 | `GET` | `/api/content/profile` · `/projects` · `/experience` · `/wins` | Content as JSON |
-| `POST` | `/api/contact` | Validates, honeypot-checks, rate-limits (5 / IP / 10 min), relays to Web3Forms |
 
 In production `server/src/index.js` also serves `./dist` with a SPA fallback, so one Node
 process hosts the whole thing.
 
-**Env** (`server/.env`, copied from `.env.example`): `PORT`, `WEB3FORMS_ACCESS_KEY`,
-`ALLOWED_ORIGINS`. Without an access key the API still returns `200` and logs the message —
-handy for local testing.
+**Env** (`server/.env`, copied from `.env.example`): `PORT` and `ALLOWED_ORIGINS`. Both are
+optional. There is no mail key anywhere — see §10.1.
 
 > Content note: `client/src/data/site.js` and `server/src/data/content.js` both hold content.
 > The client copy is what renders; the server copy is what the JSON API returns. Edit both when
@@ -290,7 +286,6 @@ Drop these into `client/public/assets/` (exact names) and they light up instantl
 ## 8. ✅ TODO
 
 **High priority**
-- [ ] Set `WEB3FORMS_ACCESS_KEY` in the Render dashboard so the contact form actually delivers mail (see §10).
 - [ ] Delete the old `portfolio-p2yy` static site once the new URL is shared everywhere.
 - [ ] Save `about-centre.png` and `resume-developer.pdf` (see §7).
 - [ ] Real project links + FreshFrame case studies in the Work section.
@@ -362,13 +357,35 @@ Other scripts:
 
 There are two supported targets and **one shared implementation** of the contact logic:
 
+### 10.1 Why the contact form has no back end
+
+It posts **straight from the browser** to Web3Forms. That is deliberate, and it was arrived at
+the hard way — the original design relayed through a Node endpoint, which Web3Forms refuses:
+
 ```
-api/_core/contact.js      ← validation, honeypot, rate limit, Web3Forms relay
-├── api/contact.js        ← Vercel serverless function   (production)
-└── server/src/routes/    ← Express route                (local dev, Node hosts)
+403 {"success":false,
+     "message":"This method is not allowed. Use our API in client side or
+                contact support with server IP address (Pro plan is required)"}
 ```
 
-Both wrappers do nothing but adapt request/response shapes, so the two deployments cannot drift.
+Verified by sending the same payload three ways:
+
+| Request | Result |
+|---|---|
+| Server-side (Node `fetch` / curl) | **403** rejected |
+| + browser `Origin` and `Referer` | **403** rejected |
+| + browser `User-Agent` and `Sec-Fetch-*` | **200** delivered |
+
+Web3Forms fingerprints the caller and only accepts what looks like a real browser, unless you
+pay for Pro. So there is no `/api/contact`, and no mail key in any environment.
+
+**The access key sitting in `client/src/lib/contactForm.js` is public by design.** Every
+example in the Web3Forms docs puts one in plain HTML. It names the destination inbox; it does
+not authorise anything else and cannot read past submissions. Spam filtering is Web3Forms' job,
+backed by the `botcheck` honeypot field in the form.
+
+Validation now runs in the browser before sending, which is also better UX — errors appear
+instantly instead of after a round trip.
 
 ### Vercel — recommended
 
@@ -384,9 +401,9 @@ milliseconds, so unlike a free Node host there is **no cold-start penalty**.
    You can tell which one ran from the build log: from the repo root it prints
    `> vino-portfolio@2.0.0 build` before `> client@2.0.0 build`. If only the second line
    appears, the Root Directory is wrong.
-3. **Settings → Environment Variables** → `WEB3FORMS_ACCESS_KEY`.
-4. Deploy. Confirm with `GET /api/health` → `"runtime":"vercel"` and
-   `"mail":"configured"`.
+3. Deploy. Confirm with `GET /api/health` → `"runtime":"vercel"`.
+
+   No mail env var is needed — see §10.1.
 
 Notes:
 - The functions are dependency-free (native `fetch`), so the bundle is tiny and no extra
@@ -425,7 +442,6 @@ custom domain (or update the shared link) at it.
 | Health check path | `/api/health` |
 | Env: `NODE_VERSION` | `20` |
 | Env: `NODE_ENV` | `production` |
-| Env: `WEB3FORMS_ACCESS_KEY` | your key (never committed) |
 
 `render.yaml` at the repo root encodes all of the above — Render → **New → Blueprint** →
 pick the repo and it configures itself. You still add the access key by hand.

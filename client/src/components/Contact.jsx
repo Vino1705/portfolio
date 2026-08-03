@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import PhoneArt from './PhoneArt.jsx';
 import { MailIcon, PhoneIcon, PinIcon, SendIcon, CheckIcon, socialIcon } from './Icons.jsx';
+import { validateContact, submitContact } from '../lib/contactForm.js';
 import { profile } from '../data/site.js';
 import './Contact.css';
 
@@ -17,31 +18,26 @@ export default function Contact() {
 
   async function onSubmit(e) {
     e.preventDefault();
-    setState('sending');
     setErrors({});
     setNote('');
 
+    const found = validateContact(form);
+    if (found) {
+      setErrors(found);
+      setNote('Please check the fields above.');
+      setState('error');
+      return;
+    }
+
+    setState('sending');
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
-      const data = await res.json().catch(() => ({}));
-
-      if (!res.ok) {
-        setErrors(data.errors ?? {});
-        setNote(data.error ?? 'Please check the fields above.');
-        setState('error');
-        return;
-      }
-
+      await submitContact(form);
       setForm(EMPTY);
       setState('sent');
       setTimeout(() => setState('idle'), 6000);
-    } catch {
+    } catch (err) {
       setState('error');
-      setNote(`Network trouble — email me directly at ${profile.email}.`);
+      setNote(`${err.message} You can also email me directly at ${profile.email}.`);
     }
   }
 

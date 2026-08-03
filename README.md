@@ -27,9 +27,8 @@ npm run build        # builds ./dist
 npm start            # Node serves the API *and* the built site on :5174
 ```
 
-Copy `server/.env.example` to `server/.env` and add a `WEB3FORMS_ACCESS_KEY` to make the
-contact form actually deliver mail. Without it, messages are accepted and logged to the
-console.
+The contact form posts directly to Web3Forms from the browser, so it works in development
+too — no keys or `.env` needed.
 
 ---
 
@@ -40,8 +39,7 @@ Never sleeps, so there is no cold start.
 
 1. [vercel.com](https://vercel.com) → **Add New → Project** → import this repo
 2. Leave the settings alone — `vercel.json` configures the build
-3. **Settings → Environment Variables** → add `WEB3FORMS_ACCESS_KEY`
-4. Deploy
+3. Deploy — no mail env var needed (see DOCUMENTATION §10.1)
 
 **Any Node host (Render, Railway, Fly)** — one process serves the API *and* the client. Must be
 a **web service**, not a static site:
@@ -51,7 +49,7 @@ a **web service**, not a static site:
 | Build command | `npm install --include=dev && npm run build` |
 | Start command | `npm start` |
 | Health check | `/api/health` |
-| Env | `WEB3FORMS_ACCESS_KEY`, `NODE_VERSION=20` |
+| Env | `NODE_VERSION=20` |
 
 `--include=dev` is required: hosts set `NODE_ENV=production`, which makes npm skip
 devDependencies — and Vite lives there, so the build would fail with `vite: not found`.
