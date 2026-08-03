@@ -35,8 +35,8 @@ Problem Solver*. Final-year CSE @ Saveetha Engineering College, Chennai.
 - **Signature sections:** skills as a **notebook whose pages actually turn**, achievements as a
   **game HUD where badges unlock as you scroll**, experience as film frames that **stack and
   overlap as you scroll**, and a contact card built around a drawn retro **telephone handset**.
-- **Live (current deploy):** https://portfolio-p2yy.onrender.com/ *(still serving the old
-  static build until the new one is pushed — see §8 TODO)*
+- **Live:** https://vinothini.onrender.com/ — Render **web service**, running this build.
+  *(The old static site at `portfolio-p2yy.onrender.com` is superseded and can be deleted.)*
 
 ---
 
@@ -282,8 +282,8 @@ Drop these into `client/public/assets/` (exact names) and they light up instantl
 ## 8. ✅ TODO
 
 **High priority**
-- [ ] **Deploy the rebuild** — the live URL still serves the old static site. See §9 below; the old service is almost certainly a **Static Site**, which cannot run this. It needs replacing with a **Web Service**.
-- [ ] Set `WEB3FORMS_ACCESS_KEY` in the host's environment variables so the contact form delivers.
+- [ ] Set `WEB3FORMS_ACCESS_KEY` in the Render dashboard so the contact form actually delivers mail (see §10).
+- [ ] Delete the old `portfolio-p2yy` static site once the new URL is shared everywhere.
 - [ ] Save `about-centre.png` and `resume-developer.pdf` (see §7).
 - [ ] Real project links + FreshFrame case studies in the Work section.
 
@@ -297,6 +297,7 @@ Drop these into `client/public/assets/` (exact names) and they light up instantl
 - [x] Migrated the whole front end to **React** (Vite) — components, hooks, per-component CSS.
 - [x] Added a real **Node.js/Express** back end — contact relay + JSON content API + static host.
 - [x] Dropped **Python** entirely (dev server is now `npm run dev`).
+- [x] **Deployed as a Render web service** at https://vinothini.onrender.com/ — `render.yaml` blueprint, health check on `/api/health`.
 - [x] **Deep red theme, full-bleed**: wine page end to end, panels span the viewport on a centred rail, beige reduced to the Skills notebook and torn edges.
 - [x] Added **blush `#eac7c3`** as the second lead colour, plus a joy palette for the About cards.
 - [x] Header is **full width and shrinks on scroll**; cut the dead space under it in the hero.

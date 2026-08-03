@@ -6,6 +6,8 @@ I turn ideas into shipped products — and audiences into customers.
 A deep-red, full-bleed editorial portfolio built as a **React (Vite) front end** with a **Node.js /
 Express back end**.
 
+🔗 **Live:** https://vinothini.onrender.com/
+
 ---
 
 ## 🚀 Run it
