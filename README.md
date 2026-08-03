@@ -31,6 +31,24 @@ console.
 
 ---
 
+## ☁️ Deploy
+
+This is a **Node web service**, not a static site — one process serves the API *and* the built
+React app. On Render (or any Node host):
+
+| Setting | Value |
+|---|---|
+| Service type | **Web Service** (a Static Site has no start command) |
+| Build command | `npm install --include=dev && npm run build` |
+| Start command | `npm start` |
+| Health check | `/api/health` |
+| Env var | `WEB3FORMS_ACCESS_KEY` (and `NODE_VERSION=20`) |
+
+`--include=dev` is required: hosts set `NODE_ENV=production`, which makes npm skip
+devDependencies — and Vite lives there, so the build would fail with `vite: not found`.
+
+`render.yaml` in the repo root does all of this automatically via Render → New → Blueprint.
+
 ## 🧱 Stack
 
 | Layer | Choice |

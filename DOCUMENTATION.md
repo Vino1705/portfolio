@@ -282,7 +282,7 @@ Drop these into `client/public/assets/` (exact names) and they light up instantl
 ## 8. ✅ TODO
 
 **High priority**
-- [ ] **Deploy the rebuild** — the live URL still serves the old static site. Host needs Node: build command `npm install && npm run build`, start command `npm start`.
+- [ ] **Deploy the rebuild** — the live URL still serves the old static site. See §9 below; the old service is almost certainly a **Static Site**, which cannot run this. It needs replacing with a **Web Service**.
 - [ ] Set `WEB3FORMS_ACCESS_KEY` in the host's environment variables so the contact form delivers.
 - [ ] Save `about-centre.png` and `resume-developer.pdf` (see §7).
 - [ ] Real project links + FreshFrame case studies in the Work section.
@@ -349,7 +349,55 @@ Other scripts:
 
 ---
 
-## 10. Contact
+## 10. Deploying
+
+The site is **one Node process** that serves the JSON API *and* the built React app. That means
+it must run as a **Web Service**, not a Static Site.
+
+### Why the old deploy stopped updating
+
+The original service was a **Static Site** pointed at the repo root, where `index.html`,
+`styles.css` and `script.js` used to live. The rebuild deleted those, so there is nothing at the
+root for a static host to serve — it keeps showing the last successful build. A Static Site also
+has **no Start Command field at all**, which is why there is nowhere to put `npm start`.
+
+A Static Site cannot be converted into a Web Service. Create a new Web Service and point the
+custom domain (or update the shared link) at it.
+
+### Settings
+
+| Setting | Value |
+|---|---|
+| Service type | **Web Service** |
+| Runtime | Node |
+| Branch | `master` |
+| Build command | `npm install --include=dev && npm run build` |
+| Start command | `npm start` |
+| Health check path | `/api/health` |
+| Env: `NODE_VERSION` | `20` |
+| Env: `NODE_ENV` | `production` |
+| Env: `WEB3FORMS_ACCESS_KEY` | your key (never committed) |
+
+`render.yaml` at the repo root encodes all of the above — Render → **New → Blueprint** →
+pick the repo and it configures itself. You still add the access key by hand.
+
+### Two things that will bite you
+
+1. **`--include=dev` is not optional.** Hosts set `NODE_ENV=production`, and npm then skips
+   `devDependencies` — where Vite lives. A plain `npm install && npm run build` fails with
+   `vite: not found`.
+2. **Bind to `0.0.0.0`.** `server/src/index.js` does this explicitly; hosts cannot route to a
+   process listening only on localhost. It also reads `process.env.PORT`, which the host sets.
+
+### Checking a deploy worked
+
+- `GET /api/health` → `{"ok":true,...}` means the Node process is up.
+- The nav should read **About · Skills · Work · Experience · Wins**. If it still says
+  *Build / Grow / Say hi*, you are looking at the old static build.
+
+---
+
+## 11. Contact
 
 - 📧 vinoism1703@gmail.com
 - 🐙 https://github.com/Vino1705

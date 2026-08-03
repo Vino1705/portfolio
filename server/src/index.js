@@ -72,7 +72,8 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ ok: false, error: 'Something broke on our side.' });
 });
 
-app.listen(PORT, () => {
-  console.log(`✿ vino.made API listening on http://localhost:${PORT}`);
+// Bind to 0.0.0.0 so cloud hosts (Render, Railway, Fly…) can route to it.
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✿ vino.made API listening on port ${PORT}`);
   if (!fs.existsSync(CLIENT_DIST)) console.log('  (no client build yet — run `npm run build`)');
 });

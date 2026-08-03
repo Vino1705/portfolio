@@ -1,0 +1,33 @@
+# Render Blueprint — deploys the portfolio as a single Node web service that
+# serves both the API and the built React app.
+#
+# This must be a WEB SERVICE, not a Static Site: a static site has no start
+# command and cannot run the Express contact endpoint.
+#
+# To use: Render dashboard → New → Blueprint → pick this repo.
+
+services:
+  - type: web
+    name: vino-portfolio
+    runtime: node
+    plan: free
+    branch: master
+
+    # `--include=dev` matters: NODE_ENV=production makes npm skip
+    # devDependencies, and Vite lives there — without it the build fails
+    # with "vite: not found".
+    buildCommand: npm install --include=dev && npm run build
+    startCommand: npm start
+
+    healthCheckPath: /api/health
+    autoDeploy: true
+
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: NODE_ENV
+        value: production
+      # Set this in the Render dashboard — never commit the key.
+      # Without it the contact form still returns 200 and logs the message.
+      - key: WEB3FORMS_ACCESS_KEY
+        sync: false
