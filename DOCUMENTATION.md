@@ -47,12 +47,12 @@ Problem Solver*. Final-year CSE @ Saveetha Engineering College, Chennai.
 | Front end | **React 19** + **Vite 6** | Function components + hooks, no router (single page) |
 | Styling | **Vanilla CSS** | Design tokens in `tokens.css`; one stylesheet per component, imported by that component |
 | Back end | **Node.js 20+** + **Express 4** | Contact relay, JSON content API, static host for the built client |
-| Contact delivery | **Web3Forms**, server-side | The access key lives in `server/.env`, never in the browser |
+| Contact delivery | **Web3Forms**, server-side | Shared logic in `api/_core/contact.js`; the access key is an env var, never in the browser |
 | Fonts | **Google Fonts** | Fraunces (display serif), Plus Jakarta Sans (UI), Caveat (hand), Space Mono (labels/meta) |
 | Icons | **Inline SVG** — `client/src/components/Icons.jsx` | Font Awesome and the Simple Icons CDN are both gone; no third-party icon requests |
 | Brand logos | **Local SVGs** — `client/public/assets/logos/` | Self-hosted, used by the Skills notebook. See §4.1 for which are official and which are redraws |
 | Package layout | **npm workspaces** | Root `package.json` drives `client/` and `server/` |
-| Deploy target | Any Node host (Render, Railway, Fly) | `npm run build && npm start` |
+| Deploy target | **Vercel** (static + serverless functions), or any Node host | See §10 |
 
 **Python is no longer used anywhere.** The old `python -m http.server` dev step is replaced by
 `npm run dev`, and the one-off background removal that produced `caricature.png` was a
@@ -103,13 +103,21 @@ portfolio/
 │           ├── Counter.jsx            # count-up number
 │           └── RichText.jsx           # renders **bold** from the content data
 │
+├── vercel.json                # Vercel build config
+├── render.yaml                # Render blueprint (Node web service)
+│
+├── api/                       # ---------- serverless functions (Vercel) ----------
+│   ├── _core/contact.js       # ★ shared contact logic — used by BOTH targets
+│   ├── contact.js             # POST /api/contact
+│   └── health.js              # GET  /api/health
+│
 ├── server/                    # ---------- Node/Express back end ----------
 │   ├── package.json
 │   ├── .env.example           # copy → .env
 │   └── src/
 │       ├── index.js           # app setup, static hosting, SPA fallback
 │       ├── routes/
-│       │   ├── contact.js     # POST /api/contact — validate, rate-limit, relay
+│       │   ├── contact.js     # thin wrapper around api/_core/contact.js
 │       │   └── content.js     # GET  /api/content/* — JSON content
 │       └── data/content.js    # trimmed copy of the site content for the API
 │
@@ -352,10 +360,41 @@ Other scripts:
 
 ## 10. Deploying
 
-The site is **one Node process** that serves the JSON API *and* the built React app. That means
-it must run as a **Web Service**, not a Static Site.
+There are two supported targets and **one shared implementation** of the contact logic:
 
-### Why the old deploy stopped updating
+```
+api/_core/contact.js      ← validation, honeypot, rate limit, Web3Forms relay
+├── api/contact.js        ← Vercel serverless function   (production)
+└── server/src/routes/    ← Express route                (local dev, Node hosts)
+```
+
+Both wrappers do nothing but adapt request/response shapes, so the two deployments cannot drift.
+
+### Vercel — recommended
+
+Static front end on the CDN, `api/*.js` as serverless functions. Functions wake in
+milliseconds, so unlike a free Node host there is **no cold-start penalty**.
+
+1. **Add New → Project** → import the repo. `vercel.json` supplies the build command and
+   output directory (`client/dist`); leave the detected settings alone.
+2. **Settings → Environment Variables** → `WEB3FORMS_ACCESS_KEY`.
+3. Deploy. Confirm with `GET /api/health` → `"runtime":"vercel"` and
+   `"mail":"configured"`.
+
+Notes:
+- The functions are dependency-free (native `fetch`), so the bundle is tiny and no extra
+  install step is needed.
+- `server/` is **not** removed by `.vercelignore` — it is unused there, but the root
+  `package.json` declares it as an npm workspace and deleting it would break `npm install`.
+- The in-memory rate limit only covers a warm instance on serverless. Web3Forms applies its
+  own spam filtering, and the honeypot still works everywhere.
+
+### Node hosts (Render, Railway, Fly)
+
+Here the Express server serves the API *and* the built client from one process, so it must be
+a **web service**, not a static site.
+
+#### Why the original deploy stopped updating
 
 The original service was a **Static Site** pointed at the repo root, where `index.html`,
 `styles.css` and `script.js` used to live. The rebuild deleted those, so there is nothing at the
@@ -365,7 +404,7 @@ has **no Start Command field at all**, which is why there is nowhere to put `npm
 A Static Site cannot be converted into a Web Service. Create a new Web Service and point the
 custom domain (or update the shared link) at it.
 
-### Settings
+#### Settings
 
 | Setting | Value |
 |---|---|
@@ -382,7 +421,7 @@ custom domain (or update the shared link) at it.
 `render.yaml` at the repo root encodes all of the above — Render → **New → Blueprint** →
 pick the repo and it configures itself. You still add the access key by hand.
 
-### Two things that will bite you
+#### Two things that will bite you
 
 1. **`--include=dev` is not optional.** Hosts set `NODE_ENV=production`, and npm then skips
    `devDependencies` — where Vite lives. A plain `npm install && npm run build` fails with
@@ -390,7 +429,7 @@ pick the repo and it configures itself. You still add the access key by hand.
 2. **Bind to `0.0.0.0`.** `server/src/index.js` does this explicitly; hosts cannot route to a
    process listening only on localhost. It also reads `process.env.PORT`, which the host sets.
 
-### Checking a deploy worked
+#### Checking a deploy worked
 
 - `GET /api/health` → `{"ok":true,...}` means the Node process is up.
 - The nav should read **About · Skills · Work · Experience · Wins**. If it still says

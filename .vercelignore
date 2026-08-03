@@ -1,0 +1,6 @@
+# Raw source images — never served to the browser.
+assets-source/
+
+# Note: server/ is deliberately NOT ignored. It is unused on Vercel, but the
+# root package.json declares it as an npm workspace, and removing the folder
+# would break `npm install` during the build.

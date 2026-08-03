@@ -35,21 +35,27 @@ console.
 
 ## ☁️ Deploy
 
-This is a **Node web service**, not a static site — one process serves the API *and* the built
-React app. On Render (or any Node host):
+**Vercel (recommended)** — static front end + the contact endpoint as a serverless function.
+Never sleeps, so there is no cold start.
+
+1. [vercel.com](https://vercel.com) → **Add New → Project** → import this repo
+2. Leave the settings alone — `vercel.json` configures the build
+3. **Settings → Environment Variables** → add `WEB3FORMS_ACCESS_KEY`
+4. Deploy
+
+**Any Node host (Render, Railway, Fly)** — one process serves the API *and* the client. Must be
+a **web service**, not a static site:
 
 | Setting | Value |
 |---|---|
-| Service type | **Web Service** (a Static Site has no start command) |
 | Build command | `npm install --include=dev && npm run build` |
 | Start command | `npm start` |
 | Health check | `/api/health` |
-| Env var | `WEB3FORMS_ACCESS_KEY` (and `NODE_VERSION=20`) |
+| Env | `WEB3FORMS_ACCESS_KEY`, `NODE_VERSION=20` |
 
 `--include=dev` is required: hosts set `NODE_ENV=production`, which makes npm skip
 devDependencies — and Vite lives there, so the build would fail with `vite: not found`.
-
-`render.yaml` in the repo root does all of this automatically via Render → New → Blueprint.
+`render.yaml` encodes this for Render → New → Blueprint.
 
 ## 🧱 Stack
 
