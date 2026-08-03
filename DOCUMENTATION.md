@@ -258,7 +258,7 @@ Base URL in dev: `http://localhost:5174` (the Vite dev server proxies `/api` the
 | `GET` | `/api/content` | Profile summary + counts |
 | `GET` | `/api/content/profile` · `/projects` · `/experience` · `/wins` | Content as JSON |
 
-In production `server/src/index.js` also serves `./dist` with a SPA fallback, so one Node
+In production `server/src/index.js` also serves `client/dist` with a SPA fallback, so one Node
 process hosts the whole thing.
 
 **Env** (`server/.env`, copied from `.env.example`): `PORT` and `ALLOWED_ORIGINS`. Both are
@@ -347,7 +347,7 @@ Other scripts:
 |---|---|
 | `npm run dev` | Both dev servers with hot reload |
 | `npm run dev:client` / `npm run dev:server` | One at a time |
-| `npm run build` | Builds `./dist` |
+| `npm run build` | Builds `client/dist` |
 | `npm start` | Node serves the API **and** the built site on `:5174` |
 | `npm run preview` | `build` then `start` — production check |
 
@@ -393,14 +393,16 @@ Static front end on the CDN, `api/*.js` as serverless functions. Functions wake 
 milliseconds, so unlike a free Node host there is **no cold-start penalty**.
 
 1. **Add New → Project** → import the repo.
-2. **Settings → General → Root Directory must be `./` (the repo root).** If Vercel auto-picks
-   `client`, the deploy fails two ways at once: the build output lands outside the root
-   directory (`No Output Directory named "dist" found`), and — quietly — `api/` is never
-   deployed, so the contact form 404s. `vercel.json` supplies everything else.
+2. Leave the Root Directory as the repo root. `vercel.json` supplies the build command,
+   install command and output directory (`client/dist`).
 
-   You can tell which one ran from the build log: from the repo root it prints
-   `> vino-portfolio@2.0.0 build` before `> client@2.0.0 build`. If only the second line
-   appears, the Root Directory is wrong.
+   **Do not put comments in `vercel.json`.** Vercel validates it strictly and rejects unknown
+   properties — including a `"//"` key — and the deployment then fails before the build even
+   starts. If several commits go red in a row and the logs are short, check that file first.
+
+   Keep three things in step if you ever move the build output: `client/vite.config.js`
+   (`build.outDir`), `vercel.json` (`outputDirectory`) and `server/src/index.js`
+   (`CLIENT_DIST`).
 3. Deploy. Confirm with `GET /api/health` → `"runtime":"vercel"`.
 
    No mail env var is needed — see §10.1.

@@ -14,11 +14,9 @@ export default defineConfig({
     },
   },
   build: {
-    // Emit to the repo root, not client/dist. Vercel's Vite detection looks for
-    // `<root>/dist` and that wins over vercel.json#outputDirectory, so putting
-    // the build there keeps both in agreement.
-    outDir: '../dist',
-    emptyOutDir: true,
+    // client/dist — matches vercel.json#outputDirectory. Do not move this
+    // without changing that file and the Express static path together.
+    outDir: 'dist',
     sourcemap: false,
   },
 });

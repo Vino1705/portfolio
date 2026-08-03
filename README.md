@@ -23,7 +23,7 @@ so the contact form works in development too.
 **Production:**
 
 ```bash
-npm run build        # builds ./dist
+npm run build        # builds client/dist
 npm start            # Node serves the API *and* the built site on :5174
 ```
 
