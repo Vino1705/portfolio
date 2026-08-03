@@ -1,0 +1,352 @@
+/* ============================================================================
+   Résumé page — a cream sheet laid on the site's burgundy. Reads as a document
+   on screen and prints as a clean A4 with the chrome stripped away.
+   ========================================================================== */
+
+.rs-page {
+  min-height: 100vh;
+  padding: clamp(1rem, 3vw, 2.4rem) var(--gutter) clamp(3rem, 6vw, 5rem);
+  background:
+    radial-gradient(900px 520px at 82% -8%, rgba(151, 40, 63, 0.4), transparent 62%),
+    linear-gradient(170deg, var(--wine-800) 0%, var(--wine-950) 100%);
+}
+
+/* --- action bar ----------------------------------------------------------- */
+
+.rs-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  max-width: 940px;
+  margin: 0 auto clamp(1rem, 2.4vw, 1.8rem);
+}
+
+.rs-bar-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.rs-btn {
+  padding: 0.7rem 1.15rem;
+  font-size: 0.88rem;
+}
+
+.rs-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  color: var(--blush);
+  transition: color var(--dur) var(--ease);
+}
+
+.rs-back svg {
+  transform: rotate(180deg);
+}
+
+.rs-back:hover {
+  color: var(--cream);
+}
+
+/* --- the sheet ------------------------------------------------------------ */
+
+.rs-sheet {
+  position: relative;
+  max-width: 940px;
+  margin-inline: auto;
+  padding: clamp(1.6rem, 4vw, 3.4rem) clamp(1.2rem, 4vw, 3.4rem) clamp(2rem, 4vw, 3rem);
+  border-radius: var(--r-lg);
+  background: linear-gradient(168deg, var(--wash-1) 0%, var(--cream-2) 100%);
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+/* the five-colour rule, same as every panel on the portfolio */
+.rs-sheet::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--ramp);
+}
+
+/* --- masthead ------------------------------------------------------------- */
+
+.rs-head {
+  padding-bottom: clamp(1rem, 2.4vw, 1.6rem);
+  border-bottom: 2px solid color-mix(in srgb, var(--burgundy) 22%, transparent);
+}
+
+.rs-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--rosewood-deep);
+}
+
+.rs-name {
+  margin-top: 0.5rem;
+  font-family: var(--font-serif);
+  font-weight: 900;
+  font-size: clamp(2rem, 5.4vw, 3.1rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--burgundy);
+}
+
+.rs-title {
+  margin-top: 0.5rem;
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  font-weight: 600;
+  color: var(--rosewood-deep);
+}
+
+.rs-contact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+
+/* Each link travels with its own separator dot, so a wrap never leaves a
+   lone "·" at the start of a line. */
+.rs-contact > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.rs-contact a {
+  color: var(--burgundy);
+  font-weight: 700;
+  border-bottom: 1px solid color-mix(in srgb, var(--burgundy) 35%, transparent);
+}
+
+.rs-contact a:hover {
+  color: var(--rosewood);
+}
+
+/* --- sections ------------------------------------------------------------- */
+
+.rs-section {
+  margin-top: clamp(1.4rem, 3vw, 2.1rem);
+}
+
+.rs-h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+}
+
+/* the hairline that runs out from the heading to the edge of the sheet */
+.rs-h2::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: color-mix(in srgb, var(--burgundy) 22%, transparent);
+}
+
+.rs-summary {
+  margin-top: 0.8rem;
+  max-width: 78ch;
+  color: var(--text-dim);
+}
+
+/* --- label / value rows --------------------------------------------------- */
+
+.rs-rows {
+  margin-top: 0.8rem;
+}
+
+.rs-row {
+  display: grid;
+  grid-template-columns: minmax(120px, 168px) 1fr;
+  gap: 0.4rem 1rem;
+  padding: 0.4rem 0;
+}
+
+.rs-row + .rs-row {
+  border-top: 1px solid color-mix(in srgb, var(--burgundy) 10%, transparent);
+}
+
+.rs-row dt {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--burgundy);
+}
+
+.rs-row dd {
+  font-size: 0.92rem;
+  color: var(--text-dim);
+}
+
+/* --- entries -------------------------------------------------------------- */
+
+.rs-entry + .rs-entry {
+  margin-top: 1.1rem;
+}
+
+.rs-entry-title {
+  margin-top: 0.85rem;
+  font-family: var(--font-serif);
+  font-size: clamp(1.02rem, 2vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--burgundy);
+}
+
+.rs-dash {
+  color: var(--old-rose-deep);
+  font-weight: 400;
+}
+
+.rs-role {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--rosewood-deep);
+}
+
+.rs-stack {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: var(--old-rose-deep);
+}
+
+.rs-place {
+  margin-top: 0.15rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--text-faint);
+}
+
+.rs-list {
+  margin-top: 0.5rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.rs-list li {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: 0.92rem;
+  color: var(--text-dim);
+}
+
+.rs-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--rosewood);
+}
+
+.rs-list--plain {
+  margin-top: 0.8rem;
+}
+
+/* --- achievements --------------------------------------------------------- */
+
+.rs-wins {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+}
+
+.rs-wins li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.65rem 0.9rem;
+  border-radius: var(--r-sm);
+  border: 1px solid color-mix(in srgb, var(--burgundy) 14%, transparent);
+  background: color-mix(in srgb, var(--blush) 22%, transparent);
+}
+
+.rs-wins b {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+}
+
+.rs-wins span {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+/* --- foot ----------------------------------------------------------------- */
+
+.rs-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: clamp(1.8rem, 3.4vw, 2.6rem);
+  padding-top: clamp(1.2rem, 2.4vw, 1.8rem);
+  border-top: 2px solid color-mix(in srgb, var(--burgundy) 18%, transparent);
+}
+
+.rs-back--foot {
+  color: var(--rosewood-deep);
+}
+
+.rs-back--foot:hover {
+  color: var(--burgundy);
+}
+
+/* --- print ---------------------------------------------------------------- */
+
+@media print {
+  .rs-bar,
+  .rs-foot,
+  .grain {
+    display: none;
+  }
+
+  .rs-page {
+    padding: 0;
+    background: #fff;
+  }
+
+  .rs-sheet {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    background: #fff;
+    box-shadow: none;
+  }
+
+  .rs-sheet::before {
+    display: none;
+  }
+
+  .rs-section {
+    break-inside: avoid;
+  }
+
+  .rs-entry {
+    break-inside: avoid;
+  }
+}
