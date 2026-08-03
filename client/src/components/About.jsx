@@ -5,9 +5,9 @@ import TornEdge from './TornEdge.jsx';
 import { specialties, aboutCopy, lives, funFacts } from '../data/site.js';
 import './About.css';
 
-/* Drop `about-centre.png` into client/public/assets to replace the fallback. */
-const CENTRE = '/assets/about-centre.png';
-const CENTRE_FALLBACK = '/assets/profile.jpg';
+/* Background-removed cut-out of the profile photo; source in assets-source/. */
+const CENTRE = '/assets/about-cutout.webp';
+const CENTRE_FALLBACK = '/assets/about-centre.webp';
 
 export default function About() {
   const [src, setSrc] = useState(CENTRE);
@@ -15,51 +15,63 @@ export default function About() {
   return (
     <section id="about" className="section about">
       <div className="panel panel--deep panel--flush about-panel" data-reveal>
-        {/* ------------------------ chocolate banner ------------------------ */}
+        {/* --------- title banner: headline behind, cutout in front --------- */}
         <header className="about-banner on-dark">
           <p className="ab-mark">
             <span className="ab-diamond">◆</span> about · profile
           </p>
-          <h2 className="niche-title">
-            <span className="nt-line">
-              MY <em>Niche</em> &amp;
-            </span>
-            <span className="nt-line">SPECIALTIES</span>
-          </h2>
+
+          <div className="niche-stage" data-reveal="group">
+            <h2 className="niche-title">
+              <span className="nt-line">
+                MY <em>Niche</em> &amp;
+              </span>
+              <span className="nt-line">SPECIALTIES</span>
+            </h2>
+
+            <div className="niche-cast">
+              <ul className="niche-col niche-col--left">
+                {specialties.left.map((item, i) => (
+                  <li key={item} className="niche-pill" style={{ '--i': i }}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <figure className="niche-centre">
+                <span className="nc-halo" aria-hidden="true" />
+                <img
+                  src={src}
+                  srcSet={
+                    src === CENTRE
+                      ? '/assets/about-cutout-300.webp 300w, /assets/about-cutout.webp 443w'
+                      : undefined
+                  }
+                  sizes="(max-width: 760px) 40vw, 25vw"
+                  width="443"
+                  height="848"
+                  alt="Vinothini T"
+                  loading="lazy"
+                  onError={() => src !== CENTRE_FALLBACK && setSrc(CENTRE_FALLBACK)}
+                />
+              </figure>
+
+              <ul className="niche-col niche-col--right">
+                {specialties.right.map((item, i) => (
+                  <li key={item} className="niche-pill" style={{ '--i': i }}>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
           <p className="ab-sub">The two halves of what I do, and the person doing it.</p>
           <TornEdge fill="var(--wine-900)" />
         </header>
 
         {/* ---------------------------- body -------------------------------- */}
         <div className="about-inner rail">
-          <div className="niche-grid on-dark">
-            <ul className="niche-col niche-col--left">
-              {specialties.left.map((item) => (
-                <li key={item} className="niche-pill">
-                  {item}
-                </li>
-              ))}
-            </ul>
-
-            <figure className="niche-centre">
-              <span className="nc-halo" aria-hidden="true" />
-              <img
-                src={src}
-                alt="Vinothini T"
-                loading="lazy"
-                onError={() => src !== CENTRE_FALLBACK && setSrc(CENTRE_FALLBACK)}
-              />
-            </figure>
-
-            <ul className="niche-col niche-col--right">
-              {specialties.right.map((item) => (
-                <li key={item} className="niche-pill">
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* ------------------------- the story --------------------------- */}
           <div className="about-story">
             <h3 className="about-sub">
@@ -71,12 +83,12 @@ export default function About() {
           </div>
 
           {/* --------------------- the three lives ------------------------- */}
-          <ul className="lives">
-            {lives.map((life) => (
+          <ul className="lives" data-reveal="group">
+            {lives.map((life, i) => (
               <li
                 className="life patch"
                 key={life.id}
-                style={{ '--tint': `var(--${life.tint})` }}
+                style={{ '--tint': `var(--${life.tint})`, '--i': i }}
               >
                 <span className="life-icon" aria-hidden="true">
                   {life.icon}

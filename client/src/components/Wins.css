@@ -48,10 +48,12 @@
   background: var(--wine-800);
 }
 
+/* `avatar.webp` is already cropped square to the face, so it just fills the
+   circle — the old percentage nudges showed nothing but the top of her hair. */
 .pl-avatar img {
-  width: 150%;
-  max-width: none;
-  margin: 4% 0 0 -25%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .pl-name {
@@ -547,5 +549,15 @@
   }
   .badge.is-open .bd-shine {
     animation: none;
+  }
+}
+
+@media (hover: none), (max-width: 880px) {
+  .bd-tier,
+  .bd-xp,
+  .pl-stats small,
+  .xp-labels,
+  .pl-level small {
+    font-size: 0.72rem;
   }
 }

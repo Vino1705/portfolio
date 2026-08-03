@@ -27,7 +27,7 @@
   border-radius: var(--r-md);
   background:
     radial-gradient(420px 260px at 30% 10%, rgba(255, 255, 255, 0.9), transparent 70%),
-    linear-gradient(165deg, var(--joy-1), #eba9a3 60%, #dd9a94);
+    linear-gradient(165deg, var(--blush), var(--old-rose) 60%, var(--rosewood));
   border: 1px solid rgba(58, 18, 25, 0.1);
 }
 
@@ -218,5 +218,14 @@
   }
   .socials {
     margin-top: 1rem;
+  }
+}
+
+/* Below 16px iOS Safari zooms the page as soon as a field is focused, and
+   does not zoom back out. Phones get 16px fields; desktop keeps 0.95rem. */
+@media (hover: none), (max-width: 880px) {
+  .field input,
+  .field textarea {
+    font-size: 16px;
   }
 }

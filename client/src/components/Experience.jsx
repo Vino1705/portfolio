@@ -26,7 +26,7 @@ export default function Experience() {
 
         <div className="filmroll" data-reveal>
           <p className="film-edge film-edge--top">
-            <span>KODAK 5077</span>
+            
             <span className="fe-mark">✦</span>
             <span>VINO · EXPERIENCE ROLL</span>
             <span className="fe-mark">✦</span>
@@ -81,10 +81,23 @@ export default function Experience() {
                       ))}
                     </ul>
 
-                    {exp.status !== 'current' && (
-                      <a href="#contact" className="frame-cta">
-                        Let&rsquo;s build something <ArrowRightIcon width={16} height={16} />
+                    {/* A frame can point somewhere of its own (FreshFrame does);
+                        otherwise the open frames fall back to the contact form. */}
+                    {exp.cta ? (
+                      <a
+                        href={exp.cta.href}
+                        className="frame-cta"
+                        target={exp.cta.external ? '_blank' : undefined}
+                        rel={exp.cta.external ? 'noopener' : undefined}
+                      >
+                        {exp.cta.label} <ArrowRightIcon width={16} height={16} />
                       </a>
+                    ) : (
+                      exp.status !== 'current' && (
+                        <a href="#contact" className="frame-cta">
+                          Let&rsquo;s build something <ArrowRightIcon width={16} height={16} />
+                        </a>
+                      )
                     )}
                   </div>
                 </li>

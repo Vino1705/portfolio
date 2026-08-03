@@ -51,6 +51,59 @@
   letter-spacing: 0.01em;
 }
 
+/* --- studio hand-off ------------------------------------------------------ */
+
+.fc-studio {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 0.9rem;
+  margin-top: 1.5rem;
+}
+
+.fcs-lead {
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  color: var(--text-dim);
+}
+
+.fcs-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1.05rem;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  font-size: 0.88rem;
+  color: var(--text);
+  transition:
+    transform var(--dur) var(--ease),
+    color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+}
+
+.fcs-link b {
+  color: var(--blush);
+  font-weight: 700;
+}
+
+.fcs-link svg {
+  transition: transform var(--dur) var(--ease);
+}
+
+.fcs-link:hover {
+  transform: translateY(-2px);
+  border-color: var(--blush);
+  background: var(--blush-tint);
+}
+
+.fcs-link:hover svg {
+  transform: translateX(3px);
+}
+
 .foot-socials {
   display: flex;
   justify-content: center;
@@ -140,5 +193,11 @@
   .fc-btn {
     width: 100%;
     font-size: 0.8rem;
+  }
+}
+
+@media (hover: none), (max-width: 880px) {
+  .fc-eyebrow {
+    font-size: 0.72rem;
   }
 }

@@ -8,6 +8,35 @@
    ========================================================================== */
 
 :root {
+  /* --- THE PALETTE ------------------------------------------------------
+     Five colours, in order: burgundy · old rose · rosewood · blush · cream.
+     Everything decorative on the page is drawn from these; the `-deep` and
+     `-soft` siblings below are shades of the same five, not new hues. */
+  --burgundy: #6d1f2e;
+  --old-rose: #c4848a;
+  --rosewood: #bf6a70;
+  --blush: #e5a8ac;
+  --cream: #f6e6dc;
+
+  --burgundy-deep: #4a1220;
+  --burgundy-soft: #8c2b3d;
+  --old-rose-deep: #a4666c;
+  --old-rose-soft: #d5a0a4;
+  --rosewood-deep: #9d4b52;
+  --blush-soft: #f0cbc7;
+  --blush-deep: #d4898f;
+  --cream-deep: #e2c4b6;
+
+  /* The five in order — used for the rule across the top of every panel. */
+  --ramp: linear-gradient(
+    90deg,
+    var(--burgundy) 0%,
+    var(--rosewood) 30%,
+    var(--old-rose) 55%,
+    var(--blush) 78%,
+    var(--cream) 100%
+  );
+
   /* --- beige / paper accents (used sparingly) --------------------------- */
   --beige-50: #f5ecdb;
   --beige-100: #ecdfc7;
@@ -26,39 +55,30 @@
   --wine-500: #97283f;
   --wine-400: #b23c52;
 
-  /* --- chocolate (banner headers) --------------------------------------- */
-  --choco-900: #2b1310;
-  --choco-800: #3d1b16;
-  --choco-700: #4f241c;
-
   /* --- warm neutrals & accents ------------------------------------------ */
-  --cream: #f7f0e3;
-  --cream-2: #efe4d2;
+  --cream-2: #efd9cd;
   --ink: #3a1219;
   --sand: #c9a56e;
   --sand-deep: #8b6a3c;
   --gold: #e7be77;
   --gold-deep: #9b6a1e;
-  --rose: #e3a2a7;
-  --rose-soft: #f0c9c6;
-  --rose-deep: #a3283c;
+  --rose: var(--blush);
+  --rose-soft: var(--blush-soft);
+  --rose-deep: var(--rosewood-deep);
+  --blush-tint: rgba(229, 168, 172, 0.18);
 
-  /* the blush from the reference — the second lead colour beside the red */
-  --blush: #f0cbc7;
-  --blush-deep: #dda49e;
-  --blush-tint: rgba(240, 203, 199, 0.16);
+  /* light panel stock — cream washing into blush */
+  --wash-1: #f9ece3;
+  --wash-2: #f3dbd3;
+  --wash-3: #ecc7c6;
 
-  /* light panel stock — beige washing into blush */
-  --wash-1: #f8efe3;
-  --wash-2: #f3ddd6;
-  --wash-3: #edcbc5;
-
-  /* playful accents — turned up so they actually read */
-  --joy-1: #f4b0ab; /* blush pink */
-  --joy-2: #f0c46b; /* gold       */
-  --joy-3: #86d6a6; /* mint       */
-  --joy-4: #bda6e8; /* lilac      */
-  --joy-5: #f5a074; /* apricot    */
+  /* Accent set for cards, chips and rarity tints — the five palette colours,
+     ordered light to dark so neighbouring cards stay easy to tell apart. */
+  --joy-1: var(--blush); /* blush    */
+  --joy-2: var(--old-rose); /* old rose */
+  --joy-3: var(--rosewood); /* rosewood */
+  --joy-4: var(--burgundy); /* burgundy */
+  --joy-5: var(--cream-deep); /* cream    */
 
   /* --- text / lines / surfaces (dark red is now the default context) ---- */
   --text: var(--cream);

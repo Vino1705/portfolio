@@ -21,6 +21,16 @@ export default function Footer() {
           {profile.email} <ArrowRightIcon width={18} height={18} />
         </a>
 
+        {/* Second door: work that wants building or automating goes to the
+            studio rather than to my inbox. */}
+        <p className="fc-studio">
+          <span className="fcs-lead">Got something worth automating — or a product in it?</span>
+          <a href={profile.freshframe} target="_blank" rel="noopener" className="fcs-link">
+            Build it with <b>FreshFrame</b>
+            <ArrowRightIcon width={16} height={16} />
+          </a>
+        </p>
+
         <div className="foot-socials">
           {profile.socials.map((s) => {
             const Ico = socialIcon[s.id] ?? MailIcon;

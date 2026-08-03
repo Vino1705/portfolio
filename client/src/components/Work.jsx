@@ -17,9 +17,9 @@ export default function Work({ onOpen }) {
           </p>
         </header>
 
-        <div className="work-grid" data-reveal>
-          {projects.map((p) => (
-            <article className="work-card patch" key={p.id}>
+        <div className="work-grid" data-reveal="group">
+          {projects.map((p, i) => (
+            <article className="work-card patch" key={p.id} style={{ '--i': i }}>
               {p.wip && <span className="wip-ribbon">🚧 In build</span>}
               <button
                 type="button"

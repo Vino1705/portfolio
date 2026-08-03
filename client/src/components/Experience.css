@@ -335,3 +335,9 @@
     top: auto;
   }
 }
+
+@media (hover: none), (max-width: 880px) {
+  .film-edge {
+    font-size: 0.72rem;
+  }
+}

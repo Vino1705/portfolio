@@ -6,6 +6,10 @@
 .hero {
   position: relative;
   isolation: isolate;
+  /* `.hc-strip` is `width: max-content`, so without this it widens the whole
+     document and the page scrolls sideways on phones. `clip` rather than
+     `hidden` so the vertical axis stays visible and nothing starts scrolling. */
+  overflow-x: clip;
   width: 100%;
   padding: calc(var(--nav-h) + clamp(0.8rem, 1.6vw, 1.4rem)) var(--rail)
     clamp(3.4rem, 5vw, 4.6rem);
@@ -96,6 +100,63 @@
   letter-spacing: -0.028em;
   color: var(--cream);
   text-wrap: balance;
+}
+
+/* --- the drop-in ---------------------------------------------------------
+   Each word sits in its own clipping box and falls into it from above, one
+   beat after the last. The padding gives ascenders, descenders ("ship") and
+   the italic swash room inside the clip; the matching negative margins cancel
+   it again, so the box measures exactly one line and the headline's leading
+   and word spacing are untouched. */
+
+.hc-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding: 0.12em 0.08em 0.18em;
+  margin: -0.12em 0.16em -0.18em -0.08em;
+}
+
+.hc-word-in {
+  display: inline-block;
+  animation: word-drop 0.82s var(--ease) backwards;
+  animation-delay: calc(0.25s + var(--i) * 0.085s);
+}
+
+@keyframes word-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-118%) rotate(5deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Everything around the headline arrives on the same rhythm, just softer —
+   no clipping box, so these only slide and fade. */
+.hc-drop {
+  animation: soft-drop 0.75s var(--ease) backwards;
+  animation-delay: calc(0.15s + var(--i) * 0.085s);
+}
+
+@keyframes soft-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hc-word-in,
+  .hc-drop {
+    animation: none;
+  }
 }
 
 .hc-title em {

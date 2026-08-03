@@ -88,7 +88,7 @@ export default function Wins() {
         <aside className="player">
           <div className="pl-top">
             <figure className="pl-avatar">
-              <img src="/assets/caricature.png" alt="" loading="lazy" />
+              <img src="/assets/avatar.webp" alt="" loading="lazy" width="58" height="58" />
             </figure>
             <div>
               <p className="pl-name">vino.made</p>

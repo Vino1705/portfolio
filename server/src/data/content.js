@@ -12,6 +12,7 @@ export const profile = {
   links: {
     github: 'https://github.com/Vino1705',
     linkedin: 'https://www.linkedin.com/in/vinothini-t-08b4b4274/',
+    freshframe: 'https://vino1705.github.io/FreshFrame/',
   },
   summary:
     'Final-year CSE student at Saveetha Engineering College who builds AI-powered products, markets them, and ships them.',
@@ -68,6 +69,7 @@ export const experience = [
     id: 'freshframe',
     role: 'Co-founder & Developer',
     company: 'FreshFrame',
+    href: 'https://vino1705.github.io/FreshFrame/',
     period: 'Freelance',
     current: false,
   },

@@ -14,7 +14,10 @@ export const profile = {
   phone: '+91 90427 85843',
   phoneHref: '+919042785843',
   available: 'Available for internships & freelance',
-  resume: '/resume-developer.pdf',
+  resume: '/resume.html',
+  /* The studio I run with my brother — linked from the Experience film roll
+     and the footer. Defined once here so both stay in step. */
+  freshframe: 'https://vino1705.github.io/FreshFrame/',
   socials: [
     { id: 'github', label: 'GitHub', href: 'https://github.com/Vino1705' },
     { id: 'linkedin', label: 'LinkedIn', href: 'https://www.linkedin.com/in/vinothini-t-08b4b4274/' },
@@ -155,7 +158,7 @@ export const projects = [
     title: 'Sahaay AI',
     category: ['ai', 'web'],
     tag: 'AI · Wellness',
-    image: '/assets/work-sahaay.png',
+    image: '/assets/work-sahaay.webp',
     blurb:
       'A gentle mental-wellness companion — mood check-ins, daily reflection and an anonymous safe space. OpenAI × NxtWave Buildathon finalist.',
     problem:
@@ -170,7 +173,7 @@ export const projects = [
     title: 'FinMate',
     category: ['fintech', 'web'],
     tag: 'FinTech',
-    image: '/assets/work-finmate.png',
+    image: '/assets/work-finmate.webp',
     blurb:
       'A friendly personal-finance & budgeting assistant that turns spending data into plain-English insight. Won ₹10K at the VIT symposium.',
     problem:
@@ -185,7 +188,7 @@ export const projects = [
     title: 'Enterprise360',
     category: ['ai'],
     tag: 'AI · Enterprise',
-    image: '/assets/work-enterprise360.png',
+    image: '/assets/work-enterprise360.webp',
     wip: true,
     blurb:
       'An AI assistant that unifies scattered enterprise data into one conversational view. Top 12 nationally at Intel AI Hackathon 2025 (₹25K).',
@@ -201,7 +204,7 @@ export const projects = [
     title: 'ContentSpark',
     category: ['ai'],
     tag: 'AI · Marketing',
-    image: '/assets/work-contentspark.png',
+    image: '/assets/work-contentspark.webp',
     wip: true,
     blurb:
       'A privacy-first AI writing companion for idea generation, rewriting & summarising — the marketer’s pocket co-pilot.',
@@ -240,6 +243,7 @@ export const experience = [
     frame: '02',
     role: 'Co-founder & Developer',
     company: 'FreshFrame',
+    href: profile.freshframe,
     kind: 'we build, you grow',
     period: 'Freelance',
     status: 'open',
@@ -250,6 +254,7 @@ export const experience = [
       '**Got something worth building?** Tell us the idea — we’ll make it real.',
     ],
     tags: ['Websites', 'Branding', 'Digital Solutions', 'Full-Stack'],
+    cta: { label: 'Visit FreshFrame', href: profile.freshframe, external: true },
   },
   {
     id: 'next',
@@ -287,7 +292,7 @@ export const wins = [
     short: 'Intel AI Hackathon',
     meta: 'Top 12 · ₹25K · National',
     desc: 'National recognition + ₹25,000 for Enterprise360, an AI assistant for unified enterprise insights.',
-    image: '/assets/win-intel.png',
+    image: '/assets/win-intel.webp',
     xp: 2500,
     tier: 'Legendary',
     rarity: 'joy-2',
@@ -301,7 +306,7 @@ export const wins = [
     short: 'OpenAI × NxtWave',
     meta: 'Finalist · Top 10',
     desc: 'Top 10 in the Tamil Nadu regionals with Sahaay AI — now heading to the national round.',
-    image: '/assets/win-nxtwave.jpg',
+    image: '/assets/win-nxtwave.webp',
     xp: 2000,
     tier: 'Epic',
     rarity: 'joy-3',
@@ -315,7 +320,7 @@ export const wins = [
     short: 'VIT Symposium',
     meta: 'Winner · ₹10K',
     desc: 'Presented FinMate and took home ₹10,000 for a practical, problem-first finance assistant.',
-    image: '/assets/win-vit.jpg',
+    image: '/assets/win-vit.webp',
     xp: 1500,
     tier: 'Rare',
     rarity: 'joy-1',
@@ -329,7 +334,7 @@ export const wins = [
     short: 'ASME IMECE India',
     meta: 'Special Mention',
     desc: 'Recognised at Brain Bolt – The Engineers’ Sprint in Hyderabad for creative engineering & teamwork.',
-    image: '/assets/win-asme.jpg',
+    image: '/assets/win-asme.webp',
     xp: 800,
     tier: 'Uncommon',
     rarity: 'joy-4',

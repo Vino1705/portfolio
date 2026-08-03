@@ -27,17 +27,44 @@ export default function App() {
 
   useReveal([]);
 
-  /* Scroll progress bar */
+  /* Scroll progress bar. The scrollable height is cached and the write is
+     deferred to an animation frame, so scrolling never triggers a layout. */
   useEffect(() => {
     const bar = document.querySelector('.scroll-progress');
     if (!bar) return undefined;
-    const onScroll = () => {
-      const max = document.documentElement.scrollHeight - window.innerHeight;
+
+    let max = 0;
+    let frame = 0;
+
+    const measure = () => {
+      max = document.documentElement.scrollHeight - window.innerHeight;
+    };
+
+    const paint = () => {
+      frame = 0;
       bar.style.setProperty('--p', max > 0 ? String(window.scrollY / max) : '0');
     };
-    onScroll();
+
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(paint);
+    };
+
+    const onResize = () => {
+      measure();
+      onScroll();
+    };
+
+    measure();
+    paint();
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    window.addEventListener('resize', onResize);
+    window.addEventListener('load', onResize);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('load', onResize);
+    };
   }, []);
 
   /* ⌘K / Ctrl+K opens search */

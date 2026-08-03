@@ -199,6 +199,12 @@
   animation: sheet-in 0.34s var(--ease);
 }
 
+/* `display: flex` above would otherwise beat the UA's `[hidden] { display: none }`,
+   leaving the closed sheet covering the page on every screen under 880px. */
+.nav-sheet[hidden] {
+  display: none;
+}
+
 @keyframes sheet-in {
   from {
     opacity: 0;
@@ -296,5 +302,16 @@
 @media (min-width: 881px) {
   .nav-sheet {
     display: none;
+  }
+}
+
+/* 44px touch targets for the header controls on phones. */
+@media (hover: none), (max-width: 880px) {
+  .nav-home,
+  .nav-icon,
+  .site-header.is-stuck .nav-home,
+  .site-header.is-stuck .nav-icon {
+    width: 44px;
+    height: 44px;
   }
 }
