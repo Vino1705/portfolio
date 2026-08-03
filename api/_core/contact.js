@@ -5,19 +5,41 @@
    Kept dependency-free so the serverless bundle stays tiny. */
 
 const WINDOW_MS = 10 * 60 * 1000;
-const MAX_HITS = 5;
+const MAX_SENDS = 5;
 
 /* Best-effort rate limit. On a long-lived Node process this is exact; on
    serverless it only covers a warm instance, which still blunts naive spam.
-   Web3Forms applies its own spam filtering on top. */
-const hits = new Map();
+   Web3Forms applies its own spam filtering on top.
 
-export function rateLimited(ip) {
+   Only *delivered* messages count. Validation failures and honeypot hits do
+   not, so someone fixing a typo five times is never locked out. */
+const sends = new Map();
+
+function recent(ip) {
   const now = Date.now();
-  const entry = hits.get(ip)?.filter((t) => now - t < WINDOW_MS) ?? [];
-  entry.push(now);
-  hits.set(ip, entry);
-  return entry.length > MAX_HITS;
+  const entry = (sends.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
+  if (entry.length) sends.set(ip, entry);
+  else sends.delete(ip); // keep the map from growing forever
+  return entry;
+}
+
+/* Check only — does not consume an allowance. */
+export function rateLimited(ip) {
+  return recent(ip).length >= MAX_SENDS;
+}
+
+/* Call once a message has actually been accepted for delivery. */
+export function recordSend(ip) {
+  const entry = recent(ip);
+  entry.push(Date.now());
+  sends.set(ip, entry);
+}
+
+/* Whole minutes until the oldest send falls out of the window. */
+export function retryAfterMinutes(ip) {
+  const entry = recent(ip);
+  if (!entry.length) return 0;
+  return Math.max(1, Math.ceil((WINDOW_MS - (Date.now() - entry[0])) / 60000));
 }
 
 const isEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
@@ -80,12 +102,23 @@ export async function relay(data, accessKey) {
 /* The whole flow, for callers that just want a status + body. */
 export async function handleContact({ body, ip, accessKey }) {
   if (rateLimited(ip)) {
-    return { status: 429, body: { ok: false, error: 'Too many messages — try again in a bit.' } };
+    const mins = retryAfterMinutes(ip);
+    return {
+      status: 429,
+      body: {
+        ok: false,
+        error: `That's ${MAX_SENDS} messages already — try again in about ${mins} minute${
+          mins === 1 ? '' : 's'
+        }, or email me directly.`,
+      },
+    };
   }
 
   const { botcheck, data, errors } = validate(body);
   if (botcheck) return { status: 200, body: { ok: true } }; // honeypot — pretend it worked
-  if (errors) return { status: 400, body: { ok: false, errors } };
+  if (errors) return { status: 400, body: { ok: false, errors } }; // typos are free
 
-  return relay(data, accessKey);
+  const result = await relay(data, accessKey);
+  if (result.status === 200) recordSend(ip); // only real sends use an allowance
+  return result;
 }

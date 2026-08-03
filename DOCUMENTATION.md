@@ -393,8 +393,10 @@ Notes:
   install step is needed.
 - `server/` is **not** removed by `.vercelignore` — it is unused there, but the root
   `package.json` declares it as an npm workspace and deleting it would break `npm install`.
-- The in-memory rate limit only covers a warm instance on serverless. Web3Forms applies its
-  own spam filtering, and the honeypot still works everywhere.
+- The in-memory rate limit (5 **delivered** messages per IP per 10 minutes) only covers a warm
+  instance on serverless. Validation failures and honeypot hits deliberately do **not** count,
+  so a visitor fixing typos is never locked out. Web3Forms applies its own spam filtering on
+  top, and the honeypot works everywhere.
 
 ### Node hosts (Render, Railway, Fly)
 
